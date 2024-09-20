@@ -1,0 +1,146 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <% sidebarLinks.forEach(link => { %>
+      <% if (link.name === 'Logout') { %>
+        <!-- Display the logout link with a specific ID -->
+        <li class="nav-item">
+          <a id="logoutButton" class="nav-link <%= currentRoute === link.route ? 'active active-class' : 'collapsed' %>"
+            href="javascript:void(0);" onclick="toggleActivelogout()">
+            <i class="<%= link.icon %>"></i>
+            <span><%= link.name %></span>
+          </a>
+        </li>
+      <% } else if (link.submenu) { %>
+        <!-- Display a link with a submenu -->
+        <li class="nav-item">
+          <a class="nav-link <%= link.submenu.some(sublink => currentRoute === sublink.route) ? 'active active-class' : 'collapsed' %>"
+            data-bs-toggle="collapse" href="#<%= link.name.replace(/ /g, '-') %>-submenu" role="button" aria-expanded="<%= link.submenu.some(sublink => currentRoute === sublink.route) ? 'true' : 'false' %>" aria-controls="<%= link.name.replace(/ /g, '-') %>-submenu">
+            <i class="<%= link.icon %>"></i>
+            <span><%= link.name %></span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="<%= link.name.replace(/ /g, '-') %>-submenu"
+            class="nav-content collapse <%= link.submenu.some(sublink => currentRoute === sublink.route) ? 'show' : '' %>">
+            <% link.submenu.forEach(sublink => { %>
+              <li>
+                <a href="<%= sublink.route %>"
+                  class="<%= currentRoute === sublink.route ? 'active active-class' : '' %>">
+                  <i class="<%= sublink.icon %>"></i><%= sublink.name %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </li>
+      <% } else { %>
+        <!-- Display a link without a submenu -->
+        <li class="nav-item">
+          <a class="nav-link <%= currentRoute === link.route ? 'active active-class' : 'collapsed' %>"
+            href="<%= link.route %>">
+            <i class="<%= link.icon %>"></i>
+            <span><%= link.name %></span>
+          </a>
+        </li>
+      <% } %>
+    <% }); %>
+  </ul>
+</aside>
+<style>
+ /* Sidebar styles */
+.sidebar {
+    transition: all 0.3s;
+    width: 250px;
+    /* Other sidebar styles */
+}
+
+/* When the screen width is less than 1200px */
+@media (max-width: 1200px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+
+    /* When the toggle-sidebar class is active, show the sidebar */
+    body.toggle-sidebar .sidebar {
+        margin-left: 0;
+    }
+
+    /* Shift the main content when the sidebar is visible */
+    body.toggle-sidebar .main-content {
+        margin-left: 250px;
+    }
+}
+
+/* Optional: Adjustments for larger screens */
+@media (min-width: 1200px) {
+    .sidebar {
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 250px;
+    }
+
+    /* No need to apply toggle-sidebar class logic on larger screens */
+    body.toggle-sidebar .sidebar {
+        margin-left: 0;
+    }
+
+    body.toggle-sidebar .main-content {
+        margin-left: 250px;
+    }
+}
+
+
+</style>
+<!-- logout function destroying session -->
+<script>
+  document.querySelector('.toggle-sidebar-btn').addEventListener('click', function () {
+    document.querySelector('#sidebar').classList.toggle('active');
+  });
+</script>
+
+<!-- Custom Script to Handle Sidebar Toggle -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleSidebarBtn = document.querySelector('.toggle-sidebar-btn');
+    const body = document.body;
+
+    toggleSidebarBtn.addEventListener('click', function () {
+      body.classList.toggle('toggle-sidebar');
+    });
+  });
+// Function to get a cookie by name
+function getCookie(name) {
+    let cookieArr = document.cookie.split(";");
+
+    for(let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+
+        if(name === cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+
+    return null;
+}
+
+// Function to handle logout
+function toggleActivelogout() {
+  fetch('http://localhost:7000/back/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    // console.log(data.message);
+    // Redirect to the /back route
+    window.location.href = '/back';
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+</script>
+
+<!-- Ensure Bootstrap's JavaScript is included -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

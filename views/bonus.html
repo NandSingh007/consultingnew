@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  .emi-calculator {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#results {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+</style>
+<body>
+
+  <!-- Header included -->
+  <%- include("include/header.ejs") -%>
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Setting</h1>
+    </div><!-- End Page Title -->
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Add +</button>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr. No</th>
+                    <th scope="col">Loan Type</th>
+                    <th scope="col">Interest (%)</th>
+                    <th scope="col">Limit</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (GetLoanTypes.length === 0) { %>
+                    <tr>
+                      <td colspan="5" class="text-center">No loan types available.</td>
+                    </tr>
+                  <% } else { %>
+                    <% GetLoanTypes.forEach(function(item, index) { %>
+                      <tr data-id="<%= item._id %>">
+                        <td><%= index + 1 %></td>
+                        <td><%= item.loanType %></td>
+                        <td><%= item.interest %>%</td>
+                        <td><%= item.limit %></td>
+                        <td>
+                          <button class="btn btn-danger delete-btn" data-id="<%= item._id %>" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                          <button class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-id="<%= item._id %>" data-loantype="<%= item.loanType %>" data-interest="<%= item.interest %>" data-limit="<%= item.limit %>"><i class="fas fa-edit"></i></button>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  <% } %>
+                </tbody>
+                
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+<!-- insurance modal  -->
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Insurance</h1>
+  </div><!-- End Page Title -->
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#exampleModaladd">Add +</button>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th scope="col">Sr. No</th>
+                  <th scope="col">Bank Name</th>
+                  <th scope="col">Insurance Amount</th>
+                  <th scope="col">Bank Image</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (getInsuranceBanks.length === 0) { %>
+                  <tr>
+                    <td colspan="5" class="text-center">No insurance data available.</td>
+                  </tr>
+                <% } else { %>
+                  <% getInsuranceBanks.forEach(function(bank, index) { %>
+                    <tr data-id="<%= bank._id %>">
+                      <td><%= index + 1 %></td>
+                      <td><%= bank.banktype %></td>
+                      <td><%= bank.insuranceamount %></td>
+                      <td>
+                        <% if (bank.image) { %>
+                          <img src="<%= bank.image %>" alt="Bank Image" style="width: 100px; height: auto;">
+                        <% } else { %>
+                          No image
+                        <% } %>
+                      </td>
+                      <td>
+                        <button class="btn btn-danger delete-btnBank" data-id="<%= bank._id %>" data-toggle="modal" data-target="#deleteModalinsurance"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModalInsurance" data-id="<%= bank._id %>" data-banktype="<%= bank.banktype %>" data-insuranceamount="<%= bank.insuranceamount %>" data-image="<%= bank.image %>"><i class="fas fa-edit"></i></button>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main><!-- End #main -->
+
+
+  <!-- Modal ADD LOAN -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Loan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addLoanForm">
+            <div class="form-group">
+              <label for="loanType">Loan Type</label>
+              <input type="text" class="form-control" id="loanType" name="loanType" placeholder="Enter Loan Type" required>
+            </div>
+            <div class="form-group">
+              <label for="interest">Interest (%)</label>
+              <input type="number" class="form-control" id="interest" name="interest" placeholder="Enter Interest Rate" required>
+            </div>
+            <div class="form-group">
+              <label for="limit">Limit</label>
+              <input type="number" class="form-control" id="limit" name="limit" placeholder="Enter Limit" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Loan</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal ADD LOAN -->
+
+
+  
+  <!-- Modal ADD BankInsurance -->
+  <div class="modal fade" id="exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Loan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addBankForm">
+            <div class="form-group">
+              <label for="loanType">Bank Name</label>
+              <input type="text" class="form-control" id="banknameadd" name="banknameadd" placeholder="Enter Bank Type" required>
+            </div>
+            <div class="form-group">
+              <label for="interest">Insurance Amount</label>
+              <input type="number" class="form-control" id="insuranceamountadd" name="insuranceamountadd" placeholder="Enter Insurance Amount" required>
+            </div>
+            <div class="form-group">
+              <label for="image">Bank Image</label>
+              <input type="file" class="form-control-file" id="imageadd" name="imageadd" accept="image/*" required>
+            </div>
+  
+            <button type="submit" class="btn btn-success">Add Loan</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal ADD BankInsurance -->
+
+  <!-- Modal DELETE Confirmation -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this loan type?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger delete-confirm-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal DELETE Confirmation -->
+
+  
+  <div class="modal fade" id="deleteModalinsurance" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this loan type?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger delete-confirm-btnbank">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal EDIT Loan -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Loan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editLoanForm">
+            <input type="hidden" id="editLoanId" name="editLoanId">
+            <div class="form-group">
+              <label for="editLoanType">Loan Type</label>
+              <input type="text" class="form-control" id="editLoanType" name="editLoanType" placeholder="Enter Loan Type" required>
+            </div>
+            <div class="form-group">
+              <label for="editInterest">Interest (%)</label>
+              <input type="number" class="form-control" id="editInterest" name="editInterest" placeholder="Enter Interest Rate" required>
+            </div>
+            <div class="form-group">
+              <label for="editLimit">Limit</label>
+              <input type="number" class="form-control" id="editLimit" name="editLimit" placeholder="Enter Limit" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal EDIT Loan -->
+
+
+  
+  <!-- Modal edit for Insurance Loan -->
+  <!-- Modal edit for Insurance Loan -->
+<div class="modal fade" id="editModalInsurance" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Insurance</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editBankForm" enctype="multipart/form-data">
+          <input type="hidden" id="editBankId" name="editBankId">
+          
+          <!-- Bank Type Field -->
+          <div class="form-group">
+            <label for="banktype">Bank Type</label>
+            <input type="text" class="form-control" id="banktype" name="banktype" placeholder="Enter Bank Type" required>
+          </div>
+          
+          <!-- Insurance Amount Field -->
+          <div class="form-group">
+            <label for="insuranceamount">Insurance Amount</label>
+            <input type="number" class="form-control" id="insuranceamount" name="insuranceamount" placeholder="Enter Insurance Amount" required>
+          </div>
+
+          <!-- Bank Image Upload Field -->
+          <div class="form-group">
+            <label for="image">Bank Image</label>
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+          </div>
+
+          <!-- Save Changes Button -->
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Edit for Insurance Loan -->
+
+  <!-- End Modal EDIT Loan -->
+
+
+  <!-- Footer included -->
+  <%- include("include/footer.ejs") -%>
+
+  <!-- Font Awesome for icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+
+$(document).ready(function () {
+  // Initialize modals and forms
+  $('#exampleModal').on('shown.bs.modal', function () {
+    $('#addLoanForm').trigger('reset');
+  });
+
+  // Add Loan form submission
+  $('#addLoanForm').submit(function (event) {
+    event.preventDefault();
+    const formData = {
+      loanType: $('#loanType').val(),
+      interest: $('#interest').val(),
+      limit: $('#limit').val(),
+    };
+
+    $.ajax({
+      url: 'http://localhost:7000/back/LoanTypes',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(formData),
+      success: function (response) {
+        console.log('Loan added successfully:', response);
+        $('#exampleModal').modal('hide');
+        location.reload();
+      },
+      error: function (error) {
+        console.error('Error adding loan:', error);
+        alert('Failed to add loan. Please try again.');
+      }
+    });
+  });
+
+  // Edit button click event
+  $('.edit-btn').on('click', function () {
+    const id = $(this).data('id');
+    const loanType = $(this).data('loantype');
+    const interest = $(this).data('interest');
+    const limit = $(this).data('limit');
+
+    $('#editLoanId').val(id);
+    $('#editLoanType').val(loanType);
+    $('#editInterest').val(interest);
+    $('#editLimit').val(limit);
+  });
+
+  // Edit Loan form submission
+  $('#editLoanForm').submit(function (event) {
+    event.preventDefault();
+    const id = $('#editLoanId').val();
+    const formData = {
+      loanType: $('#editLoanType').val(),
+      interest: $('#editInterest').val(),
+      limit: $('#editLimit').val(),
+    };
+
+    $.ajax({
+      url: `http://localhost:7000/back/editlontype/${id}`,
+      method: 'post',
+      contentType: 'application/json',
+      data: JSON.stringify(formData),
+      success: function (response) {
+        console.log('Loan updated successfully:', response);
+        $('#editModal').modal('hide');
+        location.reload();
+      },
+      error: function (error) {
+        console.error('Error updating loan:', error);
+        alert('Failed to update loan. Please try again.');
+      }
+    });
+  });
+
+  // Delete button click event
+  $('.delete-btn').on('click', function () {
+    const id = $(this).data('id');
+    $('.delete-confirm-btn').data('id', id);
+  });
+
+  // Confirm delete button click event
+  $('.delete-confirm-btn').on('click', function () {
+    const id = $(this).data('id');
+
+    $.ajax({
+      url: `http://localhost:7000/back/deleteloan/${id}`,
+      method: 'DELETE',
+      success: function (response) {
+        console.log('Loan deleted successfully:', response);
+        $('#deleteModal').modal('hide');
+        location.reload();
+      },
+      error: function (error) {
+        console.error('Error deleting loan:', error);
+        alert('Failed to delete loan. Please try again.');
+      }
+    });
+  });
+
+
+
+
+
+
+// Reset the form when the modal is shown
+$('#exampleModaladd').on('shown.bs.modal', function () {
+    $('#addBankForm').trigger('reset');
+});
+
+// Add Loan form submission
+$('#addBankForm').submit(function (event) {
+    event.preventDefault();
+
+    // Create a FormData object to handle file and form data
+    const formData = new FormData();
+    formData.append('banknameadd', $('#banknameadd').val());
+    formData.append('insuranceamountadd', $('#insuranceamountadd').val());
+    formData.append('imageadd', $('#imageadd')[0].files[0]); // Get the file input
+
+    // Send the POST request with FormData
+    $.ajax({
+        url: 'http://localhost:7000/back/BankDetailsadd', // Adjust the URL based on your server setup
+        method: 'POST',
+        processData: false, // Prevent jQuery from automatically processing the data
+        contentType: false, // Set to false to let jQuery set the correct Content-Type header
+        data: formData,
+        success: function (response) {
+            console.log('Loan added successfully:', response);
+            $('#exampleModaladd').modal('hide'); // Hide the modal after success
+            location.reload(); // Reload the page to reflect new data
+        },
+        error: function (error) {
+            console.error('Error adding loan:', error);
+            alert('Failed to add loan. Please try again.'); // Show error if the request fails
+        }
+    });
+});
+
+// Edit button click event for insurance
+$('.edit-btn').on('click', function () {
+    const id = $(this).data('id');
+    const banktype = $(this).data('banktype');
+    const insuranceamount = $(this).data('insuranceamount');
+    const image = $(this).data('image');// Path to existing image if applicable
+  console.log(id, banktype, insuranceamount, image)
+    // Populate modal form fields
+    $('#editBankId').val(id);
+    $('#banktype').val(banktype);
+    $('#insuranceamount').val(insuranceamount);
+    $('#image').val(''); // Reset image input as file inputs cannot be pre-filled
+});
+
+// Edit Loan form submission
+$('#editBankForm').submit(function (event) {
+    event.preventDefault();
+
+    const id = $('#editBankId').val();
+    const formData = new FormData(this);  // Create FormData to handle file upload
+
+    $.ajax({
+        url: `http://localhost:7000/back/editInsuramcetype/${id}`,
+        method: 'post',
+        processData: false,
+        contentType: false,
+        data: formData,  // Pass formData object including the image file
+        success: function (response) {
+            console.log('Loan updated successfully:', response);
+            $('#editModalInsurance').modal('hide');
+            location.reload();
+        },
+        error: function (error) {
+            console.error('Error updating loan:', error);
+            alert('Failed to update loan. Please try again.');
+        }
+    });
+});
+
+
+
+
+
+  // Delete button click event
+  $('.delete-btnBank').on('click', function () {
+    const id = $(this).data('id');
+    $('.delete-confirm-btnbank').data('id', id);
+  });
+
+  // Confirm delete button click event
+  $('.delete-confirm-btnbank').on('click', function () {
+    const id = $(this).data('id');
+
+    $.ajax({
+      url: `http://localhost:7000/back/deletebank/${id}`,
+      method: 'DELETE',
+      success: function (response) {
+        console.log('Loan deleted successfully:', response);
+        $('#deleteModal').modal('hide');
+        location.reload();
+      },
+      error: function (error) {
+        console.error('Error deleting loan:', error);
+        alert('Failed to delete loan. Please try again.');
+      }
+    });
+  });
+
+
+
+
+
+  // EMI Calculation form submission
+  document.getElementById('emiForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Retrieve values from the form
+    const amount = parseFloat(document.getElementById('amount').value);
+    const annualInterest = parseFloat(document.getElementById('interest').value);
+    const duration = parseInt(document.getElementById('duration').value);
+
+    // Validate input values
+    if (isNaN(amount) || isNaN(annualInterest) || isNaN(duration)) {
+      alert('Please enter valid numbers for all fields.');
+      return;
+    }
+
+    // Calculate EMI
+    const monthlyInterest = annualInterest / 12 / 100;
+    const emi = amount * monthlyInterest / (1 - Math.pow(1 + monthlyInterest, -duration));
+    const totalPayment = emi * duration;
+
+    // Format and display results
+    document.getElementById('emiAmount').textContent = `$${emi.toFixed(2)}`;
+    document.getElementById('totalBalance').textContent = `$${totalPayment.toFixed(2)}`;
+  });
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq6/2TfphFbE0L/5GL0xlwOluV9Nu1ro12UZTNB9zN8DquwzpC3uJ6Cq7QJTPB1P0dbEP3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+</head>
+<style>
+    
+    .navbar.scrolled {
+    background-color: #ffffff; /* Background color after scrolling 100px */
+    border-radius: 2px;
+    border-bottom: 2px solid rgb(213, 213, 212);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    /* Shadow Effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  /* background-color: #ebebeb; */
+ /* border: 1px solid rgba(86, 84, 84, 0.805); */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
+  position: sticky;
+  width: 90%;
+  top: 0;
+  margin: 2% 5%;
+  z-index: 10000 !important;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  /* border: 1px solid rgba(0, 0, 0, 0.1); Optional: Adds a border to maintain the animated border effect */
+  /* position: relative; Ensure pseudo-elements are correctly positioned */
+}
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: rotate(45deg);
+  transform-origin: top left;
+  animation: diagonal-line 4s linear infinite;
+}
+
+@keyframes diagonal-line {
+  0% {
+    transform: rotate(45deg) translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: rotate(45deg) translateX(100%) translateY(100%);
+  }
+}
+
+.logo a {
+  color: #1e3a8a;
+  font-size: 26px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #1e3a8a;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #1e3a8a; }
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 25px;
+}
+
+.nav-links a {
+  color: #007e15;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  padding: 8px;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    /* background-color: #d45cd2 !important; */
+  color: #e58921 !important;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #3b82f6;
+  left: 0;
+  bottom: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.cta-button a {
+  padding: 12px 30px;
+  background-color: #3b82f6;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.cta-button a:hover {
+  background-color: #d45cd2 !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navbar-toggle span {
+  background: #1e3a8a;
+  height: 3px;
+  width: 25px;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu.active {
+  display: flex;
+}
+
+.navbar-menu ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-menu ul li {
+  margin: 0 15px;
+}
+
+.navbar-menu ul li a {
+  color: #1a8410;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for links */
+.navbar-menu ul li a:hover {
+  color: #fff; /* Change color on hover */
+}
+
+
+@media (max-width: 920px) {
+  .navbar {
+    padding: 15px 10px;
+   display: flex;
+    align-items: flex-start;
+  }
+
+  .navbar-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .navbar-menu ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar-menu ul li {
+    margin: 10px 0;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+ 
+  .navbar-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
+
+
+/* section-main css start  */
+/* section-main css start  */
+
+.section-main {
+    width: 99%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 250px;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    height: 250px;
+    background: linear-gradient(135deg, #e1781e, #f1f1f1, #ffffff);
+}
+
+.center-div {
+    width: 650px;
+    border: 1px solid rgb(109, 109, 109);
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.about-us {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    margin: 50px auto;
+    width: 80%;
+    max-width: 1200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-us.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.highlighted-heading {
+    text-align: center;
+    color: #02300bf0;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f1c40f, #e67e22);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.highlighted-heading i {
+    margin-right: 10px;
+    color: #e1781e;
+}
+
+.highlighted-heading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    width: 150%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: skewX(-20deg);
+    animation: shine 2s infinite;
+    z-index: 1;
+}
+
+.highlighted-heading span {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes shine {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.highlight {
+    font-weight: bold;
+    color: #e1781e;
+    background: rgba(255, 222, 130, 0.3); /* Light background for emphasis */
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        margin-bottom: 20px;
+    }
+
+    .about-image img {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .highlighted-heading {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+
+    .about-us {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+}
+
+/* Services Section CSS */
+
+.services-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    border-radius: 15px;
+    margin: 50px auto;
+    width: 83%;
+    max-width: 1200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.services-section h2 {
+    color: #02300bf0;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.services-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.service-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: #e1781e;
+    margin-bottom: 15px;
+}
+
+.service-title {
+    color: #02300bf0;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.service-description {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .services-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-item {
+        width: 80%;
+        max-width: none;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .service-item {
+        padding: 15px;
+    }
+
+    .service-title {
+        font-size: 1.2rem;
+    }
+
+    .service-description {
+        font-size: 0.9rem;
+    }
+}
+
+/* Our Clients Section */
+/* Our Clients Section */
+.clients-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    color: #02300bf0;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-heading::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: #e1781e;
+    transform: translateX(-50%);
+}
+
+.section-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.client-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.client-logo {
+    position: relative;
+    flex: 1 1 300px;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.client-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.client-logo:hover img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.client-logo:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+
+        /* foter  */
+    /* Footer Styling */
+    .footer {
+    background-image: url('/assets/img/logosiddhii.png');
+    background-position: center;
+    background-size: contain; /* Ensures the background image covers the entire footer */
+    background-repeat: no-repeat;
+    min-height: 420px;  /* Ensures minimum height is set for the footer */
+    padding: 60px 0;  /* Increased padding for more spacing */
+    position: relative;
+    width: 90%;
+    margin: 0% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin: 0; */
+    box-sizing: border-box;
+}
+
+/* Optional Overlay for Background Image */
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.664); /* Slightly darker overlay for better text contrast */
+    z-index: 1;
+}
+
+/* Footer Heading */
+.footer h2 {
+    font-family: 'Playfair Display', serif;  /* Elegant and modern serif font */
+    font-size: 2.8rem;
+    color: #d9534f;  /* Soft, warm red for a sophisticated look */
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInDown 1s ease-out;
+    letter-spacing: 2px;  /* Add spacing between letters for a cleaner look */
+}
+
+/* Footer Content */
+.footer-bg {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Footer Items */
+.footer-item {
+    width: 28%;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+   
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Light shadow for elevated effect */
+}
+
+.footer-item h3 {
+    font-family: 'Playfair Display', serif; /* Matching font for headings */
+    color: #ed541c;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;  /* For a modern look */
+    letter-spacing: 1px;
+}
+
+/* List Styling */
+.footer-item ul {
+    list-style: none;
+    padding-left: 0;
+    font-family: 'Roboto', sans-serif;  /* Clean, modern sans-serif font */
+    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3eab3e;  /* Green for consistency */
+}
+
+.footer-item ul li {
+    margin-bottom: 10px;
+}
+
+/* Social Icons Styling */
+.footer-item span {
+    padding: 10px;
+}
+
+.footer-item img {
+    width: 40px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-item img:hover {
+    transform: scale(1.2);  /* Increased hover scale for better emphasis */
+}
+
+/* Hover Effect on Items */
+.footer-item:hover {
+    transform: translateY(-5px);  /* Lift the item on hover for interactivity */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-item {
+        width: 100%;  /* Full-width for small screens */
+        margin-bottom: 20px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  
+
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 99898900;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker, smoother overlay */
+  backdrop-filter: blur(5px); /* Adds a subtle blur to the background */
+  transition: all 0.4s ease-in-out;
+}
+
+/* Modal Content */
+.modal-content {
+  background: linear-gradient(145deg, #ffffff, #f3f3f3); /* Soft gradient background */
+  margin: 8% auto;
+  padding: 25px 30px;
+  border-radius: 20px;
+  width: 75%;
+  max-width: 550px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.6s ease;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button */
+.close {
+  color: #333;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close:hover, .close:focus {
+  color: white;
+  background-color: #f01515;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Header Styling */
+.modal-content h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.modal-content h2:after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background-color: #f01515;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #f01515;
+  box-shadow: 0 0 5px rgba(240, 21, 21, 0.4);
+}
+
+textarea {
+  resize: none;
+  height: 120px;
+}
+
+/* Submit Button */
+.btn {
+  background: linear-gradient(145deg, #f01515, #c01212);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background-color: #d41010;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+  }
+
+  .btn {
+    font-size: 1rem;
+  }
+}
+
+
+</style>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">
+        <a href="#" class="typewriter"><img src="/assets/img/logosiddhii.png" width="120px" alt=""></a>
+    </div>
+    <div class="navbar-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="navbar-menu">
+        <ul class="nav-links">
+          <li><a href="#home"><i class="fas fa-home" style="color: #3498db; font-size: 1.2rem;"></i> Home</a></li>
+          <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71; font-size: 1.2rem;"></i> About Us</a></li>
+          <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c; font-size: 1.2rem;"></i> Contact</a></li>
+          <li><a href="#Client"><i class="fas fa-blog" style="color: #9b59b6; font-size: 1.2rem;"></i> Client</a></li>
+        </ul>
+      </div>
+      
+    
+        <div class="cta-button">
+            <a href="#consult" id="openModalButton">Get Consultation</a>
+        </div>
+       
+    </div>
+</nav>
+
+ <!-- main sectio start for IT Solution -->
+ <div class="section-main">
+    <!-- <div class="center-div">
+        <h2>Welcome To Our Page</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+    </div> -->
+</div>
+
+  <!-- About Us Section -->
+  <div class="about-us" id="about-us">
+    <h2 class="highlighted-heading">
+        <i class="fas fa-info-circle"></i> About Us
+    </h2>
+    
+    <div class="about-content">
+        <div class="about-text">
+            <p>
+                We are a <span class="highlight">leading IT solutions company</span> specializing in 
+                <span class="highlight">game development</span>, 
+                <span class="highlight">web and app development</span>, 
+                <span class="highlight">cloud setup</span>, and more. Our team is dedicated to providing 
+                <span class="highlight">high-quality services</span> tailored to your needs.
+            </p>
+            <p>
+                With years of experience, we ensure your success in the digital world with 
+                <span class="highlight">innovative solutions</span> and 
+                <span class="highlight">exceptional support</span>.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="https://via.placeholder.com/300" alt="About Us Image">
+        </div>
+    </div>
+</div>
+<!-- our services  -->
+<!-- Our Services Section -->
+<div class="services-section" id="services">
+    <h2 class="highlighted-heading">
+        <i class="fas fa-cogs"></i> Our Services
+    </h2>
+    <div class="services-content">
+        <div class="service-item">
+            <i class="fas fa-gamepad service-icon"></i>
+            <h3 class="service-title">Game Development</h3>
+            <p class="service-description">
+                We specialize in creating immersive and engaging games with cutting-edge technology and creative design.
+            </p>
+        </div>
+        <div class="service-item">
+            <i class="fas fa-laptop-code service-icon"></i>
+            <h3 class="service-title">Web Development</h3>
+            <p class="service-description">
+                Our web development services deliver high-quality, responsive websites tailored to your business needs.
+            </p>
+        </div>
+        <div class="service-item">
+            <i class="fas fa-mobile-alt service-icon"></i>
+            <h3 class="service-title">App Development</h3>
+            <p class="service-description">
+                We create innovative and user-friendly mobile apps for both iOS and Android platforms to enhance user experience.
+            </p>
+        </div>
+        <div class="service-item">
+            <i class="fas fa-cloud service-icon"></i>
+            <h3 class="service-title">Cloud Setup</h3>
+            <p class="service-description">
+                Our cloud setup services ensure efficient and scalable cloud solutions for your business, enhancing performance and security.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Our Clients Section -->
+<div class="clients-section" id="Client">
+    <h2 class="section-heading">Our Valued Clients</h2>
+    <p class="section-description">We proudly partner with a diverse range of clients who trust us to deliver exceptional IT solutions. Discover some of the prominent brands we've had the pleasure of working with.</p>
+    <div class="client-logos">
+        <div class="client-logo">
+            <img src="https://via.placeholder.com/600x400?text=Client1" alt="Client 1">
+            <div class="overlay">
+                <h3>Client 1</h3>
+                <p>Leading provider of innovative solutions in technology.</p>
+            </div>
+        </div>
+        <div class="client-logo">
+            <img src="https://via.placeholder.com/600x400?text=Client2" alt="Client 2">
+            <div class="overlay">
+                <h3>Client 2</h3>
+                <p>Renowned for their expertise in advanced IT infrastructure.</p>
+            </div>
+        </div>
+        <div class="client-logo">
+            <img src="https://via.placeholder.com/600x400?text=Client3" alt="Client 3">
+            <div class="overlay">
+                <h3>Client 3</h3>
+                <p>Specialists in cutting-edge digital solutions and services.</p>
+            </div>
+        </div>
+        <div class="client-logo">
+            <img src="https://via.placeholder.com/600x400?text=Client4" alt="Client 4">
+            <div class="overlay">
+                <h3>Client 4</h3>
+                <p>Trusted partner in scalable IT project management.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+ <!-- Our Footer -->
+<div class="footer" id="footer">
+    <h2 class="animated-heading2">
+        <img src="/assets/img/cont.png" alt="Contact Icon" style="width: 50px; transition: transform 0.3s ease;"> Contact
+    </h2>
+    <div class="footer-bg">
+        <div class="footer-item">
+            <h3>Service</h3>
+            <ul>
+                <li>IT Solution</li>
+                <li>HR Department</li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h3>Contact</h3>
+            <ul>
+                <li>+91 339399212</li>
+                <li>sphere@gmail.com</li>
+                <li>Jaipur, Vaishali Nagar 302030</li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h3>Social</h3>
+            <span><a href="#"><img src="/assets/img/whatsapp.webp" alt="WhatsApp" class="social-icon"></a></span>
+            <span><a href="#"><img src="/assets/img/insta.webp" alt="Instagram" class="social-icon"></a></span>
+            <span><a href="#"><img src="/assets/img/telegram.webp" alt="Telegram" class="social-icon"></a></span>
+        </div>
+    </div>
+</div>
+
+<div id="consultationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Consultation Form</h2>
+      <form action="">
+        <div class="form-group">
+          <input class="form-control" placeholder="First Name" type="text">
+          <input class="form-control" placeholder="Last Name" type="text">
+        </div>
+        <div class="form-group">
+          <input class="form-control" placeholder="Email" type="text">
+          <input class="form-control" placeholder="Phone Number" type="number">
+        </div>
+        <div class="form-group">
+          <input class="form-control" placeholder="Subject" type="text">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" placeholder="Your Message"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="button" class="btn btn-danger form-control" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+    <script>
+        
+  window.onscroll = function() {
+  changeNavbarBackground();
+};
+
+function changeNavbarBackground() {
+  var navbar = document.getElementById("navbar");
+ 
+  if (window.scrollY > 250) {
+    navbar.classList.add("scrolled"); // Add class to change navbar background
+      
+  } else {
+    navbar.classList.remove("scrolled"); // Remove class for navbar
+   }
+}
+
+    </script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('.navbar-toggle');
+        const navbarMenu = document.querySelector('.navbar-menu');
+  
+        toggleButton.addEventListener('click', function () {
+            // Toggle the 'active' class on the menu
+            navbarMenu.classList.toggle('active');
+            // Also toggle 'active' class on toggle button itself for animation
+            toggleButton.classList.toggle('active');
+        });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+    const aboutSection = document.getElementById('about-us');
+
+    const animateOnScroll = () => {
+        const sectionPosition = aboutSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+
+        if (sectionPosition < screenPosition) {
+            aboutSection.classList.add('visible');
+        }
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Trigger animation on initial load
+});
+
+  </script>
+  
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Get the modal
+    const modal = document.getElementById('consultationModal');
+    
+    // Get the button that opens the modal
+    const btn = document.getElementById('openModalButton');
+  
+    // Get the <span> element that closes the modal
+    const span = document.querySelector('.close');
+  
+    // When the user clicks the button, open the modal
+    btn.onclick = function(event) {
+      event.preventDefault();  // Prevents the page from refreshing or jumping to #
+      modal.style.display = 'block';  // Show the modal
+    }
+  
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = 'none';  // Hide the modal
+    }
+  
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';  // Hide the modal if clicked outside
+      }
+    }
+  });
+  
+  </script>
+  
+</nav>   
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+</html>
