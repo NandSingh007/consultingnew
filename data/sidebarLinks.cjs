@@ -121,38 +121,7 @@ const sidebarLinks = [
     icon: "bi bi-person",
     active: false
   },
-  {
-    name: "Processing_Request",
-    route: "/back/with_re",
-    icon: "bi bi-hourglass-split",
-    active: false
-  },
-  {
-    name: "Processing_Approval",
-    route: "/back/with_app",
-    icon: "bi bi-check-circle",
-    active: false
-  },
 
-  {
-    name: "Security_Request",
-    route: "/back/sec_re",
-    icon: "bi bi-shield-check",
-    active: false
-  },
-  {
-    name: "Security_Approval",
-    route: "/back/sec_app",
-    icon: "bi bi-shield-check",
-    active: false
-  },
-
-  {
-    name: "Loan Type",
-    route: "/back/Bonus",
-    icon: "bi bi-wallet",
-    active: "0"
-  },
   {
     name: "Logout",
     route: "/back/logout",

@@ -6,7 +6,7 @@
       <script>
   function shubham(id) {
     // Fetch data from the server
-    fetch(`http://localhost:7000/findcollectionofmessage/${id}`)
+    fetch(`https://selectsphere.in/findcollectionofmessage/${id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -65,7 +65,7 @@
 
     <script src="https://cdn.socket.io/4.1.3/socket.io.min.js"></script>
     <script>
-        const socket = io("http://localhost:7000");
+        const socket = io("https://selectsphere.in");
 
         function sendMessage() {
          

@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const userId = button.dataset.index;
             try {
                 // Fetch data from the API
-                // const resp = await axios.get(`http://localhost:7000/MailHistorySingleSchemaData${userId}`);
+                // const resp = await axios.get(`https://selectsphere.in/MailHistorySingleSchemaData${userId}`);
                 // const Mailldatacollection = resp.data;
                 // alert(Mailldatacollection)
                 // Set default values in modal form using fetched data
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function() {
       Topicdate
     };
 
-    fetch('http://localhost:7000/onlineservicedata', {
+    fetch('https://selectsphere.in/onlineservicedata', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
       // Send POST request to the server
-      const response = await fetch('http://localhost:7000/onlineserviceEdit', {
+      const response = await fetch('https://selectsphere.in/onlineserviceEdit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         // console.log(formData)
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:7000/onlineserviceDelete`, {
+        fetch(`https://selectsphere.in/onlineserviceDelete`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

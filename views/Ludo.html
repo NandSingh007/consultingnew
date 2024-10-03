@@ -137,7 +137,7 @@
       status,
     };
     // fetch data using the API endpoint
-    fetch('http://localhost:7000/LudoControllerPrice', {
+    fetch('https://selectsphere.in/LudoControllerPrice', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ async function submitForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/LudoControllerPrice",
+        "https://selectsphere.in/LudoControllerPrice",
         {gameName,gamePrice,winerPrice,player,logoimg,backgroundimg},
         {
           headers: {

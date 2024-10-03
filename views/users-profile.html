@@ -82,7 +82,7 @@
     };
     console.log(formdata, "formdata");
     try {
-      const { data } = await axios.post('http://localhost:7000/ChangeAdminPassword', formdata);
+      const { data } = await axios.post('https://selectsphere.in/ChangeAdminPassword', formdata);
       alert(data.message); // Display the success message
       location.reload(); // Reload the page
     } catch (error) {

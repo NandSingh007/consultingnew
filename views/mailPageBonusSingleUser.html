@@ -171,7 +171,7 @@
         Id
       };
       
-    fetch('http://localhost:7000/SingleUserMailEdit', {
+    fetch('https://selectsphere.in/SingleUserMailEdit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function async() {
           Id,UserId
         };
         console.log(formData)
-        fetch(`http://localhost:7000/deleteSIngleMailUser`, {
+        fetch(`https://selectsphere.in/deleteSIngleMailUser`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'

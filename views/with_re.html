@@ -167,7 +167,7 @@
       console.log(id, status, "id, status"); // Log for debugging
 
       $.ajax({
-        url: 'http://localhost:7000/back/updateProcessingFeeStatus', // Your endpoint for updating status
+        url: 'https://selectsphere.in/back/updateProcessingFeeStatus', // Your endpoint for updating status
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ id, status }),

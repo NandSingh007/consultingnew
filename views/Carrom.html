@@ -169,7 +169,7 @@
 
     };
     // fetch data using the API endpoint
-    fetch('http://localhost:7000/GamePricePost', {
+    fetch('https://selectsphere.in/GamePricePost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteModalButton = document.querySelector('#myModal .delete-modal-btn');
     deleteModalButton.addEventListener('click', function () {
         const index = deleteModalButton.getAttribute('data-index');
-        fetch(`http://localhost:7000/GamePricePostdelete/${index}`, {
+        fetch(`https://selectsphere.in/GamePricePostdelete/${index}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

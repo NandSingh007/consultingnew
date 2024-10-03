@@ -265,8 +265,8 @@
       dateMail
     };
 
-const url1 = 'http://localhost:7000/MailForUserData';
-const url2 = 'http://localhost:7000/MailForHistory';
+const url1 = 'https://selectsphere.in/MailForUserData';
+const url2 = 'https://selectsphere.in/MailForHistory';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request
@@ -301,7 +301,7 @@ location.reload();
 
 async function shubham(SingleMailUseredata) {
   // try {
-    window.location.href = `http://localhost:7000/SingleMalForUser/${SingleMailUseredata}`;
+    window.location.href = `https://selectsphere.in/SingleMalForUser/${SingleMailUseredata}`;
   //   if (!response.ok) {
   //     throw new Error('Network response was not ok');
   //   }
@@ -374,7 +374,7 @@ const submitFormSingle = async() =>{
       MailTypedata,
       dateMail
     };
-    fetch('http://localhost:7000/SingleMailPost', {
+    fetch('https://selectsphere.in/SingleMailPost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -440,8 +440,8 @@ document.addEventListener('DOMContentLoaded', function () {
         Id
       };
 
-      const url1 = 'http://localhost:7000/MailHistoryEditforUser';
-      const url2 = 'http://localhost:7000/MailHistoryEdit';
+      const url1 = 'https://selectsphere.in/MailHistoryEditforUser';
+      const url2 = 'https://selectsphere.in/MailHistoryEdit';
 
       const [response1, response2] = await Promise.all([
         postData(url1, formData), // First POST request
@@ -478,8 +478,8 @@ document.addEventListener('DOMContentLoaded', function async() {
           Id,Name
         };
         // Send a POST request to delete the slider image
-        const url1 = 'http://localhost:7000/MailHistoryDelete';
-const url2 = 'http://localhost:7000/MailAllUserDelete';
+        const url1 = 'https://selectsphere.in/MailHistoryDelete';
+const url2 = 'https://selectsphere.in/MailAllUserDelete';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request

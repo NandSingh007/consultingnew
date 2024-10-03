@@ -15,238 +15,61 @@
       </button>
       <% if (user) { %>
         <section class="section mt-2">
-            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                <div class="tab-pane fade show active profile-overview">
-                    <h5 class="card-title">Profile Details</h5>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Full Name</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.Username || 'No data available' %></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Phone</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.phoneNumber || 'No data available' %></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Email</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.email || 'No data available' %></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Address</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.address || 'No data available' %></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Income</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.income || 'No data available' %></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Job Type</div>
-                        <div class="col-lg-9 col-md-8"><%= user.userRegistration.jobType || 'No data available' %></div>
-                    </div>
+          <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
+            <div class="tab-pane fade show active profile-overview">
+              <h5 class="card-title">Profile Details</h5>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Full Name</div>
+                <div class="col-lg-9 col-md-8"><%= user[0].firstName + ' ' + user[0].lastName || 'No data available' %></div>
+              </div>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Phone</div>
+                <div class="col-lg-9 col-md-8"><%= user[0].phoneNumber || 'No data available' %></div>
+              </div>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Email</div>
+                <div class="col-lg-9 col-md-8"><%= user[0].email || 'No data available' %></div>
+              </div>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Subject</div>
+                <div class="col-lg-9 col-md-8"><%= user[0].subject || 'No data available' %></div>
+              </div>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Message</div>
+                <div class="col-lg-9 col-md-8"><%= user[0].message || 'No data available' %></div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Date</div>
+                <div class="col-lg-9 col-md-8"><%= new Date(user[0].date).toLocaleString() || 'No data available' %></div>
+              </div>
+      
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Resume</div>
+                <div class="col-lg-9 col-md-8">
+                  <% if (user[0].resume) { %>
+                    <!-- Use iframe to show PDF -->
+                    <iframe src="<%= user[0].resume %>" width="100%" height="500px"></iframe>
+                  <% } else { %>
+                    No resume uploaded
+                  <% } %>
                 </div>
+              </div>
+      
+            
+      
             </div>
+          </div>
         </section>
-    
-        <section class="section mt-2">
-            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                <div class="tab-pane fade show active">
-                    <h5 class="card-title">Document Details</h5>
-                    <% if (user.userFileUploads && user.userFileUploads.length > 0) { %>
-                        <% const doc = user.userFileUploads[0]; %>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">User Profile</div>
-                            <div class="col-lg-9 col-md-8">
-                                <% if (doc.profilePhotoUpload) { %>
-                                    <img src="<%= doc.profilePhotoUpload %>" alt="Profile Photo" style="max-width: 20%; height: auto;">
-                                <% } else { %>
-                                    <div>No Profile Photo</div>
-                                <% } %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">AdhaarCard Front</div>
-                            <div class="col-lg-9 col-md-8">
-                                <% if (doc.adharcardFront) { %>
-                                    <img src="<%= doc.adharcardFront %>" alt="AdhaarCard Front" style="max-width: 20%; height: auto;">
-                                <% } else { %>
-                                    <div>No AdhaarCard Front</div>
-                                <% } %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">AdhaarCard Back</div>
-                            <div class="col-lg-9 col-md-8">
-                                <% if (doc.adharcardBack) { %>
-                                    <img src="<%= doc.adharcardBack %>" alt="AdhaarCard Back" style="max-width: 20%; height: auto;">
-                                <% } else { %>
-                                    <div>No AdhaarCard Back</div>
-                                <% } %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">PanCard</div>
-                            <div class="col-lg-9 col-md-8">
-                                <% if (doc.pancardPhoto) { %>
-                                    <img src="<%= doc.pancardPhoto %>" alt="PanCard" style="max-width: 20%; height: auto;">
-                                <% } else { %>
-                                    <div>No PanCard</div>
-                                <% } %>
-                            </div>
-                        </div>
-    
-                        <section class="section mt-2">
-                            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                                <h5 class="card-title">Bank Details</h5>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Bank Name</div>
-                                    <div class="col-lg-9 col-md-8"><%= doc.bankName || 'No data available' %></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Account Number</div>
-                                    <div class="col-lg-9 col-md-8"><%= doc.accountNumber || 'No data available' %></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">IFSC Code</div>
-                                    <div class="col-lg-9 col-md-8"><%= doc.ifscCode || 'No data available' %></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Holder Name</div>
-                                    <div class="col-lg-9 col-md-8"><%= doc.HolderName || 'No data available' %></div>
-                                </div>
-                            </div>
-                        </section>
-    
-                        <section class="section mt-2">
-                            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                                <h5 class="card-title">Loan Type</h5>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Loan Type</div>
-                                    <div class="col-lg-9 col-md-8"><%= doc.loanType || 'No data available' %></div>
-                                </div>
-                            </div>
-                        </section>
-    
-                        <section class="section mt-2">
-                            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                                <h5 class="card-title">Loan Details</h5>
-                        
-                                <% if (user.userFileUploads && user.userFileUploads.length > 0) { %>
-                                    <% const doc = user.userFileUploads[0]; %>
-                                    <% if (doc.loanType && doc.limit && doc.interest) { %>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Loan Type</div>
-                                            <div class="col-lg-9 col-md-8"><%= doc.loanType || 'No data available' %></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Limit</div>
-                                            <div class="col-lg-9 col-md-8"><%= doc.limit || 'No data available' %></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Interest</div>
-                                            <div class="col-lg-9 col-md-8"><%= doc.interest || 'No data available' %></div>
-                                        </div>
-                                    <% } else { %>
-                                        <% if (user.getloanData && user.getloanData.length > 0) { %>
-                                            <% const loan = user.getloanData[0]; %>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-4 label">Limit</div>
-                                                <div class="col-lg-9 col-md-8"><%= loan.limit || 'No data available' %></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-4 label">Interest</div>
-                                                <div class="col-lg-9 col-md-8"><%= loan.interest || 'No data available' %></div>
-                                            </div>
-                                        <% } else { %>
-                                            <div class="alert alert-warning">No loan details available</div>
-                                        <% } %>
-                                    <% } %>
-                                <% } else { %>
-                                    <div class="alert alert-warning">No document details available</div>
-                                <% } %>
-                            </div>
-                        </section>
-                        
-                    <% } else { %>
-                        <div class="alert alert-warning">No document details available</div>
-                    <% } %>
-                </div>
-            </div>
-        </section>
-    
-        <section class="section mt-2">
-            <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
-                <h5 class="card-title">Loan Types</h5>
-                <!-- Add Button -->
-                <!-- <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addLoanTypeModal">
-                    <i class="fas fa-plus"></i> Add Loan Type
-                </button> -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Loan Type</th>
-                                    <th>Limit</th>
-                                    <th>Interest</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% if (user.userFileUploads && user.userFileUploads.length > 0) { %>
-                                    <% const doc = user.userFileUploads[0]; %>
-                                    <% if (doc.loanType && doc.limit && doc.interest) { %>
-                                        <tr>
-                                            <td><%= doc.loanType || 'No data available' %></td>
-                                            <td><%= doc.limit || 'No data available' %></td>
-                                            <td><%= doc.interest || 'No data available' %></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm" 
-                                                   data-toggle="modal" data-target="#editLoanTypeModal" 
-                                                   data-id="<%= doc._id %>" 
-                                                   data-loanType="<%= doc.loanType %>" 
-                                                   data-limit="<%= doc.limit %>" 
-                                                   data-interest="<%= doc.interest %>">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <% } else { %>
-                                        <% if (user.getloanData && user.getloanData.length > 0) { %>
-                                            <% user.getloanData.forEach(function(loan) { %>
-                                                <tr>
-                                                    <td><%= loan.loanType || 'No data available' %></td>
-                                                    <td><%= loan.limit || 'No data available' %></td>
-                                                    <td><%= loan.interest || 'No data available' %></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-sm" 
-                                                           data-toggle="modal" data-target="#editLoanTypeModal" 
-                                                           data-id="<%= loan._id %>" 
-                                                           data-loanType="<%= loan.loanType %>" 
-                                                           data-limit="<%= loan.limit %>" 
-                                                           data-interest="<%= loan.interest %>">
-                                                            <i class="fas fa-edit"></i> Edit
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <% }); %>
-                                        <% } else { %>
-                                            <tr>
-                                                <td colspan="4" class="text-center">No loan types available</td>
-                                            </tr>
-                                        <% } %>
-                                    <% } %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="4" class="text-center">No loan details available</td>
-                                    </tr>
-                                <% } %>
-                            </tbody>
-                            
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <% } %>
+      <% } else { %>
+        <p>User not found</p>
+      <% } %>
+      
+      
     <!-- Edit Loan Type Modal -->
     <div class="modal fade" id="editLoanTypeModal" tabindex="-1" role="dialog" aria-labelledby="editLoanTypeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -341,7 +164,7 @@
 
     // Perform AJAX request to update loan type
     $.ajax({
-      url: 'http://localhost:7000/back/updateloantypefile', // Adjust URL as needed
+      url: 'https://selectsphere.in/back/updateloantypefile', // Adjust URL as needed
       method: 'POST',
       data: {
         userId: userId,

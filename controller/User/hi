@@ -1403,7 +1403,7 @@ router.get("/users-profile", (req, res) => {
 router.get("/with_re", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getProcessingFeeDataWithStatusZero"
+      "https://selectsphere.in/getProcessingFeeDataWithStatusZero"
     );
     const profile = await profileResponse.json();
     res.render("with_re", {
@@ -1420,7 +1420,7 @@ router.get("/with_re", async (req, res) => {
 router.get("/with_app", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getProcessingFeeDataWithStatusOne"
+      "https://selectsphere.in/getProcessingFeeDataWithStatusOne"
     );
     const profile = await profileResponse.json();
     console.log(profile, "profile  1");
@@ -1438,7 +1438,7 @@ router.get("/with_app", async (req, res) => {
 router.get("/with_rej", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getProcessingFeeDataWithStatusTwo"
+      "https://selectsphere.in/getProcessingFeeDataWithStatusTwo"
     );
     const profile = await profileResponse.json();
     console.log(profile, "profile  2");
@@ -1475,7 +1475,7 @@ router.get("/pages-contact", (req, res) => {
 router.get("/Bonus", async (req, res) => {
   // res.render("bonus", { title: "Bonus", currentRoute: req.url });
   try {
-    const response = await axios.get("http://localhost:7000/GetLoanTypes"); // Replace with your API endpoint
+    const response = await axios.get("https://selectsphere.in/GetLoanTypes"); // Replace with your API endpoint
     const data = response.data;
     // console.log(data);
     res.render("Bonus", {
@@ -1495,7 +1495,7 @@ router.get("/GetLoanTypes", GetLoanTypes);
 router.get("/Refer", async (req, res) => {
   try {
     const response = await axios.get(
-      "http://localhost:7000/FetchPackageDataController"
+      "https://selectsphere.in/FetchPackageDataController"
     ); // Replace with your API endpoint
     const data = response.data;
 
@@ -1515,7 +1515,7 @@ router.delete("/DeletePackage/:id", DeletePackage);
 router.get("/rech_pe", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/fetchCompanyProfile"
+      "https://selectsphere.in/fetchCompanyProfile"
     );
     const profileData = await profileResponse.json();
 
@@ -1567,7 +1567,7 @@ router.post(
 router.get("/sec_re", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getSecurityFeeDataWithStatusZero"
+      "https://selectsphere.in/getSecurityFeeDataWithStatusZero"
     );
     const profile = await profileResponse.json();
     res.render("security_req", {
@@ -1584,7 +1584,7 @@ router.get("/sec_re", async (req, res) => {
 router.get("/sec_app", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getSecurityFeeDataWithStatusOne"
+      "https://selectsphere.in/getSecurityFeeDataWithStatusOne"
     );
     const profile = await profileResponse.json();
     console.log(profile, "profile  1");
@@ -1602,7 +1602,7 @@ router.get("/sec_app", async (req, res) => {
 router.get("/sec_rej", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/getSecurityFeeDataWithStatusTwo"
+      "https://selectsphere.in/getSecurityFeeDataWithStatusTwo"
     );
     const profile = await profileResponse.json();
     console.log(profile, "profile  2");

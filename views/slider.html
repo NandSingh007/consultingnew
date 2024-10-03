@@ -191,7 +191,7 @@ document.getElementById('imageFormupdate').addEventListener('submit', function (
     formData.append("NoticeImageIds", sliderImageIds); // Append the sliderImageIds here
   // console.log(formData)
     // Fetch API to send the FormData object
-    fetch(`http://localhost:7000/NoticeUpdateImg`, {
+    fetch(`https://selectsphere.in/NoticeUpdateImg`, {
         method: 'POST',
         body: formData
     })
@@ -224,7 +224,7 @@ document.getElementById('imageFormupdate').addEventListener('submit', function (
             formData.append("NoticeName", Name);
             formData.append("NoticeImg", NoticeImg);
             // Fetch API to send the FormData object
-            fetch(`http://localhost:7000/NoticeSlider`, {
+            fetch(`https://selectsphere.in/NoticeSlider`, {
                 method: 'POST',
                 body: formData
             })
@@ -248,7 +248,7 @@ location.reload()
           NticeinnerId,
             sliderImageIds
         };
-        fetch(`http://localhost:7000/NoticeDelteImg`, {
+        fetch(`https://selectsphere.in/NoticeDelteImg`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

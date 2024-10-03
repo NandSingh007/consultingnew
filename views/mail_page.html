@@ -177,8 +177,8 @@
       festivalBonusdata,
       dateFestival
     };
-const url1 = 'http://localhost:7000/FestivalBonus';
-const url2 = 'http://localhost:7000/FestivalBonusforuser';
+const url1 = 'https://selectsphere.in/FestivalBonus';
+const url2 = 'https://selectsphere.in/FestivalBonusforuser';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request
@@ -238,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function () {
       festName,
       Id
     };
-    const url1 = 'http://localhost:7000/FestivalBonusEditInUser';
-const url2 = 'http://localhost:7000/FestivalBonusforuserEditInFestival';
+    const url1 = 'https://selectsphere.in/FestivalBonusEditInUser';
+const url2 = 'https://selectsphere.in/FestivalBonusforuserEditInFestival';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request
@@ -277,8 +277,8 @@ document.addEventListener('DOMContentLoaded', function async() {
           Id,Name
         };
         // Send a POST request to delete the slider image
-        const url1 = 'http://localhost:7000/FestivalBonusDeleter';
-const url2 = 'http://localhost:7000/FestivalBonusforuserDelete';
+        const url1 = 'https://selectsphere.in/FestivalBonusDeleter';
+const url2 = 'https://selectsphere.in/FestivalBonusforuserDelete';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request

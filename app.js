@@ -27,14 +27,14 @@ var app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:7000",
+    origin: "https://selectsphere.in",
     methods: ["POST", "GET", "DELETE", "PUT"]
   }
 });
 const allowedOrigins = [
-  "http://localhost:7000",
-  "http://localhost:7000/back"
-  // "http://192.168.29.155:7000"
+  "https://selectsphere.in",
+  "https://selectsphere.in/back"
+  // "http://192.168.29.155:6500"
 ];
 
 // CORS options

@@ -120,7 +120,14 @@ router.get("/ITsolution", (req, res) => {
 
 // EMI Page Routes
 router.get("/ITconsulting", (req, res) => {
-  res.render("Frontend/ITconsulting.html", {
+  res.render("Frontend/ITconsulting", {
+    title: "home",
+    currentRoute: req.url
+  });
+});
+
+router.get("/Legal", (req, res) => {
+  res.render("Frontend/LegalWorkshop", {
     title: "home",
     currentRoute: req.url
   });

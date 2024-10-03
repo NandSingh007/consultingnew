@@ -2,20 +2,23 @@ const express = require("express");
 const path = require("path");
 const {
   getInsuranceBanks,
+  userDetailDataReg,
+  frontlogin,
 
   deleteuser,
-  updateProcessingFeeStatus,
+  getConsultations,
+  createConsultation,
   bankdetails,
-
+  // registerfrontendData,
+  getCompanyProfileSelect,
+  FetchPersonalUserdetailsecondPage,
   getSecurityFeeDataWithStatusOnebyid,
   editInsuramcetype,
   PackageDataController,
-
+  frontloginform,
   BankDetailsadd,
-  updateSecurityFeeStatus,
-  getProcessingFeeDataWithStatusZero,
-  securityAmount,
-  getProcessingFeeDataWithStatusOne,
+
+  FetchPersonalUserdetails,
   CompanyProfileScn,
   getSecurityFeeDataWithStatusOneFront,
   // AddAdmin,
@@ -25,26 +28,26 @@ const {
   getSecurityFeeDataWithStatusZero,
   personalDetailsOfUser,
   updateloantypefile,
-  getProcessingFeeDataWithStatus,
-  step3Details,
+
   getSecurityFeeDataWithStatusOne,
   stepfourdetails,
-  getAllInformation,
+  forgotpasswordfront,
+
   // getSecurityFeeDataWithStatusTwo,
   step1Details,
-
+  frontsubmitForm,
   deleteloan,
   deletebank,
   processFeeData,
-  editlontype,
-  LoanTypes,
-  Statusendpoint,
-  updatePackage,
 
-  processingFeeDataFetchStatus,
+  LoanTypes,
+
+  updatePackage,
+  fetchCompanyProfile,
+
   changePassword,
-  userDetailData,
   loginNumber,
+  GetLoanTypes,
   FetchPackageDataController,
 
   DeletePackage,
@@ -52,12 +55,12 @@ const {
   // UploadImgMulter,
   // DeleteAdminImg,
   EditName,
-  step2Details,
   // getProcessingFeeDataWithStatusTwo,
   changePasswordfirst,
   login,
   ChangeAdminPassword,
-  register
+  register,
+  UpdateCompanyProfileSelect
 } = require("../controller/User/UserLofinController");
 const { default: axios } = require("axios");
 const multer = require("multer");
@@ -72,24 +75,23 @@ router.get("/admin_role", authMiddleware, (req, res) => {
   res.render("admin_role", { title: "Admin Role", currentRoute: req.url });
 });
 router.get("/player", authMiddleware, async (req, res) => {
+  const { page = 1 } = req.query; // Get 'page' from query params, default to 1
+  const limit = 10; // Number of users per page
+
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/back/userDetailData"
+      `https://selectsphere.in/back/getConsultations`
     );
-
     // Check if the response is JSON
     const contentType = profileResponse.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       throw new Error("Received non-JSON response");
     }
-
     const profile = await profileResponse.json();
-
-    // Sort the profile array by creationDate (or another timestamp field)
-    profile.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
+    console.log(profile, "getConsultations");
 
     res.render("player", {
-      profile,
+      profile: profile, // Pass the actual data array to the view
       title: "Player Master",
       currentRoute: req.url
     });
@@ -107,7 +109,7 @@ router.get("/user/:userId", authMiddleware, async (req, res) => {
     const userId = req.params.userId;
     // console.log(userId);
     const apiResponse = await fetch(
-      `http://localhost:7000/back/personalDetailsOfUser/${userId}`
+      `https://selectsphere.in/back/personalDetailsOfUser/${userId}`
     );
 
     if (!apiResponse.ok) {
@@ -145,66 +147,6 @@ router.get("/users-profile", authMiddleware, (req, res) => {
     currentRoute: req.url
   });
 });
-router.get("/with_re", async (req, res) => {
-  try {
-    const profileResponse = await fetch(
-      "http://localhost:7000/back/getProcessingFeeDataWithStatusZero"
-    );
-
-    // Check if the response is JSON
-    const contentType = profileResponse.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Received non-JSON response");
-    }
-
-    const profile = await profileResponse.json();
-
-    res.render("with_re", {
-      profile,
-      currentRoute: "/back/with_re"
-    });
-  } catch (error) {
-    console.error("Error fetching profile:", error);
-    res.render("errorPage"); // Handle error appropriately
-  }
-});
-
-router.get("/with_app", authMiddleware, async (req, res) => {
-  try {
-    const profileResponse = await fetch(
-      "http://localhost:7000/back/getProcessingFeeDataWithStatusOne"
-    );
-    const profile = await profileResponse.json();
-    // console.log(profile, "profile  1");
-    res.render("with_app", {
-      profile,
-      currentRoute: "/with_app"
-    });
-  } catch (error) {
-    console.error("Error fetching profile:", error);
-    res.render("errorPage"); // Handle error appropriately
-  }
-  // res.render("with_re", { title: "with_re", currentRoute: req.url });
-});
-
-// router.get("/with_rej", authMiddleware, async (req, res) => {
-//   try {
-//     const profileResponse = await fetch(
-//       "http://localhost:7000/back/getProcessingFeeDataWithStatusTwo"
-//     );
-//     const profile = await profileResponse.json();
-//     // console.log(profile, "profile  2");
-//     res.render("with_rej", {
-//       profile,
-//       currentRoute: "/back/with_rej"
-//     });
-//   } catch (error) {
-//     console.error("Error fetching profile:", error);
-//     res.render("errorPage"); // Handle error appropriately
-//   }
-//   // res.render("with_re", { title: "with_re", currentRoute: req.url });
-// });
-router.post("/updateProcessingFeeStatus", updateProcessingFeeStatus);
 router.get("/chatbox", authMiddleware, (req, res) => {
   res.render("chatbox", { title: "chatbox", currentRoute: req.url });
 });
@@ -225,27 +167,46 @@ router.get("/pages-contact", (req, res) => {
 });
 router.get("/Bonus", async (req, res) => {
   try {
+    // Fetch Loan Types data
+    const loanResponse = await axios.get(
+      "https://selectsphere.in/back/GetLoanTypes"
+    );
+
+    // Fetch Insurance Banks data
+    const insuranceResponse = await axios.get(
+      "https://selectsphere.in/back/getInsuranceBanks"
+    );
+
+    // Get data from both responses
+    const loanData = loanResponse.data;
+    const insuranceData = insuranceResponse.data;
+
+    // Render the view with the fetched data
     res.render("bonus", {
       title: "Bonus",
-      currentRoute: req.url
+      currentRoute: req.url,
+      GetLoanTypes: loanData.length > 0 ? loanData : [], // Loan Types data
+      getInsuranceBanks: insuranceData.length > 0 ? insuranceData : [] // Insurance Banks data
     });
   } catch (error) {
     console.error("Error fetching data from API:", error);
     res.render("bonus", {
       title: "Bonus",
-      currentRoute: req.url
+      currentRoute: req.url,
+      GetLoanTypes: [], // Pass empty array if there's an error
+      getInsuranceBanks: [] // Pass empty array if there's an error
     });
   }
 });
 
 router.post("/LoanTypes", LoanTypes);
-router.post("/editlontype/:id", editlontype);
 router.delete("/deleteloan/:id", deleteloan);
 router.delete("/deletebank/:id", deletebank);
+router.get("/GetLoanTypes", GetLoanTypes);
 router.get("/Refer", async (req, res) => {
   try {
     const response = await axios.get(
-      "http://localhost:7000/back/FetchPackageDataController"
+      "https://selectsphere.in/back/FetchPackageDataController"
     ); // Replace with your API endpoint
     const data = response.data;
 
@@ -260,42 +221,37 @@ router.get("/Refer", async (req, res) => {
   }
 });
 
-router.delete("/DeletePackage/:id", DeletePackage);
-
 router.get("/rech_pe", async (req, res) => {
   try {
+    const profileResponse = await fetch(
+      "https://selectsphere.in/back/getCompanyProfileSelect"
+    );
+    const profileData = await profileResponse.json();
+
     res.render("rech_pe", {
+      profile: profileData.profile, // Access the `profile` key inside the data
       currentRoute: "/rech_pe"
     });
   } catch (error) {
     console.error("Error fetching profile:", error);
-    res.render("errorPage"); // Handle error appropriately
+    res.render("errorPage");
   }
 });
 
-// router.post("/AddAdmin", AddAdmin);
-// router.post("/users-profile", UploadImgMulter, UpdateAdmin);
-// router.get("/AdminData", GetAdminUser);
-// router.post("/ChangeAdminPassword", ChangeAdminPassword);
-// router.post("/DeleteAdminImg", DeleteAdminImg);
-// router.post("/sendotp", sendotp);
-router.post("/step2Details", step2Details);
 // router.post("/update-otp", updateotp);
 router.post("/logout", (req, res) => {
   res.clearCookie("token"); // Clear the authentication cookie
+  window.reload();
   res.json({ message: "Logged out successfully" });
 });
 router.post("/loginNumber", loginNumber);
-router.post(
-  "/getProcessingFeeDataWithStatus/:id",
-  getProcessingFeeDataWithStatus
-);
+
 // Set up multer for file handling
 
 router.get("/sec_re", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/back/getSecurityFeeDataWithStatusZero"
+      "https://selectsphere.in/back/getSecurityFeeDataWithStatusZero"
     );
     const profile = await profileResponse.json();
     res.render("security_req", {
@@ -312,7 +268,7 @@ router.get("/sec_re", async (req, res) => {
 router.get("/sec_app", async (req, res) => {
   try {
     const profileResponse = await fetch(
-      "http://localhost:7000/back/getSecurityFeeDataWithStatusOne"
+      "https://selectsphere.in/back/getSecurityFeeDataWithStatusOne"
     );
     const profile = await profileResponse.json();
     // console.log(profile, "profile  1");
@@ -330,7 +286,7 @@ router.get("/sec_app", async (req, res) => {
 // router.get("/sec_rej", async (req, res) => {
 //   try {
 //     const profileResponse = await fetch(
-//       "http://localhost:7000/back/getSecurityFeeDataWithStatusTwo"
+//       "https://selectsphere.in/back/getSecurityFeeDataWithStatusTwo"
 //     );
 //     const profile = await profileResponse.json();
 //     // console.log(profile, "profile  2");
@@ -345,7 +301,6 @@ router.get("/sec_app", async (req, res) => {
 //   // res.render("with_re", { title: "with_re", currentRoute: req.url });
 // });
 
-router.get("/getAllInformation/:id", getAllInformation);
 router.post("/step1Details", step1Details);
 router.post("/editname", EditName);
 router.post("/stepfourdetails", stepfourdetails);
@@ -353,45 +308,37 @@ router.put("/updatePackage/:id", updatePackage);
 // ("");
 router.get("/FetchPackageDataController", FetchPackageDataController);
 router.post("/PackageDataController", PackageDataController);
-router.post("/processingFeeDataFetchStatus", processingFeeDataFetchStatus);
-// router.get(
-//   "/getProcessingFeeDataWithStatusTwo",
-//   getProcessingFeeDataWithStatusTwo
-// );
-router.post("/updateSecurityFeeStatus", updateSecurityFeeStatus);
-router.post("/securityAmount", securityAmount);
-router.get(
-  "/getProcessingFeeDataWithStatusOne",
-  getProcessingFeeDataWithStatusOne
-);
-router.get(
-  "/getProcessingFeeDataWithStatusZero",
-  getProcessingFeeDataWithStatusZero
-);
+router.get("/fetchCompanyProfile", fetchCompanyProfile);
+
 router.get("/CompanyProfileScn", CompanyProfileScn);
-router.get("/Statusendpoint/:userId", Statusendpoint);
 router.get("/getSecurityFeeDataWithStatusOne", getSecurityFeeDataWithStatusOne);
 router.get(
   "/getSecurityFeeDataWithStatusOneFront/:userId",
   getSecurityFeeDataWithStatusOneFront
 );
-// router.post("/securityAmount", securityAmount);
 // router.get("/getSecurityFeeDataWithStatusTwo", getSecurityFeeDataWithStatusTwo);
 router.get(
   "/getSecurityFeeDataWithStatusZero",
   getSecurityFeeDataWithStatusZero
 );
 router.post("/bankdetails", bankdetails);
-router.get("/userDetailData", userDetailData);
 router.post("/changePasswordfirst", changePasswordfirst);
 router.post("/ChangeAdminPassword", ChangeAdminPassword);
 // router.post("/UpdateCompanyProfile", UpdateCompanyProfile);
+
 router.get("/personalDetailsOfUser/:userId", personalDetailsOfUser);
+router.get("/FetchPersonalUserdetails/:userId", FetchPersonalUserdetails);
+router.get(
+  "/FetchPersonalUserdetailsecondPage/:userId",
+  FetchPersonalUserdetailsecondPage
+);
 
 // Route to update company profile
-
+router.post("/frontloginform", frontloginform);
 router.delete("/deleteuser/:Id", deleteuser);
 router.post("/register", register);
+router.post("/frontlogin", frontlogin);
+router.post("/forgot-password-front", forgotpasswordfront);
 router.get("/getInsuranceBanks", getInsuranceBanks);
 
 // Define the route for form submission
@@ -420,6 +367,17 @@ router.post(
   editInsuramcetype
 );
 
+router.post(
+  "/frontsubmitForm",
+  upload.fields([
+    { name: "profilePhotoUpload", maxCount: 1 },
+    { name: "adharcardFront", maxCount: 1 },
+    { name: "adharcardBack", maxCount: 1 },
+    { name: "pancardPhoto", maxCount: 1 },
+    { name: "capturedPhoto", maxCount: 1 }
+  ]),
+  frontsubmitForm
+);
 router.post("/updateloantypefile", updateloantypefile);
 // Apply the middleware to the route
 const uploadMiddleware = upload.fields([
@@ -431,6 +389,13 @@ const uploadMiddleware = upload.fields([
     maxCount: 1
   }
 ]);
-router.post("/UpdateCompanyProfile", uploadMiddleware, updateCompanyProfile);
+// const upload = multer({ storage: storage, fileFilter: fileFilter });
 
+router.post("/UpdateCompanyProfile", uploadMiddleware, updateCompanyProfile);
+router.get("/userDetailDataReg", userDetailDataReg);
+router.get("/getCompanyProfileSelect", getCompanyProfileSelect);
+router.post("/UpdateCompanyProfileSelect", UpdateCompanyProfileSelect);
+router.get("/getConsultations", getConsultations);
+router.post("/createConsultation", upload.single("resume"), createConsultation);
+// router.post("/checkPan", pancardDetailData);
 module.exports = router;

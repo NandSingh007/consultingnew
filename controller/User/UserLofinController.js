@@ -1,5 +1,14 @@
 const jwt = require("jsonwebtoken");
 // import jwt from "jsonwebtoken";
+const {
+  API_CRN,
+  API_MERCHANT_KEY,
+  API_MERCHANT_MID,
+  API_PANTXN_URL,
+  encrypt,
+  generateRandomAPIString
+} = require("../../config/Config");
+
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -16,13 +25,13 @@ const Admin_User = require("../../models/UserData");
 const multer = require("multer");
 const fs = require("fs");
 const axios = require("axios");
+
 // const { JustCheck, ImgModel } = require("../../models/Justcheck");
 const {
   ImgCollectiondata,
   NoticeCollectiondata
 } = require("../../models/ImagesColletion");
 const PackageData = require("../../models/PackageLoan");
-const CompanyProfile = require("../../models/CompanyProfileSchema");
 const LoginData = require("../../models/LoginModule");
 const StepFormData = require("../../models/UserFormDetails");
 // const jobDetails = require("../../models/JobDetails");
@@ -36,6 +45,8 @@ const User = require("../../models/User");
 const Registration = require("../../models/Registration");
 const FileUpload = require("../../models/FileUpload");
 const InsuranceBank = require("../../models/BankInsuranceType");
+const Consultation = require("../../models/Consultation");
+const CompanyProfileSdata = require("../../models/CompanyProfileSelect");
 
 dotenv.config();
 
@@ -156,6 +167,17 @@ exports.LoanTypes = async (req, res) => {
   }
 };
 
+exports.GetLoanTypes = async (req, res) => {
+  try {
+    const loanTypes = await LoanTypeDatas.find(); // Adjust this query according to your database and schema
+    res.status(200).json(loanTypes);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch loan types", error: error.message });
+  }
+};
+
 const fetchJobDetails = async (id) => {
   try {
     const jobDetails = await jobDetails.find({ userId: id });
@@ -192,31 +214,6 @@ const fetchLoanTypeDatas = async (id) => {
   }
 };
 
-exports.getAllInformation = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const [jobDetails, joDocuments, stepFormData, loanTypeDatas] =
-      await Promise.all([
-        fetchJobDetails(id),
-        fetchJoDocuments(id),
-        fetchStepFormData(id),
-        fetchLoanTypeDatas(id)
-      ]);
-
-    const response = {
-      jobDetails,
-      joDocuments,
-      stepFormData,
-      loanTypeDatas
-    };
-
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 exports.deleteloan = async (req, res) => {
   const loanTypeId = req.params.id;
 
@@ -243,133 +240,7 @@ exports.deletebank = async (req, res) => {
     res.status(500).send(err);
   }
 };
-exports.editlontype = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { loanType, interest, limit } = req.body;
-    console.log(loanType, interest, limit, id);
-    // Ensure all required fields are present
-    if (!loanType || !interest || limit === undefined) {
-      return res
-        .status(400)
-        .json({ error: "Loan Type, Interest, and Limit are required" });
-    }
-
-    // Find the loan type by ID and update it
-    const updatedLoanType = await LoanTypeDatas.findByIdAndUpdate(
-      id,
-      { loanType, interest, limit },
-      { new: true }
-    );
-
-    if (!updatedLoanType) {
-      return res.status(404).json({ error: "Loan type not found" });
-    }
-
-    res.json({
-      message: "Loan type updated successfully",
-      loan: updatedLoanType
-    });
-  } catch (error) {
-    console.error("Error updating loan type:", error);
-    res.status(500).json({ error: "Failed to update loan type" });
-  }
-};
-// exports.AddAdmin = async (req, res) => {
-//   try {
-//     await Admin_User.Admin_User.create(req.body);
-//     res.send({ message: "User Created Successfully" });
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
-// exports.GetAdminUser = async (req, res) => {
-//   try {
-//     const data = await Admin_User.Admin_User.findOne({});
-//     res.send(data);
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
-// const storage = multer.diskStorage({
-//   destination: "uploads",
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + "-" + file.originalname);
-//   }
-// });
-// const upload = multer({ storage: storage });
-
-// exports.UploadImgMulter = upload.single("ProfileImg");
-
-// exports.UpdateAdmin = async (req, res) => {
-//   try {
-//     let updateData = req.body;
-//     if (req.file) {
-//       updateData.ProfileImg = req.file.path;
-//     }
-//     const updatedAdmin = await Admin_User.Admin_User.findOneAndUpdate(
-//       {},
-//       { $set: updateData },
-//       { new: true }
-//     );
-//     res.redirect("/users-profile");
-//   } catch (error) {
-//     console.error("Error updating admin:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
-// exports.ChangeAdminPassword = async (req, res) => {
-//   try {
-//     const { CurrentPassword, NewPassword } = req.body;
-//     const updatedDocument = await Admin_User.Admin_User.findOneAndUpdate(
-//       { Password: CurrentPassword },
-//       { $set: { Password: NewPassword } },
-//       { new: true }
-//     );
-//     if (!updatedDocument) {
-//       return res.status(404).send("Incorrect Password");
-//     }
-//     res.send({ message: true });
-//   } catch (error) {
-//     console.error("Error changing password:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// };
-
-// exports.DeleteAdminImg = async (req, res) => {
-//   try {
-//     const { email } = req.body;
-//     const result = await Admin_User.Admin_User.updateOne(
-//       { Email: email.trim() },
-//       { $unset: { ProfileImg: true } }
-//     );
-//     res.send({ message: result.nModified > 0 });
-//   } catch (error) {
-//     console.error("Error deleting profile image:", error);
-//     res.status(500).send({ message: false });
-//   }
-// };
-
-// const storageIcon = multer.memoryStorage();
-// const uploadicon = multer({ storage: storageIcon });
-
 // exports.UploadImgMulter1 = uploadicon.single("SliderImg");
-const calculateMonthlyEmi = (LoanAmount, InterestRate, LoanTenureMonths) => {
-  // Convert annual interest rate to monthly and calculate
-  const monthlyInterestRate = InterestRate / 100 / 12;
-  const denominator = Math.pow(1 + monthlyInterestRate, LoanTenureMonths) - 1;
-  const emi =
-    LoanAmount *
-    monthlyInterestRate *
-    (Math.pow(1 + monthlyInterestRate, LoanTenureMonths) / denominator);
-  return emi;
-};
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -379,520 +250,6 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
-exports.step2Details = [
-  upload.single("incomeProof"),
-  async (req, res) => {
-    try {
-      const { userId, income, loanType, phone, email } = req.body;
-
-      const incomeProof = req.file ? req.file.path : null; // Check if file exists
-
-      // Check if user details already exist in jobDetails based on userId
-      let existingRecord = await jobDetails.findOne({ userId });
-
-      if (existingRecord) {
-        // Update existing record
-        existingRecord.income = income;
-        existingRecord.loanType = loanType;
-        if (incomeProof) {
-          existingRecord.incomeProof = incomeProof; // Only update if incomeProof is provided
-        }
-        existingRecord.phone = phone;
-        existingRecord.email = email;
-        await existingRecord.save();
-        res
-          .status(200)
-          .json({ message: "Income details updated successfully" });
-      } else {
-        // Insert new record
-        const newIncomeDetails = new jobDetails({
-          userId,
-          income,
-          phone,
-          email,
-          loanType,
-          incomeProof
-        });
-
-        await newIncomeDetails.save();
-        res.status(200).json({ message: "Income details saved successfully" });
-      }
-    } catch (error) {
-      console.error("Error saving income details:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  }
-];
-exports.step3Details = async (req, res) => {
-  try {
-    const { userId, phone, email } = req.body;
-    const { adhaarFront, adhaarBack, panFront, userPhoto } = req.files;
-
-    // Ensure all files are uploaded
-    if (!adhaarFront || !adhaarBack || !panFront || !userPhoto) {
-      return res.status(400).json({ message: "All files must be uploaded" });
-    }
-
-    // Convert file buffers to Base64 strings
-    const adhaarFrontBase64 = adhaarFront[0].buffer.toString("base64");
-    const adhaarBackBase64 = adhaarBack[0].buffer.toString("base64");
-    const panFrontBase64 = panFront[0].buffer.toString("base64");
-    const userPhotoBase64 = userPhoto[0].buffer.toString("base64");
-
-    const existingDocument = await JoDocuments.findOne({ userId });
-
-    if (existingDocument) {
-      // Update existing document
-      existingDocument.adhaarFront = adhaarFrontBase64;
-      existingDocument.adhaarBack = adhaarBackBase64;
-      existingDocument.panFront = panFrontBase64;
-      existingDocument.userPhoto = userPhotoBase64;
-      existingDocument.userId = userId;
-
-      await existingDocument.save();
-      return res
-        .status(200)
-        .json({ message: "Documents updated successfully." });
-    } else {
-      // Create new document
-      const newDocument = new JoDocuments({
-        userId,
-        adhaarFront: adhaarFrontBase64,
-        adhaarBack: adhaarBackBase64,
-        panFront: panFrontBase64,
-        userPhoto: userPhotoBase64,
-        phone,
-        email
-      });
-
-      await newDocument.save();
-      return res
-        .status(200)
-        .json({ message: "Documents uploaded successfully." });
-    }
-  } catch (error) {
-    console.error("Error saving documents:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-exports.securityAmount = async (req, res) => {
-  try {
-    const { userIdtwo, transactionnumbertwo } = req.body;
-    // console.log(
-    //   userIdtwo,
-    //   transactionnumbertwo,
-    //   "userIdtwo, transactionnumbertwo"
-    // );
-    const inserData = new SecurityData({
-      transactionnumbertwo,
-      userIdtwo
-    });
-    await inserData.save();
-    res.status(200).json("data Saved");
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
-// exports.updateSecurityFeeStatus = async (req, res) => {
-//   const { id, status } = req.body;
-
-//   try {
-//     // Validate input
-//     if (!id || !status) {
-//       return res.status(400).json({ error: "ID and status are required" });
-//     }
-
-//     // Fetch the document from SecurityData
-//     const securityData = await SecurityData.findById(id);
-
-//     // Check if the document exists
-//     if (!securityData) {
-//       return res.status(404).json({ error: "Security data not found" });
-//     }
-
-//     // Update the status
-//     securityData.Status = status;
-//     await securityData.save();
-
-//     // Respond with success
-//     res.status(200).json({
-//       message: "Status updated successfully",
-//       updatedData: securityData
-//     });
-//   } catch (error) {
-//     console.error("Error updating security fee status:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// };
-exports.updateSecurityFeeStatus = async (req, res) => {
-  const { id, status } = req.body;
-
-  try {
-    // Validate input
-    if (!id || !status) {
-      return res.status(400).json({ error: "ID and status are required" });
-    }
-
-    // Check if status is 2
-    if (status === 2) {
-      // Delete the document if status is 2
-      const deletedData = await SecurityData.findByIdAndDelete(id);
-
-      // Check if the document was found and deleted
-      if (!deletedData) {
-        return res.status(404).json({ error: "Security data not found" });
-      }
-
-      return res.status(200).json({
-        message: "Security data deleted successfully"
-      });
-    } else {
-      // Fetch the document if status is not 2
-      const securityData = await SecurityData.findById(id);
-
-      // Check if the document exists
-      if (!securityData) {
-        return res.status(404).json({ error: "Security data not found" });
-      }
-
-      // Update the status
-      securityData.Status = status;
-      await securityData.save();
-
-      // Respond with success
-      return res.status(200).json({
-        message: "Status updated successfully",
-        updatedData: securityData
-      });
-    }
-  } catch (error) {
-    console.error("Error updating security fee status:", error);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-};
-
-exports.processingFeeDataFetchStatus = async (req, res) => {
-  try {
-    const { id, status } = req.body;
-
-    if (!userId) {
-      return res
-        .status(400)
-        .json({ success: false, message: "UserId is required" });
-    }
-
-    // Fetch the data for the given userId
-    const userFeeData = await processingFeeData.findOne({ userId });
-
-    if (userFeeData) {
-      const { Status } = userFeeData;
-      // Check if status is 0 or 1
-      if (Status === 0 || Status === 1) {
-        return res.status(200).json({ success: true, result: true });
-      } else {
-        return res.status(200).json({ success: true, result: false });
-      }
-    } else {
-      return res.status(200).json({ success: true, result: false });
-    }
-  } catch (error) {
-    console.error("Error fetching processing fee data:", error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-};
-// exports.updateProcessingFeeStatus = async (req, res) => {
-//   try {
-//     const { id, status } = req.body;
-//     // console.log(id, status);
-//     if (!id || !status) {
-//       return res.status(400).json({ message: "ID and status are required." });
-//     }
-
-//     // Update the status in the database
-//     const updatedFee = await processingFeeData.findByIdAndUpdate(
-//       id,
-//       { Status: status },
-//       { new: true }
-//     );
-
-//     if (!updatedFee) {
-//       return res.status(404).json({ message: "Record not found." });
-//     }
-//     res
-//       .status(200)
-//       .json({ message: "Status updated successfully.", data: updatedFee });
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-exports.updateProcessingFeeStatus = async (req, res) => {
-  try {
-    const { id, status } = req.body;
-
-    if (!id || !status) {
-      return res.status(400).json({ message: "ID and status are required." });
-    }
-
-    let responseMessage;
-
-    if (status === 2) {
-      // If the status is 2, delete the entire document
-      const deletedFee = await processingFeeData.findByIdAndDelete(id);
-
-      if (!deletedFee) {
-        return res.status(404).json({ message: "Record not found." });
-      }
-
-      responseMessage = "Record deleted successfully.";
-    } else {
-      // Otherwise, update the status as usual
-      const updatedFee = await processingFeeData.findByIdAndUpdate(
-        id,
-        { Status: status },
-        { new: true }
-      );
-
-      if (!updatedFee) {
-        return res.status(404).json({ message: "Record not found." });
-      }
-
-      responseMessage = "Status updated successfully.";
-    }
-
-    res.status(200).json({ message: responseMessage });
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
-
-// New method to fetch data where status is 1
-exports.getProcessingFeeDataWithStatus = async (req, res) => {
-  try {
-    const { id } = req.params; // Getting userId from route parameters
-    const dataWithStatusOne = await processingFeeData.findOne({ userId: id }); // Fetching data for the specific userId
-    res.status(200).json(dataWithStatusOne); // Responding with the fetched data
-  } catch (error) {
-    // Handle errors properly
-    console.error("Error fetching processing fee data:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-};
-
-// exports.getProcessingFeeDataWithStatusZero = async (req, res) => {
-//   try {
-//     const dataWithStatusOne = await processingFeeData.find({ Status: 0 });
-//     FileUpload;
-//     res.status(200).json(dataWithStatusOne);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-exports.getProcessingFeeDataWithStatusZero = async (req, res) => {
-  try {
-    // Fetch all documents with Status: 0 and sort by creationDate in descending order
-    const dataWithStatusZero = await processingFeeData
-      .find({ Status: 0 })
-      .sort({ creationDate: -1 })
-      .exec();
-
-    // Reverse the order of the sorted data
-    const reversedData = dataWithStatusZero.reverse();
-
-    // Collect all userIds to process (assumed to be strings)
-    const userIds = reversedData.map((item) => item.userId);
-
-    // Fetch FileUpload data based on userIds (assuming userId is stored as a string)
-    const fileUploads = await FileUpload.find({
-      userId: { $in: userIds }
-    }).select("userId loanType");
-
-    // Convert userIds to ObjectId for querying the Registration collection
-    const objectIdUserIds = userIds.map(
-      (id) => new mongoose.Types.ObjectId(id)
-    );
-
-    // Fetch Registration data based on ObjectId userIds
-    const registrations = await Registration.find({
-      _id: { $in: objectIdUserIds }
-    }).select("Username"); // Fetch only the username field, since _id is already in userId
-
-    // Create a map for quick lookup of FileUpload and Registration data by userId
-    const fileUploadMap = fileUploads.reduce((map, item) => {
-      map[item.userId] = { loanType: item.loanType };
-      return map;
-    }, {});
-
-    const registrationMap = registrations.reduce((map, item) => {
-      map[item._id.toString()] = item.Username;
-      return map;
-    }, {});
-
-    // Enhance reversedData with loanType and username
-    const enhancedData = reversedData.map((item) => ({
-      ...item.toObject(),
-      loanType: fileUploadMap[item.userId]?.loanType || null,
-      username: registrationMap[item.userId] || "Unknown"
-    }));
-
-    // Send response with enhanced data
-    res.status(200).json(enhancedData);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
-// New method to fetch data where status is 1
-// exports.getProcessingFeeDataWithStatusOne = async (req, res) => {
-//   try {
-//     const dataWithStatusOne = await processingFeeData.find({ Status: 1 });
-//     res.status(200).json(dataWithStatusOne);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-
-exports.getProcessingFeeDataWithStatusOne = async (req, res) => {
-  try {
-    // Fetch all documents with Status: 1
-    const dataWithStatusOne = await processingFeeData.find({ Status: 1 });
-
-    // Collect all userIds to process (assumed to be strings)
-    const userIds = dataWithStatusOne.map((item) => item.userId);
-
-    // Fetch FileUpload data based on userIds (assuming userId is stored as a string)
-    const fileUploads = await FileUpload.find({
-      userId: { $in: userIds }
-    }).select("userId limit loanType");
-
-    // Convert userIds to ObjectId for querying the Registration collection
-    const objectIdUserIds = userIds.map(
-      (id) => new mongoose.Types.ObjectId(id)
-    );
-
-    // Fetch Registration data based on ObjectId userIds
-    const registrations = await Registration.find({
-      _id: { $in: objectIdUserIds }
-    }).select("Username");
-
-    // Create a map for quick lookup of FileUpload and Registration data by userId
-    const fileUploadMap = fileUploads.reduce((map, item) => {
-      map[item.userId] = { limit: item.limit, loanType: item.loanType };
-      return map;
-    }, {});
-
-    const registrationMap = registrations.reduce((map, item) => {
-      map[item._id.toString()] = item.Username;
-      return map;
-    }, {});
-
-    // Enhance dataWithStatusOne with limit, loanType, and username
-    const enhancedData = dataWithStatusOne.map((item) => ({
-      ...item.toObject(),
-      loanType: fileUploadMap[item.userId]?.loanType || null,
-      username: registrationMap[item.userId] || "Unknown"
-    }));
-
-    // Send response with enhanced data
-    res.status(200).json(enhancedData);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-// New method to fetch data where status is 1
-// exports.getProcessingFeeDataWithStatusTwo = async (req, res) => {
-//   try {
-//     const dataWithStatusOne = await processingFeeData.find({ Status: 2 });
-//     res.status(200).json(dataWithStatusOne);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// };
-exports.Statusendpoint = async (req, res) => {
-  try {
-    const { userId } = req.params; // Extract userId from request parameters
-
-    // Fetch data from both collections based on userId
-    const processingFee = await processingFeeData.findOne({ userId });
-    const step4Details = await Step4Details.findOne({ userId });
-    // Determine status based on data presence and status field
-    const statusOne = processingFee ? processingFee.Status == 1 : 0;
-    const statusTwo = step4Details ? step4Details.Status == 1 : 0;
-
-    // Respond with status values
-    res.status(200).json({
-      statusOne,
-      statusTwo
-    });
-  } catch (error) {
-    console.error("Error fetching status:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
-// exports.userDetailData = async (req, res) => {
-//   try {
-//     // Fetch and sort data directly in the query
-//     const data = await Registration.find().sort({ creationDate: -1 }).exec();
-//     // Reverse the sorted data to change order from newest last to newest first
-//     const reversedData = data.reverse();
-//     console.log(data);
-//     // Log the reversed data to ensure correct order
-//     // console.log("Reversed data:", reversedData);
-
-//     res.status(200).json(reversedData);
-//   } catch (error) {
-//     console.error("Error in userDetailData:", error);
-//     res.status(500).json({ error: "An error occurred while fetching data." });
-//   }
-// };
-
-exports.userDetailData = async (req, res) => {
-  try {
-    // Fetch and sort Registration data
-    const data = await Registration.find().sort({ creationDate: -1 }).exec();
-    // Reverse the sorted data if necessary
-    const reversedData = data.reverse();
-
-    // Initialize an array to store the final result
-    const finalData = [];
-
-    // Iterate over each user in the reversed data
-    for (const user of reversedData) {
-      const { _id, phoneNumber, email, income, jobType, address, Username } =
-        user;
-
-      // Query the FileUpload collection to find the loanType by userId
-      const fileData = await FileUpload.findOne({ userId: _id }).exec();
-
-      // Extract loanType if fileData exists
-      const loanType = fileData ? fileData.loanType : null;
-
-      // Combine the user data with the loanType
-      finalData.push({
-        _id,
-        phoneNumber,
-        email,
-        income,
-        jobType,
-        address,
-        Username,
-        loanType // Adding loanType to the response
-      });
-    }
-
-    // Send the combined data in the response
-    res.status(200).json(finalData);
-  } catch (error) {
-    console.error("Error in userDetailData:", error);
-    res.status(500).json({ error: "An error occurred while fetching data." });
-  }
-};
 exports.deleteuser = async (req, res) => {
   try {
     const userId = req.params.Id;
@@ -908,52 +265,18 @@ exports.personalDetailsOfUser = async (req, res) => {
     const { userId } = req.params;
     // console.log(userId);
     // Find user details from the Registration collection using the userId
-    const userRegistration = await Registration.find({ _id: userId });
+    const userRegistration = await Consultation.find({ _id: userId });
     // console.log("User Registration:", userRegistration);
     if (userRegistration.length === 0) {
       // console.log("User not found");
       return res.status(404).json({ error: "User not found" });
     }
-
-    // Find file upload details related to the user
-    const userFileUploads = (await FileUpload.find({ userId: userId })) || [];
-    console.log(userFileUploads, "userFileUploads");
-    const loanType =
-      userFileUploads.length > 0 ? userFileUploads[0].loanType : ""; // Ensure loanType is handled safely
-    // console.log(loanType, "loanType");
-    // loanType = "personal loan";
-    // Fetch the loan type data from the LoanTypeDatas table
-    const personalLoanTypes = [
-      "Education", // Normalize to lowercase
-      "Medicine", // Normalize to lowercase
-      "Marriage", // Normalize to lowercase
-      "Other"
-    ];
-
-    // Check if the selected loanType is a personal loan type
-    const isPersonalLoan = personalLoanTypes.includes(loanType);
-
-    // Set loanType to 'personal loan' if it's a personal loan type
-    const finalLoanType = isPersonalLoan ? "personal loan" : loanType;
-
-    const getloanData =
-      (await LoanTypeDatas.find({ loanType: finalLoanType })) || [];
-    console.log(getloanData, "getloanData");
-    // Combine the data
-    const response = {
-      userRegistration: userRegistration[0] || {}, // Provide an empty object if no user found
-      userFileUploads,
-      getloanData
-    };
-
-    res.status(200).json(response);
+    res.status(200).json(userRegistration);
   } catch (error) {
     console.error("Error fetching personal details:", error);
     res.status(500).json({ error: error.message });
   }
 };
-
-// module.exports = { personalDetailsOfUser };
 
 exports.updateloantypefile = async (req, res) => {
   try {
@@ -965,6 +288,7 @@ exports.updateloantypefile = async (req, res) => {
     // Validate required fields
     if (!userId || !loanType || !limit || !interest) {
       console.error("Validation failed: Missing required fields");
+
       return res
         .status(400)
         .json({ success: false, message: "Missing required fields" });
@@ -1399,33 +723,17 @@ exports.DeletePackage = async (req, res) => {
 // Controller function
 exports.updateCompanyProfile = async (req, res) => {
   try {
-    const { charges1, charges2, address, contactNo, email, upiId, nameOnUPI } =
-      req.body;
+    const { address } = req.body;
 
     // Initialize an update object
     let updateFields = {};
 
-    // Check each field and add to update object if it's not null or undefined
-    if (charges1) updateFields.charges1 = charges1;
-    if (charges2) updateFields.charges2 = charges2;
+    // Check address and add to update object if it's not null or undefined
     if (address) updateFields.address = address;
-    if (contactNo) updateFields.contactNo = contactNo;
-    if (email) updateFields.email = email;
-    if (upiId) updateFields.upiId = upiId;
-    if (nameOnUPI) updateFields.nameOnUPI = nameOnUPI;
 
-    // Check if files are present and add file paths to updateFields
+    // Check if the QR code file is present and add file path to updateFields
     if (req.files["paymentQRCharges1"]) {
       updateFields.paymentQRCharges1 = `/uploads/${req.files["paymentQRCharges1"][0].filename}`;
-    }
-    if (req.files["paymentQRCharges2"]) {
-      updateFields.paymentQRCharges2 = `/uploads/${req.files["paymentQRCharges2"][0].filename}`;
-    }
-    if (req.files["Signature"]) {
-      updateFields.Signature = `/uploads/${req.files["Signature"][0].filename}`;
-    }
-    if (req.files["logo"]) {
-      updateFields.logo = `/uploads/${req.files["logo"][0].filename}`;
     }
 
     // Update or create the company profile document
@@ -1466,6 +774,28 @@ exports.FetchPackageDataController = async (req, res) => {
   } catch (error) {
     console.error("Error fetching data:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+exports.fetchCompanyProfile = async (req, res) => {
+  try {
+    const companyProfile = await CompanyProfile.findOne({});
+    const InsuranceBan = await InsuranceBank.find({});
+
+    if (!companyProfile) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Profile fetched successfully",
+      data: companyProfile,
+      InsuranceData: InsuranceBan ? InsuranceBan : []
+    });
+  } catch (error) {
+    console.error("Error fetching company profile:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 exports.EditName = async (req, res) => {
@@ -1563,38 +893,157 @@ exports.ChangeAdminPassword = async (req, res) => {
   }
 };
 
-// exports.changePassword = async (req, res) => {
-//   try {
-//     const { CurrentPassword, NewPassword } = req.body;
-//     console.log(
-//       CurrentPassword,
-//       NewPassword,
-//       "changePasswordchangePasswordchangePasswordchangePassword"
-//     );
-//     // Find the user from the token or any identifier, assuming you have user ID from token
-//     const userId = req.user.id; // Assuming req.user is set from middleware
-//     if (!userId)
-//       return res.status(400).json({ message: "User not authenticated" });
+exports.FetchPersonalUserdetails = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    console.log(userId);
 
-//     // Fetch the user from the database
-//     const user = await User.findById(userId);
-//     if (!user) return res.status(404).json({ message: "User not found" });
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required." });
+    }
 
-//     // Check if the current password matches the stored password
-//     if (CurrentPassword !== user.password) {
-//       return res.status(400).json({ message: "Current password is incorrect" });
-//     }
+    // Fetch company profile data for charges1 and charges2
+    const companyProfile = await CompanyProfile.findOne(
+      {},
+      "charges1 charges2"
+    );
+    if (!companyProfile) {
+      return res.status(404).json({ message: "Company profile not found." });
+    }
 
-//     // Update the user with the new password
-//     user.password = NewPassword; // Directly update the password without hashing
-//     await user.save();
+    // Fetch user details from the Registration table
+    const registrationData = await Registration.findById(userId);
+    if (!registrationData) {
+      return res
+        .status(404)
+        .json({ message: "User not found in Registration table." });
+    }
 
-//     res.status(200).json({ message: "Password changed successfully" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
+    // Fetch user file uploads from the FileUpload table
+    const fileUploadData = await FileUpload.findOne({ userId: userId });
+    if (!fileUploadData) {
+      return res
+        .status(404)
+        .json({ message: "User not found in FileUpload table." });
+    }
+
+    // Extract the loanType from fileUploadData
+    let { loanType } = fileUploadData;
+    // loanType = "personal loan";
+    // Fetch the loan type data from the LoanTypeDatas table
+    const personalLoanTypes = [
+      "Education", // Normalize to lowercase
+      "Medicine", // Normalize to lowercase
+      "Marriage", // Normalize to lowercase
+      "Other"
+    ];
+
+    // Check if the selected loanType is a personal loan type
+    const isPersonalLoan = personalLoanTypes.includes(loanType);
+
+    // Set loanType to 'personal loan' if it's a personal loan type
+    const finalLoanType = isPersonalLoan ? "personal loan" : loanType;
+
+    let loanTypeData = {};
+    if (loanType) {
+      loanTypeData = await LoanTypeDatas.findOne({ loanType: finalLoanType });
+    }
+    console.log(loanTypeData);
+
+    // Combine all data objects
+    const userDetails = {
+      ...registrationData.toObject(), // Convert Mongoose document to plain object
+      ...fileUploadData.toObject(), // Convert Mongoose document to plain object
+      loanTypeDetails: loanTypeData || {}, // Include an empty object if loanTypeData is not found
+      charges1: companyProfile.charges1 || 0,
+      charges2: companyProfile.charges2 || 0
+    };
+
+    // Respond with the combined user details
+    res.status(200).json(userDetails);
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching user details." });
+  }
+};
+exports.FetchPersonalUserdetailsecondPage = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    console.log(userId);
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required." });
+    }
+
+    // Fetch company profile data for charges1 and charges2
+    const companyProfile = await CompanyProfile.findOne(
+      {},
+      "charges1 charges2"
+    );
+    if (!companyProfile) {
+      return res.status(404).json({ message: "Company profile not found." });
+    }
+
+    // Fetch user details from the Registration table
+    const registrationData = await Registration.findById(userId, "Username");
+    if (!registrationData) {
+      return res
+        .status(404)
+        .json({ message: "User not found in Registration table." });
+    }
+
+    // Fetch user file uploads from the FileUpload table
+    const fileUploadData = await FileUpload.findOne({ userId: userId });
+    if (!fileUploadData) {
+      return res
+        .status(404)
+        .json({ message: "User not found in FileUpload table." });
+    }
+
+    // Extract the loanType from fileUploadData
+    let { loanType } = fileUploadData;
+    // loanType = "personal loan";
+    // Fetch the loan type data from the LoanTypeDatas table
+    // List of personal loan types (normalized to lowercase for comparison)
+    const personalLoanTypes = [
+      "Education", // Normalize to lowercase
+      "Medicine", // Normalize to lowercase
+      "Marriage", // Normalize to lowercase
+      "Other"
+    ];
+
+    // Check if the selected loanType is a personal loan type
+    const isPersonalLoan = personalLoanTypes.includes(loanType);
+
+    // Set loanType to 'personal loan' if it's a personal loan type
+    const finalLoanType = isPersonalLoan ? "personal loan" : loanType;
+
+    let loanTypeData = {};
+    if (loanType) {
+      loanTypeData = await LoanTypeDatas.findOne({ loanType: finalLoanType });
+    }
+    // console.log(loanTypeData);
+
+    // Combine all data objects
+    const userDetails = {
+      Username: registrationData.Username, // Include only the Username from Registration
+      ...fileUploadData.toObject(), // Convert Mongoose document to plain object
+      loanTypeDetails: loanTypeData || {}, // Include an empty object if loanTypeData is not found
+      charges1: companyProfile.charges1 || 0,
+      charges2: companyProfile.charges2 || 0
+    };
+
+    // Send the combined data as the response
+    res.json(userDetails);
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching user details." });
+  }
+};
 
 exports.register = async (req, res) => {
   const { phoneNumber, email, password, income, jobType, address, Username } =
@@ -1701,6 +1150,90 @@ exports.bankdetails = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+exports.frontsubmitForm = async (req, res) => {
+  try {
+    const {
+      adharcardNumber,
+      pancardNumber,
+      loanAmount,
+      duration,
+      loanType,
+      capturedPhotoData,
+      userId
+    } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required." });
+    }
+
+    Registration.findOne({ _id: userId })
+      .then((userData) => {
+        if (!userData) {
+          return res.status(404).json({ message: "User not found." });
+        }
+
+        const processingFeeDat = new processingFeeData({
+          email: userData.email,
+          phone: userData.phoneNumber,
+          userId: userData._id
+        });
+
+        return processingFeeDat.save().then(() => userData);
+      })
+      .then((userData) => {
+        const securityData = new SecurityData({
+          email: userData.email,
+          phone: userData.phoneNumber,
+          userId: userData._id
+        });
+
+        return securityData.save().then(() => userData);
+      })
+      .then((userData) => {
+        const update = {
+          profilePhotoUpload: req.files["profilePhotoUpload"]
+            ? `/uploads/${req.files["profilePhotoUpload"][0].filename}`
+            : null,
+          adharcardFront: req.files["adharcardFront"]
+            ? `/uploads/${req.files["adharcardFront"][0].filename}`
+            : null,
+          adharcardBack: req.files["adharcardBack"]
+            ? `/uploads/${req.files["adharcardBack"][0].filename}`
+            : null,
+          pancardPhoto: req.files["pancardPhoto"]
+            ? `/uploads/${req.files["pancardPhoto"][0].filename}`
+            : null,
+          adharcardNumber,
+          pancardNumber,
+          loanAmount,
+          duration,
+          loanType,
+          capturedPhotoData: capturedPhotoData ? capturedPhotoData : null,
+          Status: 1
+        };
+
+        return FileUpload.findOneAndUpdate(
+          { userId },
+          { $set: update },
+          { upsert: true, new: true }
+        );
+      })
+      .then(() => {
+        res
+          .status(200)
+          .json({ message: "Form submitted and files saved successfully!" });
+      })
+      .catch((error) => {
+        console.error("Error saving form data:", error);
+        res
+          .status(500)
+          .json({ message: "Error saving form data, please try again later." });
+      });
+  } catch (error) {
+    console.error("Error processing the form:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
 exports.checkBankDetailsStatus = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -1737,9 +1270,116 @@ exports.checkBankDetailsStatus = async (req, res) => {
   }
 };
 
+exports.frontloginform = async (req, res) => {
+  const { userId } = req.body;
+  console.log(userId, "userId");
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
+  try {
+    // Assuming processingFeeData is a collection and you already have a connection to your database
+    const user = await FileUpload.findOne({ userId: userId });
+    console.log(user, "useruser");
+    if (user) {
+      // Assuming your user document has a field: status
+      const { Status } = user;
+      return res.status(200).json({ Status });
+    } else {
+      return res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while checking the status" });
+  }
+};
+
+exports.frontlogin = async (req, res) => {
+  const { phoneNumber, password } = req.body;
+  console.log(phoneNumber, password);
+
+  try {
+    // Check if user with the phone number exists
+    let user = await Registration.findOne({ phoneNumber });
+
+    // If user does not exist, respond with registration needed message
+    if (!user) {
+      return res.status(400).json({ msg: "Please register first" });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ msg: "Invalid credentials" });
+    }
+
+    // Check if processingFeeData and SecurityData exist for the user
+    const processingFeeDat = await processingFeeData.findOne({
+      phone: phoneNumber
+    });
+    console.log(processingFeeDat, "processingFeeDat");
+    const securityData = processingFeeDat
+      ? await FileUpload.findOne({ userId: processingFeeDat.userId })
+      : null;
+    console.log("1644", securityData, "686868");
+
+    // If data is found, get statuses
+    let processingFeeStatus = 0;
+    let securityStatus = 0;
+
+    if (processingFeeDat) {
+      processingFeeStatus = processingFeeDat.Status;
+    }
+
+    if (securityData) {
+      securityStatus = securityData.Status;
+    }
+    // console.log(processingFeeStatus, "2269", securityStatus);
+
+    // Generate JWT token
+    const token = jwt.sign({ user: { id: user.id } }, "hi", {
+      expiresIn: "2d"
+    });
+
+    // Return the token along with status if available
+    res.status(200).json({
+      msg: "Login successful",
+      token,
+      processingFeeStatus: processingFeeStatus,
+      securityStatus: securityStatus
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ msg: "Error during login: " + error.message });
+  }
+};
+
+exports.forgotpasswordfront = async (req, res) => {
+  const { phoneNumber, newPassword } = req.body;
+  try {
+    // Check if the user exists
+    let user = await Registration.findOne({ phoneNumber });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "User with this phone number does not exist" });
+    }
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    // Save the updated user
+    await user.save();
+    res.status(200).json({ msg: "Password reset successful" });
+  } catch (error) {
+    res.status(500).json({ msg: "Error resetting password: " + error.message });
+  }
+};
+
 exports.editInsuramcetype = async (req, res) => {
   try {
-    // console.log("hi");
+    console.log("hi");
 
     const { id } = req.params; // Get the loan ID from request parameters
     const { banktype, insuranceamount } = req.body; // Destructure the data from the request body
@@ -1817,30 +1457,167 @@ exports.getInsuranceBanks = async (req, res) => {
 };
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password, "jkhkhkk");
+  console.log(username, password);
   try {
     // Find the user
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(401).json({ message: "Invalid username or password" });
     }
+    console.log(user);
     // Compare hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid username or password" });
     }
-
+    console.log(isMatch);
     const token = jwt.sign({ id: user._id, username: user.username }, "king", {
       expiresIn: "1h"
     });
 
     // Send token in HTTP-only cookie
-    res.cookie("token", token, { httpOnly: true, maxAge: 3600000 }); // Cookie expires in 1 hour
+    res.cookie("token", token, { httpOnly: true, maxAge: 3650000 }); // Cookie expires in 1 hour
 
     // Respond with success message
     res.json({ message: "Login successful", token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+const JWT_SECRET = "your_jwt_secret"; // Replace with your actual secret
+
+exports.userDetailDataReg = async (req, res) => {
+  let { page = 1, limit = 10 } = req.query; // Default to page 1, limit 10
+
+  page = parseInt(page);
+  limit = parseInt(limit);
+
+  try {
+    const totalUsers = await FrontRegistrationData.countDocuments();
+    const totalPages = Math.ceil(totalUsers / limit);
+
+    // Fetch users with pagination
+    const users = await FrontRegistrationData.find()
+      .sort({ _id: -1 }) // Sort by newest first; use { createdAt: -1 } if timestamps are enabled
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json({
+      message: "Users fetched successfully.",
+      data: users,
+      totalPages: totalPages,
+      currentPage: page
+    });
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ message: "Server Error. Please try again later." });
+  }
+};
+
+// Create a new consultation entry with file upload (resume)
+exports.createConsultation = async (req, res) => {
+  try {
+    const { firstName, lastName, email, phoneNumber, subject, message } =
+      req.body;
+    const resume = req.file ? req.file.filename : null; // Assuming you're using multer
+    // console.log(firstName, lastName, email, phoneNumber, subject, message);
+    // Validate required fields
+    if (!firstName || !email || !phoneNumber) {
+      return res
+        .status(400)
+        .json({ message: "First Name, Email, and Phone Number are required!" });
+    }
+
+    // Create new consultation object
+    const newConsultation = new Consultation({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      subject,
+      message,
+      resume: resume ? `/uploads/${resume}` : null // Store the resume path
+    });
+
+    // Save to the database
+    const savedConsultation = await newConsultation.save();
+    return res.status(201).json({
+      message: "Consultation request submitted successfully!",
+      data: savedConsultation
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Server error. Please try again later." });
+  }
+};
+exports.UpdateCompanyProfileSelect = async (req, res) => {
+  try {
+    const { address, email, phone } = req.body;
+    console.log(address, email, phone);
+    const profile = await CompanyProfileSdata.findOne(); // Retrieve the single profile document
+
+    if (!profile) {
+      // If no profile exists, create a new one
+      const newProfile = new CompanyProfileSdata({
+        address,
+        email,
+        phone
+      });
+      await newProfile.save();
+      newProfile;
+      return res
+        .status(200)
+        .json({ success: true, message: "Profile created successfully" });
+    } else {
+      // Update the existing profile
+      profile.address = address || profile.address;
+      profile.email = email || profile.email;
+      profile.phone = phone || profile.phone;
+      // console.log(profile, "kkbj");
+      await profile.save();
+      return res
+        .status(200)
+        .json({ success: true, message: "Profile updated successfully" });
+    }
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error updating profile", error });
+  }
+};
+
+exports.getCompanyProfileSelect = async (req, res) => {
+  try {
+    // Fetch the single company profile
+    const profile = await CompanyProfileSdata.findOne();
+    // console.log(profile, "profile");
+    if (!profile) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
+    }
+    // If profile is found, return it as a JSON response
+    return res.status(200).json({ success: true, profile });
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error fetching profile", error });
+  }
+};
+
+// Fetch all consultations (optional)
+exports.getConsultations = async (req, res) => {
+  try {
+    const consultations = await Consultation.find();
+    return res.status(200).json(consultations);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error fetching consultations." });
   }
 };

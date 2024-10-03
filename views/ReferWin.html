@@ -321,7 +321,7 @@
     const formData = {
       child, firstParent, SecondParent ,ThirdParent 
     };
-    fetch('http://localhost:7000/ReferWinDataController', {
+    fetch('https://selectsphere.in/ReferWinDataController', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ const submitForm2 = async(event)=> {
     const formData = {
       FixedAmount
     };
-    fetch('http://localhost:7000/ReferWinDataFixedAmt', {
+    fetch('https://selectsphere.in/ReferWinDataFixedAmt', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         // console.log(formData)
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:7000/DeletereReferWin`, {
+        fetch(`https://selectsphere.in/DeletereReferWin`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         // console.log(formData)
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:7000/DeletereReferWinsecond`, {
+        fetch(`https://selectsphere.in/DeletereReferWinsecond`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
