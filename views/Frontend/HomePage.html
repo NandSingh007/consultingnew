@@ -175,6 +175,7 @@ body {
 
 .cta-button a:hover {
   background-color: #d45cd2 !important;
+  color: white !important;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
@@ -228,9 +229,9 @@ body {
 
 @media (max-width: 920px) {
   .navbar {
-    padding: 15px 30px;
+    padding: 5px 30px;
    display: flex;
-    align-items: flex-start;
+   
   }
 
   .navbar-menu {
@@ -246,6 +247,7 @@ body {
 
   .navbar-menu ul {
     width: 100%;
+    text-align: center;
     flex-direction: column;
   }
 
@@ -860,13 +862,13 @@ display: none;
   transition: opacity 0.4s ease, top 0.4s ease;
 }
 
-.image-container-service:hover .overlay,
-.image-container-service:hover .overlay1 {
+.image-container-service .overlay,
+.image-container-service .overlay1 {
   height: 100%;
   width: 100%;
 }
 
-.image-container-service:hover .overlay-text {
+.image-container-service .overlay-text {
   opacity: 1;
 }
 
@@ -944,6 +946,110 @@ display: none;
   }
 }
 
+.hrconsulting {
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(90deg, #ff6347, #ff8c00); 
+    padding: 14px 30px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 20px auto;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite, floating 4s ease-in-out infinite; /* Add floating animation */
+}
+
+/* Gradient Background Animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating Animation for Automatic Movement */
+@keyframes floating {
+    0% {
+        transform: translateY(0px); /* Initial position */
+    }
+    50% {
+        transform: translateY(-20px); /* Moves up */
+    }
+    100% {
+        transform: translateY(0px); /* Moves back to original position */
+    }
+}
+
+.hrconsulting:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+.hrconsulting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hrconsulting:hover::before {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hrconsulting {
+        font-size: .9rem;
+        padding: 5px 20px;
+        margin: 12px auto;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hrconsulting {
+        font-size: .8rem;
+        padding: 4px 18px;
+        margin: 8px auto;
+        border-radius: 20px;
+    }
+    .list-data{
+  font-size: .8rem;
+  padding: 0px 5px;
+list-style: none;
+}
+
+.cta-button2 {
+ font-size: 12px;
+  padding: 4px 20px; /* Increased padding for better emphasis */
+  border-radius: 25px; /* Smooth, rounded corners */
+ 
+}
+
+
+}
+.list-data{
+list-style: none;
+}
 
 .box {
             width: 29%;
@@ -1467,91 +1573,6 @@ display: none;
     padding: 16px;
   }
 }
-.hrconsulting {
-    font-size: 1.5rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-align: center;
-    color: #fff;
-    background: linear-gradient(90deg, #ff6347, #ff8c00); 
-    padding: 14px 30px;
-    border-radius: 30px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 20px auto;
-    position: relative;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.4s ease;
-    background-size: 200% 200%;
-    animation: gradientShift 5s ease infinite, floating 4s ease-in-out infinite; /* Add floating animation */
-}
-
-/* Gradient Background Animation */
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Floating Animation for Automatic Movement */
-@keyframes floating {
-    0% {
-        transform: translateY(0px); /* Initial position */
-    }
-    50% {
-        transform: translateY(-20px); /* Moves up */
-    }
-    100% {
-        transform: translateY(0px); /* Moves back to original position */
-    }
-}
-
-.hrconsulting:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease;
-}
-
-.hrconsulting::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 30px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.hrconsulting:hover::before {
-    opacity: 1;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hrconsulting {
-        font-size: 1.3rem;
-        padding: 12px 25px;
-        border-radius: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hrconsulting {
-        font-size: 1.2rem;
-        padding: 10px 20px;
-        border-radius: 20px;
-    }
-}
 
 /* Heading with Icon */
 .Write {
@@ -1614,17 +1635,26 @@ display: none;
 </style>
 <!-- <script></script> -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-      const toggleButton = document.querySelector('.navbar-toggle');
-      const navbarMenu = document.querySelector('.navbar-menu');
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButton = document.querySelector('.navbar-toggle');
+  const navbarMenu = document.querySelector('.navbar-menu');
+  const navLinks = document.querySelectorAll('.nav-links a'); // Select all navbar links
 
-      toggleButton.addEventListener('click', function () {
-          // Toggle the 'active' class on the menu
-          navbarMenu.classList.toggle('active');
-          // Also toggle 'active' class on toggle button itself for animation
-          toggleButton.classList.toggle('active');
-      });
+  // Toggle the navbar when the toggle button is clicked
+  toggleButton.addEventListener('click', function () {
+      navbarMenu.classList.toggle('active');
+      toggleButton.classList.toggle('active');
   });
+
+  // Close the navbar menu when any nav link is clicked
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navbarMenu.classList.remove('active');
+      toggleButton.classList.remove('active');
+    });
+  });
+});
+
 </script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -1665,7 +1695,7 @@ display: none;
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="logo">
-            <a href="#" class="typewriter"><img src="/assets/img/ss.png" width="160px" alt=""></a>
+            <a href="#" ><img src="/assets/img/ss.png" width="160px" alt=""></a>
         </div>
         <div class="navbar-toggle">
             <span></span>
@@ -1678,11 +1708,12 @@ display: none;
             <li><a href="#services"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
             <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
             <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact</a></li>
+            <li>  <div class="cta-button">
+              <a href="#consult" id="openModalButton" style="color: white;">Get Consultation</a>
+          </div></li>
         </ul>
         
-            <div class="cta-button">
-                <a href="#consult" id="openModalButton">Get Consultation</a>
-            </div>
+          
            
         </div>
     </nav>
@@ -1846,7 +1877,7 @@ display: none;
           <div class="overlay-text">
             <h2 class="hrconsulting">HR Consulting</h2>
             <p>Innovative solutions tailored to your needs</p>
-            <ul>
+            <ul class="list-data">
               <li><i class="fas fa-users" style="color: #3498db;"></i> Talent Acquisition</li>
               <li><i class="fas fa-briefcase" style="color: #e74c3c;"></i> Employee Engagement</li>
               <li><i class="fas fa-chart-pie" style="color: #2ecc71;"></i> Performance Management</li>
@@ -1866,13 +1897,13 @@ display: none;
           <div class="overlay-text">
             <h2 class="hrconsulting">IT Solutions</h2>
             <p>Comprehensive IT consulting and services</p>
-            <ul>
+            <ul class="list-data">
               <li><i class="fas fa-laptop-code" style="color: #1abc9c;"></i> Custom Web Development</li>
               <li><i class="fas fa-video" style="color: #9b59b6;"></i> Professional Video Editing</li>
               <li><i class="fas fa-search" style="color: #f39c12;"></i> SEO Services</li>
               <li><i class="fas fa-bullhorn" style="color: #e74c3c;"></i> Digital Marketing</li>
             </ul>
-            <div class="cta-button2">Learn More</div>
+            <div class="cta-button2">Explore More</div>
           </div>
         </div>
       </div>
@@ -1885,7 +1916,7 @@ display: none;
  <div class="seconddiv" style="background-color: #f7f7f7; align-items: center; padding: 40px 0px; width: 90%; margin: 2% 5%; perspective: 1000px;">
     <h2 class="animated-heading2">
         <i class="fas fa-star" style="color: #f39c12; font-size: 2rem; margin-right: 15px;"></i>
-        OUR CUSTOMERS
+        OUR CLIENTS
     </h2>
     <div class="custom-div">
         <div class="box">
