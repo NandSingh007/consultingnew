@@ -2022,8 +2022,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <h2>Services</h2>
             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
             <div class="use-links">
-              <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i> <Strong style="color: #000;">IT Solution</Strong></a></li>
-              <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i>  <Strong style="color: #000;">HR Consulting</Strong></a></li>
+              <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i> <Strong style="color: #5c5a5a;">IT Solution</Strong></a></li>
+              <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i>  <Strong style="color: #5c5a5a;">HR Consulting</Strong></a></li>
             </div>
           </div>
 
@@ -2049,12 +2049,23 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="address-links">
               <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 90906500112</a></li>
               <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild"> mail@1234567.com</a></li>
-              <li class="address1"><i class="fa-solid fa-location-dot"></i> <span id="address">Kolathur ramankulam-
-                Malappuram Dt 
-                 Kerala 679338 </span> </li>
-                
-                
-            </div>
+              <li class="address1">
+                <i class="fa-solid fa-location-dot"></i>
+                <span id="address">Kolathur Ramankulam, Malappuram Dt, Kerala 679338</span>
+              </li>
+              
+              <!-- Map Embed -->
+              <iframe
+              id="addressMap"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5379327323093!2d75.79441997644541!3d26.82543688315207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db679f8fbb891%3A0xf8309d36c10f788!2sTerminal%201%20Jaipur%20International%20Airport!5e0!3m2!1sen!2sin!4v1696843200000!5m2!1sen!2sin"
+              width="310"
+              height="360"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            
           </div>
         </div>
                 
@@ -2211,16 +2222,28 @@ a{
 
 </style>
   </section>
+ 
   <script>
     // Fetch company profile data and update the HTML content
     fetch('https://selectsphere.in/back/getCompanyProfileSelect')
       .then(response => response.json())
       .then(data => {
         if (data.success && data.profile) {
-          // Correctly accessing phone, email, and address from data.profile
-          document.getElementById('phone').textContent = data.profile.phone;
-          document.getElementById('emaild').textContent = data.profile.email;
-          document.getElementById('address').textContent = data.profile.address;
+          const phone = data.profile.phone;
+          const email = data.profile.email;
+          const address = data.profile.address;
+  
+          // Update phone, email, and address fields
+          document.getElementById('phone').textContent = phone;
+          document.getElementById('emaild').textContent = email;
+          document.getElementById('address').textContent = address;
+  
+          // Update the Google Maps iframe with the new address
+          const encodedAddress = encodeURIComponent(address);  // Encode the address for URL
+          // const mapIframe = document.getElementById('addressMap');
+          
+          // Replace with your valid API key
+          // mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodedAddress}`;
         } else {
           console.error('Failed to fetch profile data.');
         }
@@ -2230,8 +2253,6 @@ a{
       });
   </script>
   
-
-
 
 
 
