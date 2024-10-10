@@ -680,31 +680,6 @@ display: none;
   margin-bottom: 10px;
 }
 
-.about-item p,
-.about-item ul {
-  font-size: 1rem;
-  margin-top: 20px !important;
-  color: #7f8c8d;
-}
-
-.about-item ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.about-item ul li {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-}
-
-.about-item ul li i {
-  color: #3498db;
-  font-size: 20px;
-  margin-right: 10px;
-}
-
 /* Right content - image */
 .about-right {
   width: 45%;
@@ -719,6 +694,32 @@ display: none;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   animation: fadeInZoomBounce 1s ease-in-out;
 }
+.about-details {
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #333; /* Dark gray for readability */
+}
+
+.about-item {
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #222; /* Slightly darker for contrast */
+  margin-top: 20px;
+}
+
+.about-item strong {
+  font-size: 20px;
+  font-weight: 700; /* Extra bold for strong emphasis */
+}
+
+.animated-image {
+  max-width: 100%;
+  height: auto;
+}
+
 
 /* Responsive Styling */
 @media (max-width: 992px) {
@@ -737,13 +738,6 @@ display: none;
     font-size: 2rem;
   }
 
-  .about-item strong {
-    font-size: 1.2rem;
-  }
-
-  .about-item ul li {
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -751,9 +745,7 @@ display: none;
     font-size: 1.8rem;
   }
 
-  .about-item ul li {
-    font-size: 0.95rem;
-  }
+ 
 }
 
 @media (max-width: 576px) {
@@ -761,13 +753,6 @@ display: none;
     font-size: 1.6rem;
   }
 
-  .about-item strong {
-    font-size: 1.1rem;
-  }
-
-  .about-item ul li {
-    font-size: 0.9rem;
-  }
 }
 
 /* Animations */
@@ -875,7 +860,7 @@ display: none;
 .cta-button2 {
   display: inline-block;
   padding: 12px 30px; /* Increased padding for better emphasis */
-  background: linear-gradient(135deg, #ff6600, #ff4500); /* Gradient background for a modern look */
+  background: linear-gradient(135deg, #ff6600, #ff6500); /* Gradient background for a modern look */
   color: white;
   font-size: 18px; /* Larger font for better readability */
   font-family: 'Poppins', sans-serif; /* Modern font */
@@ -890,7 +875,7 @@ display: none;
 }
 
 .cta-button2:hover {
-  background: linear-gradient(135deg, #ff4500, #ff3300); /* Darker gradient on hover */
+  background: linear-gradient(135deg, #ff6500, #ff3300); /* Darker gradient on hover */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Deepen shadow on hover */
   transform: translateY(-3px); /* Slight lift effect on hover */
 }
@@ -1358,7 +1343,7 @@ list-style: none;
 }
 
 .footer-item img {
-    width: 40px;
+    width: 35px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -1695,7 +1680,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="logo">
-            <a href="#" ><img src="/assets/img/ss.png" width="160px" alt=""></a>
+          <img src="/assets/img/ss.png" width="160px" alt="">
         </div>
         <div class="navbar-toggle">
             <span></span>
@@ -1704,12 +1689,12 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="navbar-menu">
           <ul class="nav-links">
-            <li><a href="#home"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
+            <li><a href="/"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
             <li><a href="#services"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
             <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
-            <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact</a></li>
+            <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact With Us</a></li>
             <li>  <div class="cta-button">
-              <a href="#consult" id="openModalButton" style="color: white;">Get Consultation</a>
+              <a href="#consult" id="openModalButton" style="color: white;">Send Resume</a>
           </div></li>
         </ul>
         
@@ -1835,27 +1820,19 @@ document.addEventListener('DOMContentLoaded', function () {
       About Us
     </h2>
     <div class="about-details">
-      <div class="about-item">
-        <strong>What We Are:</strong>
-        <p style="margin-top: 10px;">At <span style="font-weight: bold; color: #2C3E50; ">Select Sphere Consulting</span>, founded on <span style="font-weight: bold; color: #2C3E50;">2 August 2024</span>, we provide <span style="font-weight: bold; color: #2C3E50;">expert HR and IT consulting</span> to help businesses thrive.</p>
-      </div>
-      <div class="about-item">
-        <strong>What We Are Doing?</strong>
-        <ul>
-          <li><i class="fas fa-check-circle" style="color: #28a745; padding-left: 10px; font-size: 20px;"></i> <span style="font-weight: bold; color: #2C3E50;">Tailored IT solutions</span> for your business.</li>
-          <li><i class="fas fa-users" style="color: #007bff; padding-left: 10px; font-size: 20px;"></i> <span style="font-weight: bold; color: #2C3E50;">Expert HR services</span> and onboarding.</li>
-          <li><i class="fas fa-chart-line" style="color: #ffc107; padding-left: 10px; font-size: 20px;"></i> Focused on <span style="font-weight: bold; color: #2C3E50;">growth and scalability</span>.</li>
-        </ul>
-      </div>
-      <div class="about-item">
-        <strong>Our Aim:</strong>
-        <p  style="margin-top: 10px;">At <span class="highlight">Select Sphere Consulting</span>, our aim is to <span class="highlight">empower businesses</span> through <span class="highlight">tailored HR and IT solutions</span> that enhance <span class="highlight">operational efficiency</span>, drive <span class="highlight">innovation</span>, and foster <span class="highlight">sustainable growth</span>. We strive to build <span class="highlight">lasting partnerships</span> with our clients, enabling them to <span class="highlight">navigate challenges</span> effectively and achieve their <span class="highlight">organizational goals</span>.</p>
-      </div>
-    </div>
+      Founded in Aug 3, 2024, Select Sphere , Your trusted partner in HR and IT consulting,Based in Jaipur,Rajasthan. We specialize in delivering strategic solutions tailored to the unique needs of modern businesses. Our comprehensive services span from human resources management and talent acquisition to cutting-edge IT solutions designed to enhance business performance and foster innovation.
+
+      With a deep understanding of the ever-evolving business landscape, we collaborate closely with our clients to help them navigate challenges, optimize resources, and drive growth. Whether it's recruiting top talent, implementing effective HR strategies, or leveraging the latest technology,Select Sphere is dedicated to helping you succeed.
+      
+      Our commitment to excellence, innovation, and client-centric solutions has positioned us as a leading consultancy in the region. We are proud to serve businesses across PAN India. </div>
   </div>
   <div class="about-right">
     <img class="animated-image" src="/assets/img/girlimg.webp" alt="Girl Image">
   </div>
+  <div class="about-item">
+    <strong>Our Aim:</strong>
+    "To build a forward-thinking organization where HR and IT collaborate to create an empowered workforce, foster innovation, and support business agility. By aligning talent strategies with digital transformation initiatives, we aim to drive organizational efficiency, enhance employee engagement, and unlock new opportunities for growth and collaboration." 
+   </div>
 </div>
 
 
@@ -2028,36 +2005,212 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
     
-   <!-- Our Footer -->
-   <div class="footer" id="footer">
-    <h2 class="animated-heading2">
-      <img src="/assets/img/cont.png" alt="Custom Solutions" style="width: 50px; transition: transform 0.3s ease;">Contact
-    </h2>
-    <div class="footer-bg">
-      <div class="footer-item">
-        <h3>Service</h3>
-        <ul>
-          <li>IT Solution</li>
-          <li>HR Department</li>
-        </ul>
-      </div>
-      <div class="footer-item">
-        <h3>Contact</h3>
-        <ul>
-          <li id="phone">+91 339399212</li>
-          <li id="emaild">sphere@gmail.com</li>
-          <li id="address">Jaipur, Vaishali Nagar 302030</li>
-        </ul>
-      </div>
-      <div class="footer-item">
-        <h3>Social</h3>
-        <span><a href=""><img src="/assets/img/whatsapp.webp" alt="WhatsApp"></a></span>
-        <span><a href=""><img src="/assets/img/insta.webp" alt="Instagram"></a></span>
-        <span><a href=""><img src="/assets/img/telegram.webp" alt="Telegram"></a></span>
-        <span><a href=""><img src="/assets/img/link.png" alt="linkedin"></a></span>
+  <!-- footer section start -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="index.html">  <a href="#" ><img src="/assets/img/sslogo.png" width="200px" alt=""></a></a>
+          <div class="footer-about">
+            <p>We are an HR and ITconsulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
+            <Strong>CO-Founder </Strong> : <strong>Siddhii Jain</strong>
+          </div>
+          
+        </div>
+        <div class="col-md-3">
+          <div class="useful-link">
+            <h2>Services</h2>
+            <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+            <div class="use-links">
+              <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i> <Strong style="color: #000;">IT Solution</Strong></a></li>
+              <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i>  <Strong style="color: #000;">HR Consulting</Strong></a></li>
+            </div>
+          </div>
+
+        </div>
+                  <div class="col-md-3">
+                      <div class="social-links">
+            <h2>Follow Us</h2>
+            <img src="./assets/images/about/.png" alt="">
+            <div class="social-icons">
+              <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i> </a></li>
+              <li><a href=""  target="_blank"><i class="fa-brands fa-instagram"></i> </a></li>
+              <li><a href=""  target="_blank"><i class="fa-brands fa-linkedin-in"></i> </a></li>
+            </div>
+            <div style="margin-top: 20px;"><img src="/assets/img/sslogo.png" width="200px" alt=""></div>
+          </div>
+                  
+
+                  </div>
+        <div class="col-md-3">
+          <div class="address">
+            <h2>Get In Touch</h2>
+            <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+            <div class="address-links">
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 90906500112</a></li>
+              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild"> mail@1234567.com</a></li>
+              <li class="address1"><i class="fa-solid fa-location-dot"></i> <span id="address">Kolathur ramankulam-
+                Malappuram Dt 
+                 Kerala 679338 </span> </li>
+                
+                
+            </div>
+          </div>
+        </div>
+                
       </div>
     </div>
-  </div>
+
+  </footer>
+  <!-- footer section end -->
+  <!-- footer copy right section start -->
+  <section id="copy-right">
+    <div class="copy-right-sec"><i class="fa-solid fa-copyright"></i>  
+     2024 Select Sphere. All rights reserved.
+    </div>
+<style>
+
+#footer{
+  background: #f7f7f7;
+    padding: 2rem;
+  /* padding-top: 5rem; */
+  padding-top: 3rem;
+    padding-bottom: 80px;
+  background-image: url(https://arena.km.ua/wp-content/uploads/3538533.jpg);
+}
+#footer2{
+  background: #f7f7f7;
+    padding: 3rem;
+    margin-top: 0px;
+  /* padding-top: 5rem; */
+  padding-top: 7rem;
+    padding-bottom: 80px;
+  background-image: url(../images/cards/v748-toon-111.png);
+}
+.logo-footer{
+  /* max-width: 300px; */
+}
+.social-links{
+  /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+
+}
+.social-links h2{
+  padding-bottom: 15px;
+  font-size: 20px;
+    font-weight: 600;
+}
+.social-links img{
+  padding-bottom: 25px;
+}
+.social-icons{
+  /* display: flex;
+    gap: 3rem; */
+  display: flex;
+    /* flex-direction: column; */
+    /* gap: 1rem; */
+  color: #777777;
+}
+.social-icons a{
+  /* font-size: 18px; */
+    /* background: #ffffff; */
+    /* box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    border-radius: 3px;
+  color: #82074a; */
+  /* margin-right: 18px; */
+  color: #777777;
+}
+.social-icons a:hover{
+  color: #000;
+}
+.social-icons a i{
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    border-radius: 3px;
+    color: #f01515;
+  font-size: 16px;
+  margin-right: 12px;
+}
+li{
+  list-style: none;
+}
+.useful-link h2{
+  padding-bottom: 15px;
+  font-size: 20px;
+    font-weight: 600;
+}
+.useful-link img{
+  padding-bottom: 15px;
+}
+.use-links{
+  line-height: 32px;
+}
+.use-links li i{
+  font-size: 14px;
+    padding-right: 8px;
+    color: #898989;
+}
+.use-links li a{
+  color: #303030;
+    font-size: 15px;
+    font-weight: 500;
+  color: #777777;
+}
+.use-links li a:hover{
+  color: #000;
+}
+.address h2{
+  padding-bottom: 15px;
+  font-size: 20px;
+    font-weight: 600;
+}
+.address img{
+  padding-bottom: 15px;
+}
+.address-links li a{
+  color: #303030;
+    font-size: 15px;
+    font-weight: 500;
+  color: #777777;
+
+}
+.address-links li i{
+  font-size: 16px;
+    padding-right: 8px;
+  color: #f01515;
+
+}
+.address-links li i:nth-child(1){
+  padding-top: 9px;
+}
+.address-links .address1{
+  font-weight: 500;
+    font-size: 15px;
+  display: flex;
+}
+.address-links{
+      line-height: 32px;
+    color: #777777;
+}
+.copy-right-sec{
+  padding: 1.8rem;
+    background: #e04a24;
+    color: #fff;
+    text-align: center;
+}
+.copy-right-sec a{
+  color: #fcd462;
+    font-weight: 500;
+}
+a{
+  text-decoration:none;
+}
+
+</style>
+  </section>
   <script>
     // Fetch company profile data and update the HTML content
     fetch('https://selectsphere.in/back/getCompanyProfileSelect')
@@ -2192,6 +2345,7 @@ function changeNavbarBackground() {
   handleSubmit('contactForm', 'submitBtn');       // For the second form
   </script>
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
