@@ -118,7 +118,7 @@ router.get("/ITsolution", (req, res) => {
   });
 });
 // Registration Page Route
-router.get("/ITsolution", (req, res) => {
+router.get("/About", (req, res) => {
   res.render("Frontend/About", {
     title: "home",
     currentRoute: req.url
@@ -192,13 +192,6 @@ router.get("/Download", (req, res) => {
   });
 });
 
-// About Pages Routes
-router.get("/about", (req, res) => {
-  res.render("Frontend/about", {
-    title: "home",
-    currentRoute: req.url
-  });
-});
 router.get("/about2", (req, res) => {
   res.render("Frontend/about2", {
     title: "home",

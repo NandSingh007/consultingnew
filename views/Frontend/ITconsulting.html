@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Select Sphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
+    <meta name="keywords" content="consulting, HR solutions, IT project solutions, business consulting, expert consulting">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="ConsultPro - Expert Consulting Solutions">
+    <meta property="og:description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
+    <meta property="og:image" content="path/to/your/image.jpg">
+    <meta property="og:url" content="https://www.consultpro.com">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/fficon2.png" type="image/x-icon">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq6/2TfphFbE0L/5GL0xlwOluV9Nu1ro12UZTNB9zN8DquwzpC3uJ6Cq7QJTPB1P0dbEP3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Slick Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <style>
     
@@ -610,139 +625,6 @@
 }
 
 
-
-        /* foter  */
-    /* Footer Styling */
-    .footer {
-    background-image: url('/assets/img/ss.png');
-    background-position: center;
-    background-size: contain; /* Ensures the background image covers the entire footer */
-    background-repeat: no-repeat;
-    min-height: 420px;  /* Ensures minimum height is set for the footer */
-    padding: 60px 0;  /* Increased padding for more spacing */
-    position: relative;
-    width: 90%;
-    margin: 0% 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* margin: 0; */
-    box-sizing: border-box;
-}
-
-/* Optional Overlay for Background Image */
-.footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.664); /* Slightly darker overlay for better text contrast */
-    z-index: 1;
-}
-
-/* Footer Heading */
-.footer h2 {
-    font-family: 'Playfair Display', serif;  /* Elegant and modern serif font */
-    font-size: 2.8rem;
-    color: #d9534f;  /* Soft, warm red for a sophisticated look */
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 2;
-    animation: fadeInDown 1s ease-out;
-    letter-spacing: 2px;  /* Add spacing between letters for a cleaner look */
-}
-
-/* Footer Content */
-.footer-bg {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-/* Footer Items */
-.footer-item {
-    width: 28%;
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-   
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Light shadow for elevated effect */
-}
-
-.footer-item h3 {
-    font-family: 'Playfair Display', serif; /* Matching font for headings */
-    color: #ed541c;
-    font-size: 2rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;  /* For a modern look */
-    letter-spacing: 1px;
-}
-
-/* List Styling */
-.footer-item ul {
-    list-style: none;
-    padding-left: 0;
-    font-family: 'Roboto', sans-serif;  /* Clean, modern sans-serif font */
-    font-weight: 500;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #3eab3e;  /* Green for consistency */
-}
-
-.footer-item ul li {
-    margin-bottom: 10px;
-}
-
-/* Social Icons Styling */
-.footer-item span {
-    padding: 10px;
-}
-
-.footer-item img {
-    width: 30px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.footer-item img:hover {
-    transform: scale(1.2);  /* Increased hover scale for better emphasis */
-}
-
-/* Hover Effect on Items */
-.footer-item:hover {
-    transform: translateY(-5px);  /* Lift the item on hover for interactivity */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .footer-item {
-        width: 100%;  /* Full-width for small screens */
-        margin-bottom: 20px;
-    }
-}
-
-/* Animations */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
   
 
 /* Modal Background */
@@ -1031,221 +913,230 @@ textarea {
 </div>
 
     
-   <!-- Our Footer -->
  
   <!-- footer section start -->
-  <footer id="footer">
-    <div class="container">
+  
+<footer id="footer">
+  <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <a href="index.html">  <a href="#" ><img src="/assets/img/sslogo.png" width="200px" alt=""></a></a>
-          <div class="footer-about">
-            <p>We are an HR and IT consulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
-            <Strong>Founder </Strong> : <strong>Siddhii Jain</strong>
+          <div class="col-md-3">
+              <a href="index.html">
+                  <img src="/assets/img/sslogo.png" width="200px" alt="Logo">
+              </a>
+              <div class="footer-about">
+                  <p>We are an HR and IT consulting company that provides comprehensive IT solutions. Our expertise spans human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
+                  <strong>Founder:</strong> <strong>Siddhii Jain</strong>
+              </div>
           </div>
-          
-        </div>
-        <div class="col-md-3">
-          <div class="useful-link">
-            <h2>Services</h2>
-            <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-            <div class="use-links">
-              <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i> <Strong style="color: #5c5a5a;">IT Solution</Strong></a></li>
-              <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i>  <Strong style="color: #5c5a5a;">HR Consulting</Strong></a></li>
-            </div>
-          </div>
-
-        </div>
-                  <div class="col-md-3">
-                      <div class="social-links">
-            <h2>Follow Us</h2>
-            <img src="./assets/images/about/.png" alt="">
-            <div class="social-icons">
-              <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i> </a></li>
-              <li><a href=""  target="_blank"><i class="fa-brands fa-instagram"></i> </a></li>
-              <li><a href=""  target="_blank"><i class="fa-brands fa-linkedin-in"></i> </a></li>
-            </div>
-            <h2 style="margin-top: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 22px; font-weight: 900;" >VrNakti</h2>
-          </div>
-                  
-
+          <div class="col-md-3">
+              <div class="useful-link">
+                  <h2>Services</h2>
+                  <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                  <div class="use-links">
+                      <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">IT Solution</strong></a></li>
+                      <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">HR Consulting</strong></a></li>
                   </div>
-        <div class="col-md-3">
-          <div class="address">
-            <h2>Get In Touch</h2>
-            <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-            <div class="address-links">
-              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 76655 62912</a></li>
-              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 9571501999</a></li>
-              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild">Hr@selectsphere.in</a></li>
-              <li class="address1"><i class="fa-solid fa-location-dot"></i> <span id="address">Kolathur ramankulam-
-                Malappuram Dt 
-                 Kerala 679338 </span> </li>
-                    <!-- Map Embed -->
-              <iframe
-              id="addressMap"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5379327323093!2d75.79441997644541!3d26.82543688315207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db679f8fbb891%3A0xf8309d36c10f788!2sTerminal%201%20Jaipur%20International%20Airport!5e0!3m2!1sen!2sin!4v1696843200000!5m2!1sen!2sin"
-              width="270"
-              height="300"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-            
-            </div>
+              </div>
           </div>
-        </div>
-                
+          <div class="col-md-3">
+              <div class="social-links">
+                  <h2>Follow Us</h2>
+                  <img src="./assets/images/about/home_line.png" alt="">
+                  <div class="social-icons">
+                      <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
+                      <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  </div>
+                  <div style="margin-top: 20px;"><img src="/assets/img/vrn.png" width="70px" alt=""></div>
+                  <div style="margin-top: 20px;"><img src="/assets/img/fficon2.png" width="150px" alt=""></div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="address">
+                  <h2>Get In Touch</h2>
+                  <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                  <div class="address-links">
+                      <li><i class="fa-solid fa-phone" id=""></i> <a href="tel:+76655 62912" id="phone1w">+91 76655 62912</a></li>
+                      <li><i class="fa-solid fa-phone"></i> <a href="tel:+76655 62912"  id="phonenumber">+91 76655 62912</a></li>
+                      <li ><i class="fa-solid fa-envelope"></i> <a href="Hr@selectsphere.in"  id="emailid">Hr@selectsphere.in</a></li>
+                      <li class="address1">
+                          <i class="fa-solid fa-location-dot"></i>
+                          <span id="address">
+                              Airport, Terminal 1,Jaipur Rajasthan,</span>
+                      </li>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
+  </div>
 
-  </footer>
-  <!-- footer section end -->
-  <!-- footer copy right section start -->
-  <section id="copy-right">
-    <div class="copy-right-sec"><i class="fa-solid fa-copyright"></i>  
-      &copy; 2024 Select Sphere. All rights reserved.
-    </div>
+  <div class="copy-right-sec">
+      <p>&copy; 2024 Your Company Name. All rights reserved. <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
 <style>
 
-#footer{
+#footer {
   background: #f7f7f7;
-    padding: 2rem;
-  /* padding-top: 5rem; */
-  padding-top: 3rem;
-    padding-bottom: 80px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  padding: 1rem 1rem 10px;
   background-image: url(https://arena.km.ua/wp-content/uploads/3538533.jpg);
 }
-#footer2{
-  background: #f7f7f7;
-    padding: 3rem;
-    margin-top: 0px;
-  /* padding-top: 5rem; */
-  padding-top: 7rem;
-    padding-bottom: 80px;
-  background-image: url(../images/cards/v748-toon-111.png);
-}
-.logo-footer{
-  /* max-width: 300px; */
-}
-.social-links{
-  /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
 
+
+.logo-footer {
+  max-width: 300px;
 }
-.social-links h2{
-  padding-bottom: 15px;
-  font-size: 20px;
-    font-weight: 600;
-}
-.social-links img{
-  padding-bottom: 25px;
-}
-.social-icons{
-  /* display: flex;
-    gap: 3rem; */
+
+.row {
   display: flex;
-    /* flex-direction: column; */
-    /* gap: 1rem; */
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-md-3 {
+  flex: 0 0 24%; /* Adjust to allow four columns in a row */
+  max-width: 24%; /* Same as above */
+  box-sizing: border-box;
+  padding: 0 1rem; /* Add padding for spacing */
+  margin-bottom: 2rem; /* Space between rows */
+}
+
+.footer-about {
+  padding: 1rem 0;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links h2 {
+  /* padding-bottom: 15px; */
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.social-links img {
+  /* padding-bottom: 25px; */
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem; /* Add space between icons */
+}
+
+.social-icons a {
   color: #777777;
 }
-.social-icons a{
-  /* font-size: 18px; */
-    /* background: #ffffff; */
-    /* box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
-    padding: 0.4rem 1rem 0.4rem 1rem;
-    border-radius: 3px;
-  color: #82074a; */
-  /* margin-right: 18px; */
-  color: #777777;
-}
-.social-icons a:hover{
+
+.social-icons a:hover {
   color: #000;
 }
-.social-icons a i{
+
+.social-icons a i {
   box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
-    padding: 0.4rem 1rem 0.4rem 1rem;
-    border-radius: 3px;
-    color: #f01515;
+  padding: 0.4rem;
+  border-radius: 3px;
+  color: #f01515;
   font-size: 16px;
-  margin-right: 12px;
 }
-li{
+
+li {
   list-style: none;
 }
-.useful-link h2{
-  padding-bottom: 15px;
+
+.useful-link h2,
+.address h2 {
+  /* padding-bottom: 15px; */
   font-size: 20px;
-    font-weight: 600;
+  font-weight: 600;
 }
-.useful-link img{
+
+.useful-link img,
+.address img {
   padding-bottom: 15px;
 }
-.use-links{
+
+.use-links {
   line-height: 32px;
 }
-.use-links li i{
+
+.use-links li i {
   font-size: 14px;
-    padding-right: 8px;
-    color: #898989;
+  padding-right: 8px;
+  color: #898989;
 }
-.use-links li a{
-  color: #303030;
-    font-size: 15px;
-    font-weight: 500;
+
+.use-links li a {
   color: #777777;
+  font-size: 15px;
+  font-weight: 500;
 }
-.use-links li a:hover{
+
+.use-links li a:hover {
   color: #000;
 }
-.address h2{
-  padding-bottom: 15px;
-  font-size: 20px;
-    font-weight: 600;
-}
-.address img{
-  padding-bottom: 15px;
-}
-.address-links li a{
-  color: #303030;
-    font-size: 15px;
-    font-weight: 500;
+
+.address-links li a {
   color: #777777;
-
+  font-size: 15px;
+  font-weight: 500;
 }
-.address-links li i{
+
+.address-links li i {
   font-size: 16px;
-    padding-right: 8px;
+  padding-right: 8px;
   color: #f01515;
-
 }
-.address-links li i:nth-child(1){
+
+.address-links li i:nth-child(1) {
   padding-top: 9px;
 }
-.address-links .address1{
+
+.address-links .address1 {
   font-weight: 500;
-    font-size: 15px;
+  font-size: 15px;
   display: flex;
 }
-.address-links{
-      line-height: 32px;
-    color: #777777;
+
+.address-links {
+  line-height: 32px;
+  color: #777777;
 }
-.copy-right-sec{
+
+.copy-right-sec {
   padding: 1.8rem;
-    background: #e04a24;
-    color: #fff;
-    text-align: center;
+  background: #e04a24;
+  color: #fff;
+  text-align: center;
 }
-.copy-right-sec a{
+
+.copy-right-sec a {
   color: #fcd462;
-    font-weight: 500;
+  font-weight: 500;
 }
-a{
-  text-decoration:none;
+
+a {
+  text-decoration: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .col-md-3 {
+    flex: 0 0 48%; /* Two columns on small screens */
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-md-3 {
+    flex: 0 0 100%; /* Single column on very small screens */
+    max-width: 100%;
+  }
 }
 
 </style>
@@ -1256,8 +1147,8 @@ a{
       .then(data => {
         if (data.success && data.profile) {
           // Correctly accessing phone, email, and address from data.profile
-          document.getElementById('phone').textContent = data.profile.phone;
-          document.getElementById('emaild').textContent = data.profile.email;
+          document.getElementById('phonenumber').textContent = data.profile.phone;
+          document.getElementById('emailid').textContent = data.profile.email;
           document.getElementById('address').textContent = data.profile.address;
           document.getElementById('phone1w').textContent =9571501999
         } else {

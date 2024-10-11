@@ -3,19 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Select Sphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
+    <meta name="keywords" content="consulting, HR solutions, IT project solutions, business consulting, expert consulting">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="ConsultPro - Expert Consulting Solutions">
+    <meta property="og:description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
+    <meta property="og:image" content="path/to/your/image.jpg">
+    <meta property="og:url" content="https://www.consultpro.com">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/fficon2.png" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <style>
 /* Base Styles */
 body {
     font-family: 'YourDesiredFontFamily', sans-serif; /* Change this to your desired font */
+    padding: 0px;
+    margin: 0px;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0px 10px;
     background-color: #ebebeb;
     position: sticky;
     top: 0;
@@ -508,7 +534,7 @@ list-style: none;
   justify-content: space-between;
   width: 90%;
   margin: 2% 5%;
-  /* padding: 2rem; */
+  padding: 2rem 0rem;
   background-color: #f9f9f9;
 }
 
@@ -538,18 +564,19 @@ h2.animated-heading2 i {
 
 .about-details {
   font-family: Arial, sans-serif;
-  font-size: 1.125rem; /* Responsive font size */
+  font-size: 1.08rem; /* Responsive font size */
   line-height: 1.8;
-  font-weight: 400;
+  font-weight: 600;
   color: #555; /* Medium gray for readability */
   margin-bottom: 1.5rem;
 }
 
 .about-item {
   font-family: Arial, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
+  padding: 10px;
   margin-top: 1.5rem;
 }
 
@@ -589,11 +616,11 @@ h2.animated-heading2 i {
   }
 
   .about-details {
-    font-size: 1rem;
+    font-size: .9rem;
   }
 
   .about-item {
-    font-size: 1rem;
+    font-size: .9rem;
   }
 }
 
@@ -603,11 +630,11 @@ h2.animated-heading2 i {
   }
 
   .about-details {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 
   .about-item {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -639,7 +666,7 @@ h2.animated-heading2 i {
   background: #f7f7f7;
   display: flex;
   flex-direction: column; /* Stack elements vertically */
-  padding: 3rem 2rem 80px;
+  padding: 1rem 1rem 10px;
   background-image: url(https://arena.km.ua/wp-content/uploads/3538533.jpg);
 }
 
@@ -674,13 +701,13 @@ h2.animated-heading2 i {
 }
 
 .social-links h2 {
-  padding-bottom: 15px;
+  /* padding-bottom: 15px; */
   font-size: 20px;
   font-weight: 600;
 }
 
 .social-links img {
-  padding-bottom: 25px;
+  /* padding-bottom: 25px; */
 }
 
 .social-icons {
@@ -710,7 +737,7 @@ li {
 
 .useful-link h2,
 .address h2 {
-  padding-bottom: 15px;
+  /* padding-bottom: 15px; */
   font-size: 20px;
   font-weight: 600;
 }
@@ -831,9 +858,9 @@ a {
 </script>
 <body>
     <nav class="navbar" id="navbar">
-        <div class="logo">
-            <img src="/assets/img/sslogo.png" width="160px" alt="Logo">
-        </div>
+        <div class="logo" style="cursor: pointer;">
+            <img src="/assets/img/sslogo.png" width="160px" alt="">
+          </div>
         <div class="navbar-toggle">
             <span></span>
             <span></span>
@@ -878,79 +905,97 @@ a {
      </div>
   </div>
   
-  <footer id="footer">
+<footer id="footer">
     <div class="container">
-      <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-        <div class="footer-col" style="flex: 1; min-width: 250px; padding: 5px;">
-          <a href="index.html">
-            <img src="/assets/img/sslogo.png" width="200" alt="Logo">
-          </a>
-          <div class="footer-about">
-            <p>We are an HR and IT consulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
-            <strong>Founder:</strong> <strong>Siddhii Jain</strong>
-          </div>
-        </div>
-  
-        <div class="footer-col" style="flex: 1; min-width: 250px; padding: 5px;">
-          <h2>Services</h2>
-          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-          <ul class="use-links">
-            <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i> <strong style="color: #5c5a5a;">IT Solution</strong></a></li>
-            <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i> <strong style="color: #5c5a5a;">HR Consulting</strong></a></li>
-          </ul>
-        </div>
-  
-        <div class="footer-col" style="flex: 1; min-width: 250px; padding: 5px;">
-          <h2>Follow Us</h2>
-          <img src="./assets/images/about/home_line.png" alt="">
-          <ul class="social-icons" style="list-style: none; padding: 0; display: flex; gap: 1rem;">
-            <li><a href="#" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
-          </ul>
-          <div style="margin-top: 20px;">
-            <h2 style="margin-top: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 22px; font-weight: 900;" >VrNakti</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="index.html">
+                    <img src="/assets/img/sslogo.png" width="200px" alt="Logo">
+                </a>
+                <div class="footer-about">
+                    <p>We are an HR and IT consulting company that provides comprehensive IT solutions. Our expertise spans human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
+                    <strong>Founder:</strong> <strong>Siddhii Jain</strong>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="useful-link">
+                    <h2>Services</h2>
+                    <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                    <div class="use-links">
+                        <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">IT Solution</strong></a></li>
+                        <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">HR Consulting</strong></a></li>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="social-links">
+                    <h2>Follow Us</h2>
+                    <img src="./assets/images/about/home_line.png" alt="">
+                    <div class="social-icons">
+                        <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </div>
+                    <div style="margin-top: 20px;"><img src="/assets/img/vrn.png" width="70px" alt=""></div>
+                    <div style="margin-top: 20px;"><img src="/assets/img/fficon2.png" width="150px" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="address">
+                    <h2>Get In Touch</h2>
+                    <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                    <div class="address-links">
+                        <li><i class="fa-solid fa-phone" id=""></i> <a href="tel:+76655 62912" id="phone1w">+91 76655 62912</a></li>
+                        <li><i class="fa-solid fa-phone"></i> <a href="tel:+76655 62912"  id="phonenumber">+91 76655 62912</a></li>
+                        <li ><i class="fa-solid fa-envelope"></i> <a href="Hr@selectsphere.in"  id="emailid">Hr@selectsphere.in</a></li>
+                        <li class="address1">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span id="address">
+                                Airport, Terminal 1,Jaipur Rajasthan,</span>
+                        </li>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
   
-        <div class="footer-col" style="flex: 1; min-width: 250px; padding: 5px;">
-          <h2>Get In Touch</h2>
-          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-          <ul class="address-links" style="list-style: none; padding: 0;">
-            <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 76655 62912</a></li>
-            <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 9571501999</a></li>
-            <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild">Hr@selectsphere.in</a></li>
-            <li class="address1">
-              <i class="fa-solid fa-location-dot"></i>
-              <span id="address">Kolathur Ramankulam, Malappuram Dt, Kerala 679338</span>
-            </li>
-          </ul>
-  
-          <!-- Map Embed -->
-          <iframe
-            id="addressMap"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5379327323093!2d75.79441997644541!3d26.82543688315207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db679f8fbb891%3A0xf8309d36c10f788!2sTerminal%201%20Jaipur%20International%20Airport!5e0!3m2!1sen!2sin!4v1696843200000!5m2!1sen!2sin"
-            width="260"
-            height="280"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </div>
+    <div class="copy-right-sec">
+        <p>&copy; 2024 Your Company Name. All rights reserved. <a href="#">Privacy Policy</a></p>
     </div>
   </footer>
-  
-  
-  <!-- footer section end -->
-  <!-- footer copy right section start -->
-  <section id="copy-right">
-    <div class="copy-right-sec"><i class="fa-solid fa-copyright"></i>  
-     2024 Select Sphere. All rights reserved.
-    </div>
-    </section>
 </body>
+
+<script>
+    // Fetch company profile data and update the HTML content
+    fetch('https://selectsphere.in/back/getCompanyProfileSelect')
+      .then(response => response.json())
+      .then(data => {
+        if (data.success && data.profile) {
+          const phone = data.profile.phone;
+          const email = data.profile.email;
+          const address = data.profile.address;
+  
+          // Update phone, email, and address fields
+          document.getElementById('phonenumber').textContent = phone;
+          document.getElementById('emailid').textContent = email;
+          document.getElementById('address').textContent = address;
+          document.getElementById('phone1w').textContent =9571501999
+  
+          // Update the Google Maps iframe with the new address
+          const encodedAddress = encodeURIComponent(address);  // Encode the address for URL
+          // const mapIframe = document.getElementById('addressMap');
+          
+          // Replace with your valid API key
+          // mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodedAddress}`;
+        } else {
+          console.error('Failed to fetch profile data.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
