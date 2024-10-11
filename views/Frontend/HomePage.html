@@ -59,7 +59,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
+  padding: 5px;
   background-color: #ebebeb;
  /* border: 1px solid rgba(86, 84, 84, 0.805); */
   /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
@@ -624,312 +624,9 @@ display: none;
   color: #2C3E50;
 }
 
-/* Main container styling */
-.about-section {
-  display: flex;
-  background-color: #f7f7f7;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 5%;
-  width: 90%;
-  margin: 2% auto;
-  perspective: 1000px;
-  flex-wrap: wrap;
-  gap: 20px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-/* Left content */
-.about-left {
-  width: 45%;
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-align: left;
-}
-
-.animated-heading2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
-  animation: fadeInZoomBounce 1.5s ease-in-out;
-  position: relative;
-}
-
-.animated-heading2::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 5px;
-  background-color: #f39c12;
-  bottom: -10px;
-  left: 0;
-  animation: borderExpand 1.5s ease-in-out;
-  animation-delay: 0.5s;
-}
-
-.about-item {
-  margin-bottom: 20px;
-}
-
-.about-item strong {
-  color: #d44a00;
-  font-size: 1.4rem;
-  display: block;
-  margin-bottom: 10px;
-}
-
-/* Right content - image */
-.about-right {
-  width: 45%;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.animated-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  animation: fadeInZoomBounce 1s ease-in-out;
-}
-.about-details {
-  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.6;
-  color: #333; /* Dark gray for readability */
-}
-
-.about-item {
-  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  color: #222; /* Slightly darker for contrast */
-  margin-top: 20px;
-}
-
-.about-item strong {
-  font-size: 20px;
-  font-weight: 700; /* Extra bold for strong emphasis */
-}
-
-.animated-image {
-  max-width: 100%;
-  height: auto;
-}
-
-
-/* Responsive Styling */
-@media (max-width: 992px) {
-  .about-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .about-left,
-  .about-right {
-    width: 100%;
-    text-align: center;
-  }
-
-  .animated-heading2 {
-    font-size: 2rem;
-  }
-
-}
-
-@media (max-width: 768px) {
-  .animated-heading2 {
-    font-size: 1.8rem;
-  }
-
- 
-}
-
-@media (max-width: 576px) {
-  .animated-heading2 {
-    font-size: 1.6rem;
-  }
-
-}
-
-/* Animations */
-@keyframes fadeInZoomBounce {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes borderExpand {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 120px;
-  }
-}
-
 /* patterned-div */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-.seconddiv-service-service {
-  background-color: #f7f7f7;
-  width: 90%;
-  margin: 2% auto;
-  padding: 4% 0;
-  text-align: center;
-}
-
-.service-boxes-container {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 30px;
-  align-items: center;
-  gap: 20px; /* Space between the boxes */
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
-
-.box-service {
-  flex: 1;
-  text-align: center;
-  position: relative;
-  max-width: 48%; /* Each box takes up 48% width, allowing for 2 side by side */
-  box-sizing: border-box;
-}
-
-.image-container-service {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.image-container-service img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-}
-
-.overlay, .overlay1 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: height 0.4s ease;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.overlay-text {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 300;
-  color: white;
-  font-size: 18px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.4s ease, top 0.4s ease;
-}
-
-.image-container-service .overlay,
-.image-container-service .overlay1 {
-  height: 100%;
-  width: 100%;
-}
-
-.image-container-service .overlay-text {
-  opacity: 1;
-}
-
-.cta-button2 {
-  display: inline-block;
-  padding: 12px 30px; /* Increased padding for better emphasis */
-  background: linear-gradient(135deg, #ff6600, #ff6500); /* Gradient background for a modern look */
-  color: white;
-  font-size: 18px; /* Larger font for better readability */
-  font-family: 'Poppins', sans-serif; /* Modern font */
-  font-weight: 600;
-  border-radius: 30px; /* Smooth, rounded corners */
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Adds depth with shadow */
-  transition: all 0.4s ease; /* Smooth transition on hover and click */
-  position: relative;
-  text-transform: uppercase; /* Makes the button text look more professional */
-  letter-spacing: 1px; /* Slight letter spacing for elegance */
-}
-
-.cta-button2:hover {
-  background: linear-gradient(135deg, #ff6500, #ff3300); /* Darker gradient on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Deepen shadow on hover */
-  transform: translateY(-3px); /* Slight lift effect on hover */
-}
-
-.cta-button2:active {
-  transform: translateY(1px); /* Button press effect */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Reduce shadow on press */
-}
-
-.cta-button2::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 30px; /* Matches button border radius */
-  border: 2px solid rgba(255, 255, 255, 0.3); /* Light border effect */
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.cta-button2:hover::before {
-  opacity: 1; /* Border becomes visible on hover */
-}
-
-@keyframes buttonPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.cta-button2 {
-  animation: buttonPulse 2.5s infinite; /* Subtle pulse animation */
-}
-
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-  .service-boxes-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .box-service {
-    max-width: 100%; /* Full-width boxes on smaller screens */
-  }
-}
 
 .hrconsulting {
     font-size: 1.5rem;
@@ -1025,7 +722,7 @@ list-style: none;
 
 .cta-button2 {
  font-size: 12px;
-  padding: 4px 20px; /* Increased padding for better emphasis */
+  padding: 6px 10px; /* Increased padding for better emphasis */
   border-radius: 25px; /* Smooth, rounded corners */
  
 }
@@ -1615,6 +1312,88 @@ list-style: none;
     font-size: 30px; /* Adjust icon size accordingly */
   }
 }
+/* Parallax Section Styling */
+/* Parallax Section Styling */
+.parallax-section {
+  position: relative;
+  text-align: center;
+  padding: 60px 0;
+  background: url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg') center center/cover fixed;
+  width: 90%;
+  margin: 0% 5%;
+  color: #fff; /* Set default text color to white */
+}
+
+.parallax-overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Gradient for text visibility */
+  padding: 30px;
+}
+
+
+
+.parallax-services {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+}
+
+.service-box {
+  flex: 1;
+  margin: 0 1rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.1); /* Background for service boxes */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+.service-box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.service-box i {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: #f39c12;
+  transition: color 0.3s ease;
+}
+
+.service-box:hover i {
+  color: #3498db;
+}
+
+.service-box h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.service-box p {
+  font-size: 1rem;
+}
+
+@media (max-width: 992px) {
+  .parallax-services {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-box {
+    margin-bottom: 2rem;
+  }
+
+ 
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 
 </style>
@@ -1680,7 +1459,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="logo">
-          <img src="/assets/img/ss.png" width="160px" alt="">
+          <img src="/assets/img/sslogo.png" width="160px" alt="">
         </div>
         <div class="navbar-toggle">
             <span></span>
@@ -1690,11 +1469,12 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="navbar-menu">
           <ul class="nav-links">
             <li><a href="/"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
-            <li><a href="#services"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
-            <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
-            <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact With Us</a></li>
+        
+            <li><a href="/About"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
+            <li><a href="/service"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
+            <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
             <li>  <div class="cta-button">
-              <a href="#consult" id="openModalButton" style="color: white;">Send Resume</a>
+              <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
           </div></li>
         </ul>
         
@@ -1703,7 +1483,6 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </nav>
   
-<!-- Modal Structure -->
 <!-- Modal Structure -->
 <div id="consultationModal" class="modal">
   <div class="modal-content">
@@ -1812,81 +1591,36 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
     
-<!-- About Us Section -->
-<div class="about-section" id="about-us">
-  <div class="about-left">
+<!-- Parallax Scrolling Services Section -->
+<section class="parallax-section">
+  <div class="parallax-overlay">
     <h2 class="animated-heading2">
-      <i class="fas fa-info-circle" style="color: #f39c12; font-size: 47px; margin-right: 15px;"></i>
-      About Us
-    </h2>
-    <div class="about-details">
-      Founded in Aug 3, 2024, Select Sphere , Your trusted partner in HR and IT consulting,Based in Jaipur,Rajasthan. We specialize in delivering strategic solutions tailored to the unique needs of modern businesses. Our comprehensive services span from human resources management and talent acquisition to cutting-edge IT solutions designed to enhance business performance and foster innovation.
-
-      With a deep understanding of the ever-evolving business landscape, we collaborate closely with our clients to help them navigate challenges, optimize resources, and drive growth. Whether it's recruiting top talent, implementing effective HR strategies, or leveraging the latest technology,Select Sphere is dedicated to helping you succeed.
-      
-      Our commitment to excellence, innovation, and client-centric solutions has positioned us as a leading consultancy in the region. We are proud to serve businesses across PAN India. </div>
-  </div>
-  <div class="about-right">
-    <img class="animated-image" src="/assets/img/girlimg.webp" alt="Girl Image">
-  </div>
-  <div class="about-item">
-    <strong>Our Aim:</strong>
-    "To build a forward-thinking organization where HR and IT collaborate to create an empowered workforce, foster innovation, and support business agility. By aligning talent strategies with digital transformation initiatives, we aim to drive organizational efficiency, enhance employee engagement, and unlock new opportunities for growth and collaboration." 
-   </div>
-</div>
-
-
-
-<!-- Service Section   -->
- <!-- Service Section -->
-<div class="seconddiv-service-service" id="services">
-  <h2 class="animated-heading2">
-    <i class="fas fa-concierge-bell" style="color: #f39c12; font-size: 47px; margin-right: 15px;"></i>
-    Our Services
+      <i class="fas fa-rocket"></i>
+      Our Expertise
   </h2>
-
-  <div class="service-boxes-container">
-    <!-- Box 1 -->
-    <div class="box-service">
-      <div class="image-container-service" onclick="window.location.href='/ITconsulting';">
-        <img class="animated-image" src="/assets/img/h3.webp" alt="HR Consulting">
-        <div class="overlay1">
-          <div class="overlay-text">
-            <h2 class="hrconsulting">HR Consulting</h2>
-            <p>Innovative solutions tailored to your needs</p>
-            <ul class="list-data">
-              <li><i class="fas fa-users" style="color: #3498db;"></i> Talent Acquisition</li>
-              <li><i class="fas fa-briefcase" style="color: #e74c3c;"></i> Employee Engagement</li>
-              <li><i class="fas fa-chart-pie" style="color: #2ecc71;"></i> Performance Management</li>
-              <li><i class="fas fa-comments" style="color: #f39c12;"></i> HR Framework</li>
-            </ul>
-            <div class="cta-button2">Explore More</div>
-          </div>
-        </div>
+  
+    
+    <div class="parallax-services">
+      <div class="service-box">
+        <i class="fas fa-users-cog"></i>
+        <h3>HR Solutions</h3>
+        <p>Customized strategies to empower your workforce and enhance productivity.</p>
       </div>
-    </div>
-
-    <!-- Box 2 -->
-    <div class="box-service">
-      <div class="image-container-service" onclick="window.location.href='/ITsolution';">
-        <img class="animated-image" src="/assets/img/itt.webp" alt="IT Solutions">
-        <div class="overlay">
-          <div class="overlay-text">
-            <h2 class="hrconsulting">IT Solutions</h2>
-            <p>Comprehensive IT consulting and services</p>
-            <ul class="list-data">
-              <li><i class="fas fa-laptop-code" style="color: #1abc9c;"></i> Custom Web Development</li>
-              <li><i class="fas fa-video" style="color: #9b59b6;"></i> Professional Video Editing</li>
-              <li><i class="fas fa-search" style="color: #f39c12;"></i> SEO Services</li>
-              <li><i class="fas fa-bullhorn" style="color: #e74c3c;"></i> Digital Marketing</li>
-            </ul>
-            <div class="cta-button2">Explore More</div>
-          </div>
-        </div>
+      <div class="service-box">
+        <i class="fas fa-laptop-code"></i>
+        <h3>IT Consulting</h3>
+        <p>Innovative tech solutions that boost your business efficiency and performance.</p>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-chart-line"></i>
+        <h3>Business Strategy</h3>
+        <p>Transformative insights and strategies for sustainable growth.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+
 
 
   <!-- our Customer -->
@@ -2013,7 +1747,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <a href="index.html">  <a href="#" ><img src="/assets/img/sslogo.png" width="200px" alt=""></a></a>
           <div class="footer-about">
             <p>We are an HR and ITconsulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
-            <Strong>CO-Founder </Strong> : <strong>Siddhii Jain</strong>
+            <Strong>Founder </Strong> : <strong>Siddhii Jain</strong>
           </div>
           
         </div>
@@ -2037,7 +1771,8 @@ document.addEventListener('DOMContentLoaded', function () {
               <li><a href=""  target="_blank"><i class="fa-brands fa-instagram"></i> </a></li>
               <li><a href=""  target="_blank"><i class="fa-brands fa-linkedin-in"></i> </a></li>
             </div>
-            <div style="margin-top: 20px;"><img src="/assets/img/sslogo.png" width="200px" alt=""></div>
+            <h2 style="margin-top: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 22px; font-weight: 900;" >VrNakti</h2>
+            <!-- <div style="margin-top: 20px;"><img src="/assets/img/sslogo.png" width="200px" alt=""></div> -->
           </div>
                   
 
@@ -2047,9 +1782,9 @@ document.addEventListener('DOMContentLoaded', function () {
             <h2>Get In Touch</h2>
             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
             <div class="address-links">
-              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 90906500112</a></li>
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 76655 62912</a></li>
               <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 9571501999</a></li>
-              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild"> mail@1234567.com</a></li>
+              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild">Hr@selectsphere.in</a></li>
               <li class="address1">
                 <i class="fa-solid fa-location-dot"></i>
                 <span id="address">Kolathur Ramankulam, Malappuram Dt, Kerala 679338</span>

@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px;
   /* background-color: #ebebeb; */
  /* border: 1px solid rgba(86, 84, 84, 0.805); */
   /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
@@ -900,7 +900,7 @@ textarea {
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="logo">
-      <img src="/assets/img/ss.png" width="160px" alt="">
+      <img src="/assets/img/sslogo.png" width="160px" alt="">
     </div>
     <div class="navbar-toggle">
         <span></span>
@@ -910,11 +910,11 @@ textarea {
     <div class="navbar-menu">
         <ul class="nav-links">
           <li><a href="/"><i class="fas fa-home" style="color: #3498db; font-size: 1.2rem;"></i> Home</a></li>
-          <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71; font-size: 1.2rem;"></i> About Us</a></li>
-          <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact With Us</a></li>
+          <li><a href="/About"><i class="fas fa-user" style="color: #2ecc71; font-size: 1.2rem;"></i> About Us</a></li>
+          <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
             <li><a href="#Client"><i class="fas fa-blog" style="color: #9b59b6; font-size: 1.2rem;"></i> Client</a></li>
           <li> <div class="cta-button">
-            <a href="#consult" id="openModalButton">Send Resume</a>
+            <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
         </div></li>
         </ul>
       </div>
@@ -1038,10 +1038,10 @@ textarea {
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <a href="index.html">  <a href="#" ><img src="/assets/img/ss.png" width="200px" alt=""></a></a>
+          <a href="index.html">  <a href="#" ><img src="/assets/img/sslogo.png" width="200px" alt=""></a></a>
           <div class="footer-about">
             <p>We are an HR and IT consulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
-            <Strong>CO-Founder </Strong> : <strong>Siddhii Jain</strong>
+            <Strong>Founder </Strong> : <strong>Siddhii Jain</strong>
           </div>
           
         </div>
@@ -1065,7 +1065,7 @@ textarea {
               <li><a href=""  target="_blank"><i class="fa-brands fa-instagram"></i> </a></li>
               <li><a href=""  target="_blank"><i class="fa-brands fa-linkedin-in"></i> </a></li>
             </div>
-            <div style="margin-top: 20px;"><img src="/assets/img/sslogo.png" width="200px" alt=""></div>
+            <h2 style="margin-top: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 22px; font-weight: 900;" >VrNakti</h2>
           </div>
                   
 
@@ -1075,9 +1075,9 @@ textarea {
             <h2>Get In Touch</h2>
             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
             <div class="address-links">
-               <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 90906500112</a></li>
-               <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 90906500112</a></li>
-              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild"> mail@1234567.com</a></li>
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 76655 62912</a></li>
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 9571501999</a></li>
+              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild">Hr@selectsphere.in</a></li>
               <li class="address1"><i class="fa-solid fa-location-dot"></i> <span id="address">Kolathur ramankulam-
                 Malappuram Dt 
                  Kerala 679338 </span> </li>
@@ -1085,8 +1085,8 @@ textarea {
               <iframe
               id="addressMap"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5379327323093!2d75.79441997644541!3d26.82543688315207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db679f8fbb891%3A0xf8309d36c10f788!2sTerminal%201%20Jaipur%20International%20Airport!5e0!3m2!1sen!2sin!4v1696843200000!5m2!1sen!2sin"
-              width="310"
-              height="360"
+              width="270"
+              height="300"
               style="border:0;"
               allowfullscreen=""
               loading="lazy"
@@ -1318,17 +1318,25 @@ function changeNavbarBackground() {
 
     </script>
    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleButton = document.querySelector('.navbar-toggle');
-        const navbarMenu = document.querySelector('.navbar-menu');
-  
-        toggleButton.addEventListener('click', function () {
-            // Toggle the 'active' class on the menu
-            navbarMenu.classList.toggle('active');
-            // Also toggle 'active' class on toggle button itself for animation
-            toggleButton.classList.toggle('active');
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButton = document.querySelector('.navbar-toggle');
+  const navbarMenu = document.querySelector('.navbar-menu');
+  const navLinks = document.querySelectorAll('.nav-links a'); // Select all navbar links
+
+  // Toggle the navbar when the toggle button is clicked
+  toggleButton.addEventListener('click', function () {
+      navbarMenu.classList.toggle('active');
+      toggleButton.classList.toggle('active');
+  });
+
+  // Close the navbar menu when any nav link is clicked
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navbarMenu.classList.remove('active');
+      toggleButton.classList.remove('active');
     });
+  });
+});
     document.addEventListener('DOMContentLoaded', () => {
     const aboutSection = document.getElementById('about-us');
 

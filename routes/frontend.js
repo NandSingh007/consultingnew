@@ -117,10 +117,25 @@ router.get("/ITsolution", (req, res) => {
     currentRoute: req.url
   });
 });
+// Registration Page Route
+router.get("/ITsolution", (req, res) => {
+  res.render("Frontend/About", {
+    title: "home",
+    currentRoute: req.url
+  });
+});
 
 // EMI Page Routes
 router.get("/ITconsulting", (req, res) => {
   res.render("Frontend/ITconsulting", {
+    title: "home",
+    currentRoute: req.url
+  });
+});
+
+// EMI Page Routes
+router.get("/service", (req, res) => {
+  res.render("Frontend/Service", {
     title: "home",
     currentRoute: req.url
   });

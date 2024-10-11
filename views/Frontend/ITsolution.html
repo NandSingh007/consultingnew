@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px;
   /* background-color: #ebebeb; */
  /* border: 1px solid rgba(86, 84, 84, 0.805); */
   /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
@@ -609,139 +609,6 @@
 }
 
 
-
-        /* foter  */
-    /* Footer Styling */
-    .footer {
-    background-image: url('/assets/img/ss.png');
-    background-position: center;
-    background-size: contain; /* Ensures the background image covers the entire footer */
-    background-repeat: no-repeat;
-    min-height: 420px;  /* Ensures minimum height is set for the footer */
-    padding: 60px 0;  /* Increased padding for more spacing */
-    position: relative;
-    width: 90%;
-    margin: 0% 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* margin: 0; */
-    box-sizing: border-box;
-}
-
-/* Optional Overlay for Background Image */
-.footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.664); /* Slightly darker overlay for better text contrast */
-    z-index: 1;
-}
-
-/* Footer Heading */
-.footer h2 {
-    font-family: 'Playfair Display', serif;  /* Elegant and modern serif font */
-    font-size: 2.8rem;
-    color: #d9534f;  /* Soft, warm red for a sophisticated look */
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 2;
-    animation: fadeInDown 1s ease-out;
-    letter-spacing: 2px;  /* Add spacing between letters for a cleaner look */
-}
-
-/* Footer Content */
-.footer-bg {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-/* Footer Items */
-.footer-item {
-    width: 28%;
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-   
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Light shadow for elevated effect */
-}
-
-.footer-item h3 {
-    font-family: 'Playfair Display', serif; /* Matching font for headings */
-    color: #ed541c;
-    font-size: 2rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;  /* For a modern look */
-    letter-spacing: 1px;
-}
-
-/* List Styling */
-.footer-item ul {
-    list-style: none;
-    padding-left: 0;
-    font-family: 'Roboto', sans-serif;  /* Clean, modern sans-serif font */
-    font-weight: 500;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #3eab3e;  /* Green for consistency */
-}
-
-.footer-item ul li {
-    margin-bottom: 10px;
-}
-
-/* Social Icons Styling */
-.footer-item span {
-    padding: 10px;
-}
-
-.footer-item img {
-    width: 40px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.footer-item img:hover {
-    transform: scale(1.2);  /* Increased hover scale for better emphasis */
-}
-
-/* Hover Effect on Items */
-.footer-item:hover {
-    transform: translateY(-5px);  /* Lift the item on hover for interactivity */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .footer-item {
-        width: 100%;  /* Full-width for small screens */
-        margin-bottom: 20px;
-    }
-}
-
-/* Animations */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
   
 
 /* Modal Background */
@@ -899,7 +766,7 @@ textarea {
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="logo">
-      <img src="/assets/img/ss.png" width="160px" alt="">
+      <img src="/assets/img/sslogo.png" width="160px" alt="">
     </div>
     <div class="navbar-toggle">
         <span></span>
@@ -909,10 +776,10 @@ textarea {
     <div class="navbar-menu">
         <ul class="nav-links">
           <li><a href="/"><i class="fas fa-home" style="color: #3498db; font-size: 1.2rem;"></i> Home</a></li>
-          <li><a href="#about-us"><i class="fas fa-user" style="color: #2ecc71; font-size: 1.2rem;"></i> About Us</a></li>
-          <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact With Us</a></li>
+          <li><a href="/About"><i class="fas fa-user" style="color: #2ecc71; font-size: 1.2rem;"></i> About Us</a></li>
+          <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
           <li>  <div class="cta-button">
-            <a href="#consult" id="openModalButton">Send Resume</a>
+            <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
         </div></li>
         </ul>
       </div>
@@ -1038,10 +905,10 @@ textarea {
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <a href="index.html">  <a href="#" ><img src="/assets/img/ss.png" width="200px" alt=""></a></a>
+          <a href="index.html">  <a href="#" ><img src="/assets/img/sslogo.png" width="200px" alt=""></a></a>
           <div class="footer-about">
             <p>We are an HR and IT consulting company that also provides comprehensive IT solutions. Our expertise spans across human resources management and cutting-edge IT services, offering businesses the support they need to succeed in a competitive market.</p>
-            <Strong>CO-Founder </Strong> : <strong>Siddhii Jain</strong>
+            <Strong>Founder </Strong> : <strong>Siddhii Jain</strong>
           </div>
           
         </div>
@@ -1065,7 +932,7 @@ textarea {
               <li><a href=""  target="_blank"><i class="fa-brands fa-instagram"></i> </a></li>
               <li><a href=""  target="_blank"><i class="fa-brands fa-linkedin-in"></i> </a></li>
             </div>
-            <div style="margin-top: 20px;"><img src="/assets/img/sslogo.png" width="200px" alt=""></div>
+            <h2 style="margin-top: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 22px; font-weight: 900;" >VrNakti</h2>
           </div>
                   
 
@@ -1075,9 +942,9 @@ textarea {
             <h2>Get In Touch</h2>
             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
             <div class="address-links">
-              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 90906500112</a></li>
-              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 90906500112</a></li>
-              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild"> mail@1234567.com</a></li>
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone">+91 76655 62912</a></li>
+              <li><i class="fa-solid fa-phone"></i> <a href="" id="phone1w">+91 9571501999</a></li>
+              <li><i class="fa-solid fa-envelope"></i><a href="" id="emaild">Hr@selectsphere.in</a></li>
               <li class="address1"><i class="fa-solid fa-location-dot"></i> <span id="address">Kolathur ramankulam-
                 Malappuram Dt 
                  Kerala 679338 </span> </li>
@@ -1085,8 +952,8 @@ textarea {
               <iframe
               id="addressMap"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.5379327323093!2d75.79441997644541!3d26.82543688315207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db679f8fbb891%3A0xf8309d36c10f788!2sTerminal%201%20Jaipur%20International%20Airport!5e0!3m2!1sen!2sin!4v1696843200000!5m2!1sen!2sin"
-              width="310"
-              height="360"
+              width="270"
+              height="300"
               style="border:0;"
               allowfullscreen=""
               loading="lazy"
@@ -1108,6 +975,7 @@ textarea {
       &copy; 2024 Select Sphere. All rights reserved.
 
     </div>
+  </section>
 <style>
 
 #footer{
@@ -1319,17 +1187,25 @@ function changeNavbarBackground() {
 
     </script>
    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleButton = document.querySelector('.navbar-toggle');
-        const navbarMenu = document.querySelector('.navbar-menu');
-  
-        toggleButton.addEventListener('click', function () {
-            // Toggle the 'active' class on the menu
-            navbarMenu.classList.toggle('active');
-            // Also toggle 'active' class on toggle button itself for animation
-            toggleButton.classList.toggle('active');
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButton = document.querySelector('.navbar-toggle');
+  const navbarMenu = document.querySelector('.navbar-menu');
+  const navLinks = document.querySelectorAll('.nav-links a'); // Select all navbar links
+
+  // Toggle the navbar when the toggle button is clicked
+  toggleButton.addEventListener('click', function () {
+      navbarMenu.classList.toggle('active');
+      toggleButton.classList.toggle('active');
+  });
+
+  // Close the navbar menu when any nav link is clicked
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navbarMenu.classList.remove('active');
+      toggleButton.classList.remove('active');
     });
+  });
+});
     document.addEventListener('DOMContentLoaded', () => {
     const aboutSection = document.getElementById('about-us');
 
