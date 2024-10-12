@@ -165,7 +165,7 @@ router.get("/pages-register", authMiddleware, (req, res) => {
 router.get("/pages-contact", (req, res) => {
   res.render("pages-contact", { title: "Bonus", currentRoute: req.url });
 });
-router.get("/Bonus", async (req, res) => {
+router.get("/Bonus", authMiddleware, async (req, res) => {
   try {
     // Fetch Loan Types data
     const loanResponse = await axios.get(
@@ -221,7 +221,7 @@ router.get("/Refer", async (req, res) => {
   }
 });
 
-router.get("/rech_pe", async (req, res) => {
+router.get("/rech_pe", authMiddleware, async (req, res) => {
   try {
     const profileResponse = await fetch(
       "https://selectsphere.in/back/getCompanyProfileSelect"

@@ -5,6 +5,7 @@ module.exports = (req, res, next) => {
   const token = req.cookies.token; // Make sure you have cookie-parser middleware in use
   console.log(token, "token");
   if (!token) {
+    // alert("hii");
     return res.redirect("/back"); // Redirect to login if no token
   }
 
