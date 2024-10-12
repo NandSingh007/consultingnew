@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta name="keywords" content="consulting, HR solutions, IT project solutions, business consulting, expert consulting">
+    <meta name="description" content="Select Sphere">
+    <meta name="keywords"  content="Select Sphere">
 
     <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="ConsultPro - Expert Consulting Solutions">
-    <meta property="og:description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta property="og:image" content="path/to/your/image.jpg">
-    <meta property="og:url" content="https://www.consultpro.com">
+    <meta property="og:title"  content="Select Sphere">
+    <meta property="og:description"  content="Select Sphere">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/img/fficon2.png" type="image/x-icon">
@@ -1276,6 +1274,10 @@ list-style: none;
     transform: scale(1.1); /* Slight zoom effect on hover */
     transition: transform 0.5s ease; /* Smooth transition */
 }
+.nav-links .active {
+  font-weight: bold;
+  border-bottom: 2px solid #3498db; /* Add underline or other styles */
+}
 
 
 </style>
@@ -1300,6 +1302,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active'); // Add 'active' class to the matching link
+    }
+  });
+});
+
 
 </script>
 <script>
@@ -1341,31 +1356,29 @@ document.addEventListener('DOMContentLoaded', function () {
 <body>
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
-        <div class="logo" style="cursor: pointer;">
-          <img src="/assets/img/sslogo.png" width="160px" alt="">
-        </div>
-        <div class="navbar-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="navbar-menu">
-          <ul class="nav-links">
-            <li><a href="/"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
-        
-            <li><a href="/About"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
-            <li><a href="/service"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
-            <li><a href="#footer"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
-            <li>  <div class="cta-button">
-              <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
-          </div></li>
+      <div class="logo" style="cursor: pointer;">
+        <img src="/assets/img/sslogo.png" width="160px" alt="">
+      </div>
+      <div class="navbar-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="navbar-menu">
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
+          <li><a href="/About" class="nav-link"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
+          <li><a href="/service" class="nav-link"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
+          <li><a href="#footer" class="nav-link"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
+          <li>
+            <div class="cta-button">
+              <a href="#consult" id="openModalButton" style="color: white;">Share CV</a>
+            </div>
+          </li>
         </ul>
-        
-          
-           
-        </div>
+      </div>
     </nav>
-  
+    
 <!-- Modal Structure -->
 <div id="consultationModal" class="modal">
   <div class="modal-content">
@@ -1467,7 +1480,7 @@ document.addEventListener('DOMContentLoaded', function () {
       
       <div class="right-content" >
      
-        <img class="animated-image" src="/assets/img/profileimg.jpg" alt="Profile Image" style="max-width: 85%; height: auto; margin-top: 25px; border-radius: 50%; animation: bounce 2s infinite;">
+        <img class="animated-image" src="/assets/img/front.avif" alt="Profile Image" style="max-width: 85%; height: auto; margin-top: 25px; border-radius: 50%; animation: bounce 2s infinite;">
 
            </div>
       <div class="img-sec"><img src="/assets/img/cr3.png" alt="" ></div>
@@ -1621,6 +1634,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </form>
   </div>
 </div>
+
 <footer id="footer">
   <div class="container">
       <div class="row">
@@ -1638,8 +1652,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   <h2>Services</h2>
                   <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
                   <div class="use-links">
-                      <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;"> IT Solution</strong></a></li>
-                      <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;"> HR Consulting</strong></a></li>
+                      <li><a href="/ITsolution"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">IT Solution</strong></a></li>
+                      <li><a href="/ITconsulting"><i class="fa-solid fa-angles-right"></i><strong style="color: #5c5a5a;">HR Consulting</strong></a></li>
                   </div>
               </div>
           </div>
@@ -1648,29 +1662,28 @@ document.addEventListener('DOMContentLoaded', function () {
                   <h2>Follow Us</h2>
                   <img src="./assets/images/about/home_line.png" alt="">
                   <div class="social-icons">
-                      <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-                      <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-                      <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                      <li><a href="https://www.instagram.com/select_sphere" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                   </div>
                   <div style="margin-top: 20px;"><img src="/assets/img/vrn.png" width="70px" alt=""></div>
                   <div style="margin-top: 20px;"><img src="/assets/img/fficon2.png" width="150px" alt=""></div>
               </div>
           </div>
           <div class="col-md-3">
-            <div class="address">
-              <h2>Get In Touch</h2>
-              <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-              <div class="address-links">
-                  <li><i class="fa-solid fa-phone" id=""></i> <a href="tel:+76655 62912" id="phone1w">+91 76655 62912</a></li>
-                  <li><i class="fa-solid fa-phone"></i> <a href="tel:+76655 62912"  id="phonenumber">+91 76655 62912</a></li>
-                  <li ><i class="fa-solid fa-envelope"></i> <a href="Hr@selectsphere.in"  id="emailid">Hr@selectsphere.in</a></li>
-                  <li class="address1">
-                      <i class="fa-solid fa-location-dot"></i>
-                      <span id="address">
-                          Airport, Terminal 1,Jaipur Rajasthan,</span>
-                  </li>
+              <div class="address">
+                  <h2>Get In Touch</h2>
+                  <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                  <div class="address-links">
+                      <li><i class="fa-solid fa-phone" id=""></i> <a href="tel:+76655 62912" id="phone1w">+91 76655 62912</a></li>
+                      <li><i class="fa-solid fa-phone"></i> <a href="tel:+76655 62912"  id="phonenumber">+91 76655 62912</a></li>
+                      <li ><i class="fa-solid fa-envelope"></i> <a href="Hr@selectsphere.in"  id="emailid">Hr@selectsphere.in</a></li>
+                      <li class="address1">
+                          <i class="fa-solid fa-location-dot"></i>
+                          <span id="address">
+                            Address is-Astha Apartment, Airport Road,Terminal 1,Jaipur Rajasthan</span>
+                      </li>
+                  </div>
               </div>
-          </div>
           </div>
       </div>
   </div>
@@ -1687,189 +1700,169 @@ document.addEventListener('DOMContentLoaded', function () {
      2024 Select Sphere. All rights reserved.
     </div> -->
  <style>
+
 #footer {
-    background: #f7f7f7;
-    padding: 1rem; /* Padding for the footer */
-    background-image: url(https://arena.km.ua/wp-content/uploads/3538533.jpg);
-    background-size: cover; /* Cover the footer with the image */
-    background-position: center; /* Center the background image */
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  padding: 1rem 1rem 10px;
+  background-image: url(https://arena.km.ua/wp-content/uploads/3538533.jpg);
 }
 
-#footer2 {
-    background: #f7f7f7;
-    padding: 2rem;
-    margin-top: 0;
-    padding-top: 7rem;
-    padding-bottom: 80px;
-    background-image: url(../images/cards/v748-toon-111.png);
-    background-size: cover; /* Cover the footer with the image */
-    background-position: center; /* Center the background image */
-}
 
 .logo-footer {
-    max-width: 200px; /* Adjusted logo size for responsiveness */
-    margin: 0 auto; /* Center the logo */
+  max-width: 300px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-md-3 {
+  flex: 0 0 24%; /* Adjust to allow four columns in a row */
+  max-width: 24%; /* Same as above */
+  box-sizing: border-box;
+  padding: 0 1rem; /* Add padding for spacing */
+  margin-bottom: 2rem; /* Space between rows */
+}
+
+.footer-about {
+  padding: 1rem 0;
 }
 
 .social-links {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center align items */
-    text-align: center; /* Center text in the social links section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-links h2 {
-    /* padding-bottom: 15px; */
-    padding-top: 15px;
-    font-size: 20px;
-    font-weight: 600;
+  /* padding-bottom: 15px; */
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .social-links img {
-    padding-bottom: 25px;
+  /* padding-bottom: 25px; */
 }
 
 .social-icons {
-    display: flex; /* Use flexbox for horizontal alignment */
-    justify-content: center; /* Center align icons */
-    gap: 15px; /* Space between icons */
-    color: #777777; /* Default icon color */
+  display: flex;
+  gap: 1rem; /* Add space between icons */
 }
 
 .social-icons a {
-    color: #777777; /* Default icon color */
-    transition: color 0.3s ease; /* Smooth transition for hover effects */
+  color: #777777;
 }
 
 .social-icons a:hover {
-    color: #000; /* Change color on hover */
+  color: #000;
 }
 
 .social-icons a i {
-    box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
-    padding: 0.4rem;
-    border-radius: 3px;
-    color: #f01515; /* Icon color */
-    font-size: 16px; /* Size of social icons */
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+  padding: 0.4rem;
+  border-radius: 3px;
+  color: #f01515;
+  font-size: 16px;
 }
 
 li {
-    list-style: none; /* Remove default list styling */
+  list-style: none;
 }
 
 .useful-link h2,
 .address h2 {
-    /* padding-bottom: 15px; */
-    padding-top: 15px;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center; /* Center align section headers */
+  /* padding-bottom: 15px; */
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .useful-link img,
 .address img {
-    padding-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .use-links {
-    line-height: 32px; /* Space between lines */
-    text-align: center; /* Center align the useful links */
+  line-height: 32px;
 }
 
-.use-links li {
-    font-size: 15px; /* Font size for useful links */
-    color: #777777; /* Color for useful links */
+.use-links li i {
+  font-size: 14px;
+  padding-right: 8px;
+  color: #898989;
 }
 
 .use-links li a {
-    color: #303030; /* Link color */
-    font-weight: 500;
+  color: #777777;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .use-links li a:hover {
-    color: #000; /* Change link color on hover */
-}
-
-.address-links {
-    line-height: 32px; /* Space between lines */
-    color: #777777; /* Text color */
-    text-align: center; /* Center align address links */
-}
-
-.address-links li {
-    display: flex; /* Flexbox for address links */
-    align-items: center; /* Center align address items */
-    justify-content: center; /* Center address items */
+  color: #000;
 }
 
 .address-links li a {
-    color: #777777; /* Link color */
-    font-size: 15px; /* Font size for address links */
+  color: #777777;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .address-links li i {
-    font-size: 16px;
-    padding-right: 8px;
-    color: #f01515; /* Icon color */
+  font-size: 16px;
+  padding-right: 8px;
+  color: #f01515;
+}
+
+.address-links li i:nth-child(1) {
+  padding-top: 9px;
+}
+
+.address-links .address1 {
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+}
+
+.address-links {
+  line-height: 32px;
+  color: #777777;
 }
 
 .copy-right-sec {
-    padding: 1rem;
-    background: #e04a24; /* Background color */
-    color: #fff; /* Text color */
-    text-align: center; /* Center align text */
+  padding: 1.8rem;
+  background: #e04a24;
+  color: #fff;
+  text-align: center;
 }
 
 .copy-right-sec a {
-    color: #fcd462; /* Link color */
-    font-weight: 500;
+  color: #fcd462;
+  font-weight: 500;
 }
 
 a {
-    text-decoration: none; /* Remove underline from links */
+  text-decoration: none;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    #footer, #footer2 {
-        padding: 1.5rem; /* Reduced padding for smaller screens */
-    }
-
-    .social-icons {
-        flex-direction: row; /* Ensure horizontal arrangement on mobile */
-        justify-content: center; /* Center icons horizontally */
-    }
-
-    .social-icons a {
-        margin: 5px; /* Add margin between icons */
-    }
-
-    .use-links {
-        line-height: 24px; /* Adjust line height for smaller screens */
-    }
-
-    .use-links li {
-        font-size: 14px; /* Smaller font size for links */
-    }
-
-    .address-links {
-        line-height: 24px; /* Adjust line height for smaller screens */
-    }
-
-    .address-links li a {
-        font-size: 14px; /* Smaller font size for address links */
-    }
-
-    .address-links .address1 {
-        font-size: 14px; /* Smaller font size for address text */
-    }
-
-    .copy-right-sec {
-        font-size: 14px; /* Adjust font size for copyright section */
-    }
+  .col-md-3 {
+    flex: 0 0 48%; /* Two columns on small screens */
+    max-width: 48%;
+  }
 }
 
-
+@media (max-width: 576px) {
+  .col-md-3 {
+    flex: 0 0 100%; /* Single column on very small screens */
+    max-width: 100%;
+  }
+}
 </style>
   </section>
  

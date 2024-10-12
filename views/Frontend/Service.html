@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta name="keywords" content="consulting, HR solutions, IT project solutions, business consulting, expert consulting">
+    <meta name="description" content="Select Sphere">
+    <meta name="keywords"  content="Select Sphere">
 
     <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="ConsultPro - Expert Consulting Solutions">
-    <meta property="og:description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta property="og:image" content="path/to/your/image.jpg">
-    <meta property="og:url" content="https://www.consultpro.com">
+    <meta property="og:title"  content="Select Sphere">
+    <meta property="og:description"  content="Select Sphere">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/img/fficon2.png" type="image/x-icon">
@@ -699,6 +697,14 @@ a {
     max-width: 100%;
   }
 }
+.animated-image:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    transition: transform 0.5s ease; /* Smooth transition */
+}
+.nav-links .active {
+  font-weight: bold;
+  border-bottom: 2px solid #3498db; /* Add underline or other styles */
+}
 
 </style>
 <script>
@@ -729,33 +735,44 @@ a {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active'); // Add 'active' class to the matching link
+    }
+  });
+});
 
 </script>
 <body>
        <!-- Navbar -->
        <nav class="navbar" id="navbar">
         <div class="logo" style="cursor: pointer;">
-            <img src="/assets/img/sslogo.png" width="160px" alt="">
-          </div>
+          <img src="/assets/img/sslogo.png" width="160px" alt="">
+        </div>
         <div class="navbar-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
         <div class="navbar-menu">
-            <ul class="nav-links">
-                <li><a href="/"  style="font-size: 18px; font-weight: 600;"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
-                <li><a href="/About"  style="font-size: 18px; font-weight: 600;"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
-                <li><a href="#footer"  style="font-size: 18px; font-weight: 600;"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
-                <li>
-                    <div class="cta-button">
-                        <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
-                    </div>
-                </li>
-            </ul>
+          <ul class="nav-links">
+            <li><a href="/" class="nav-link" style="font-weight: bold;"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
+            <li><a href="/About" class="nav-link" style="font-weight: bold;"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
+            <li><a href="/service" class="nav-link" style="font-weight: bold;"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
+            <li><a href="#footer" class="nav-link" style="font-weight: bold;"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
+            <li>
+              <div class="cta-button">
+                <a href="#consult" id="openModalButton" style="color: white;">Share CV</a>
+              </div>
+            </li>
+          </ul>
         </div>
-    </nav>
-    
+      </nav>
+      
     
 
 
@@ -838,9 +855,8 @@ a {
                     <h2>Follow Us</h2>
                     <img src="./assets/images/about/home_line.png" alt="">
                     <div class="social-icons">
-                        <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li><a href="https://www.instagram.com/select_sphere" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                     </div>
                     <div style="margin-top: 20px;"><img src="/assets/img/vrn.png" width="70px" alt=""></div>
                     <div style="margin-top: 20px;"><img src="/assets/img/fficon2.png" width="150px" alt=""></div>

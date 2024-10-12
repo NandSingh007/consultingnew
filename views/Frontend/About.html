@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta name="keywords" content="consulting, HR solutions, IT project solutions, business consulting, expert consulting">
+    <meta name="description" content="Select Sphere">
+    <meta name="keywords"  content="Select Sphere">
 
     <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="ConsultPro - Expert Consulting Solutions">
-    <meta property="og:description" content="ConsultPro offers expert consulting solutions for HR and IT projects. Enhance your business with our tailored strategies and innovative solutions.">
-    <meta property="og:image" content="path/to/your/image.jpg">
-    <meta property="og:url" content="https://www.consultpro.com">
+    <meta property="og:title"  content="Select Sphere">
+    <meta property="og:description"  content="Select Sphere">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/img/fficon2.png" type="image/x-icon">
@@ -541,7 +539,9 @@ list-style: none;
 .about-left,
 .about-right {
   flex: 1;
-  margin: 1rem;
+  /* margin: 1rem; */
+  text-align: right;
+
 }
 
 .about-left {
@@ -587,7 +587,8 @@ h2.animated-heading2 i {
 }
 
 .animated-image {
-  max-width: 100%;
+  
+  max-width: 85%;
   height: auto;
   border-radius: 8px;
 }
@@ -824,6 +825,16 @@ a {
     max-width: 100%;
   }
 }
+/* Optional: Image Hover Effect */
+.animated-image:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    transition: transform 0.5s ease; /* Smooth transition */
+}
+.nav-links .active {
+  font-weight: bold;
+  border-bottom: 2px solid #3498db; /* Add underline or other styles */
+}
+
 
 </style>
 <script>
@@ -855,31 +866,44 @@ a {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active'); // Add 'active' class to the matching link
+    }
+  });
+});
+
+
 </script>
 <body>
     <nav class="navbar" id="navbar">
         <div class="logo" style="cursor: pointer;">
-            <img src="/assets/img/sslogo.png" width="160px" alt="">
-          </div>
+          <img src="/assets/img/sslogo.png" width="160px" alt="">
+        </div>
         <div class="navbar-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
         <div class="navbar-menu">
-            <ul class="nav-links">
-                <li><a href="/" style="font-size: 18px; font-weight: 600;"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
-                <li><a href="/service"   style="font-size: 18px; font-weight: 600;"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
-                <li><a href="#footer" style="font-size: 18px; font-weight: 600;"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
-                 <li>
-                    <div class="cta-button">
-                        <a href="#consult" id="openModalButton" style="color: white;">Share Cv</a>
-                    </div>
-                </li>
-            </ul>
+          <ul class="nav-links">
+            <li><a href="/" class="nav-link" style="font-weight: bold;"><i class="fas fa-home" style="color: #3498db;"></i> Home</a></li>
+            <li><a href="/About" class="nav-link" style="font-weight: bold;"><i class="fas fa-user" style="color: #2ecc71;"></i> About Us</a></li>
+            <li><a href="/service" class="nav-link" style="font-weight: bold;"><i class="fas fa-cogs" style="color: #e67e22;"></i> Services</a></li>
+            <li><a href="#footer" class="nav-link" style="font-weight: bold;"><i class="fas fa-envelope" style="color: #e74c3c;"></i> Contact Us</a></li>
+            <li>
+              <div class="cta-button">
+                <a href="#consult" id="openModalButton" style="color: white;">Share CV</a>
+              </div>
+            </li>
+          </ul>
         </div>
-    </nav>
-    
+      </nav>
+      
   
     
 <!-- About Us Section -->
@@ -890,19 +914,21 @@ a {
         About Us
       </h2>
       <div class="about-details">
-        Founded in Aug 3, 2024, Select Sphere , Your trusted partner in HR and IT consulting,Based in Jaipur,Rajasthan. We specialize in delivering strategic solutions tailored to the unique needs of modern businesses. Our comprehensive services span from human resources management and talent acquisition to cutting-edge IT solutions designed to enhance business performance and foster innovation.
+        <span><strong style="color: #3498db;">Founded on Aug 3, 2024</strong>, <span style="color: #e74c3c;">Select Sphere</span>, your trusted partner in <span style="background-color: #f1c40f; font-weight: bold;">HR</span> and <span style="background-color: #f1c40f; font-weight: bold;">IT consulting</span>, based in <strong style="color: #2ecc71;">Jaipur, Rajasthan</strong>. We specialize in delivering <span style="background-color: #3498db; color: white; font-weight: bold;">strategic solutions</span> tailored to the unique needs of modern businesses. Our comprehensive services span from <span style="background-color: #f1c40f; font-weight: bold;">human resources management</span> and <span style="background-color: #f1c40f; font-weight: bold;">talent acquisition</span> to cutting-edge <span style="background-color: #3498db; color: white; font-weight: bold;">IT solutions</span> designed to enhance business performance and foster innovation.</span>
   
-        With a deep understanding of the ever-evolving business landscape, we collaborate closely with our clients to help them navigate challenges, optimize resources, and drive growth. Whether it's recruiting top talent, implementing effective HR strategies, or leveraging the latest technology,Select Sphere is dedicated to helping you succeed.
+        <span>With a deep understanding of the ever-evolving <span style="background-color: #f1c40f; font-weight: bold;">business landscape</span>, we collaborate closely with our clients to help them navigate challenges, optimize resources, and drive growth. Whether it's recruiting <span style="background-color: #f1c40f; font-weight: bold;">top talent</span>, implementing effective <span style="background-color: #f1c40f; font-weight: bold;">HR strategies</span>, or leveraging the latest technology, <span style="color: #e74c3c;">Select Sphere</span> is dedicated to helping you succeed.</span>
         
-        Our commitment to excellence, innovation, and client-centric solutions has positioned us as a leading consultancy in the region. We are proud to serve businesses across PAN India. </div>
+        <span>Our commitment to <span style="background-color: #f1c40f; font-weight: bold;">excellence</span>, <span style="background-color: #f1c40f; font-weight: bold;">innovation</span>, and <span style="background-color: #f1c40f; font-weight: bold;">client-centric solutions</span> has positioned us as a <strong style="color: #3498db;">leading consultancy</strong> in the region. We are proud to serve businesses across <strong style="color: #3498db;">PAN India</strong>.</span>
+        </div>
     </div>
     <div class="about-right">
       <img class="animated-image" src="/assets/img/girlimg.webp" alt="Girl Image">
     </div>
     <div class="about-item">
-      <strong>Our Aim:</strong>
-      "To build a forward-thinking organization where HR and IT collaborate to create an empowered workforce, foster innovation, and support business agility. By aligning talent strategies with digital transformation initiatives, we aim to drive organizational efficiency, enhance employee engagement, and unlock new opportunities for growth and collaboration." 
-     </div>
+        <strong style="color: #3498db;">Our Aim:</strong>
+        <span>"To build a forward-thinking organization where <span style="background-color: #f1c40f; font-weight: bold;">HR</span> and <span style="background-color: #f1c40f; font-weight: bold;">IT</span> collaborate to create an <span style="background-color: #3498db; color: white; font-weight: bold;">empowered workforce</span>, foster <span style="background-color: #f1c40f; font-weight: bold;">innovation</span>, and support <span style="background-color: #3498db; color: white; font-weight: bold;">business agility</span>. By aligning <span style="background-color: #f1c40f; font-weight: bold;">talent strategies</span> with <span style="background-color: #3498db; color: white; font-weight: bold;">digital transformation</span> initiatives, we aim to drive <span style="background-color: #f1c40f; font-weight: bold;">organizational efficiency</span>, enhance <span style="background-color: #3498db; color: white; font-weight: bold;">employee engagement</span>, and unlock new opportunities for <span style="background-color: #f1c40f; font-weight: bold;">growth</span> and <span style="background-color: #f1c40f; font-weight: bold;">collaboration</span>."</span>
+      </div>
+      
   </div>
   
 <footer id="footer">
@@ -932,9 +958,8 @@ a {
                     <h2>Follow Us</h2>
                     <img src="./assets/images/about/home_line.png" alt="">
                     <div class="social-icons">
-                        <li><a href="" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li><a href="https://www.instagram.com/select_sphere" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                     </div>
                     <div style="margin-top: 20px;"><img src="/assets/img/vrn.png" width="70px" alt=""></div>
                     <div style="margin-top: 20px;"><img src="/assets/img/fficon2.png" width="150px" alt=""></div>
